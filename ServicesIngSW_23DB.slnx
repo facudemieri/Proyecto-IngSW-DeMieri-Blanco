@@ -1,1 +1,7 @@
-<Solution />
+<Solution>
+  <Project Path="BE_23DB/BE_23DB.csproj" Id="d16f6926-ef28-4061-8242-e46374092f75" />
+  <Project Path="BLL_23DB/BLL_23DB.csproj" Id="5e1d3a60-e9af-4e91-ab18-c2fddcf87e34" />
+  <Project Path="DAL_23DB/DAL_23DB.csproj" Id="74b86c20-5750-4324-83cf-6d0f33a217fa" />
+  <Project Path="GUI_23DB/GUI_23DB.csproj" Id="ef4e27be-5ade-420a-86a3-35e1852bbcf4" />
+  <Project Path="Services_23DB/Services_23DB.csproj" Id="8c3b7e21-469f-491a-b050-15825fcf308b" />
+</Solution>
