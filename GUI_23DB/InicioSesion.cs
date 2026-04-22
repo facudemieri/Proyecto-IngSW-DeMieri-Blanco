@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI_23DB
 {
-    public partial class Form1 : Form
+    public partial class InicioSesion : Form
     {
-        public Form1()
+        public InicioSesion()
         {
             InitializeComponent();
         }

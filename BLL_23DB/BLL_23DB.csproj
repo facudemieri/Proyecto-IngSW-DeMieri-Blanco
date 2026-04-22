@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>5e1d3a60-e9af-4e91-ab18-c2fddcf87e34</ProjectGuid>
+    <ProjectGuid>{5E1D3A60-E9AF-4E91-AB18-C2FDDCF87E34}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BLL_23DB</RootNamespace>
@@ -31,24 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BE_23DB\BE_23DB.csproj">
+      <Project>{d16f6926-ef28-4061-8242-e46374092f75}</Project>
+      <Name>BE_23DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL_23DB\DAL_23DB.csproj">
+      <Project>{74b86c20-5750-4324-83cf-6d0f33a217fa}</Project>
+      <Name>DAL_23DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services_23DB\Services_23DB.csproj">
+      <Project>{8c3b7e21-469f-491a-b050-15825fcf308b}</Project>
+      <Name>Services_23DB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>
