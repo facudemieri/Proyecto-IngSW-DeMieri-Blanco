@@ -1,6 +1,6 @@
 ﻿namespace GUI_23DB
 {
-    partial class GestionUsuario
+    partial class GestionUsuario_23DB
     {
         /// <summary>
         /// Required designer variable.

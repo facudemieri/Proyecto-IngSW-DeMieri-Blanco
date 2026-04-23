@@ -16,7 +16,7 @@ namespace GUI_23DB
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InicioSesion());
+            Application.Run(new InicioSesion_23DB());
         }
     }
 }

@@ -33,7 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,34 +48,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestionUsuario.cs">
+    <Compile Include="GestionUsuario_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GestionUsuario.Designer.cs">
-      <DependentUpon>GestionUsuario.cs</DependentUpon>
+    <Compile Include="GestionUsuario_23DB.Designer.cs">
+      <DependentUpon>GestionUsuario_23DB.cs</DependentUpon>
     </Compile>
-    <Compile Include="InicioSesion.cs">
+    <Compile Include="InicioSesion_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioSesion.Designer.cs">
-      <DependentUpon>InicioSesion.cs</DependentUpon>
+    <Compile Include="InicioSesion_23DB.Designer.cs">
+      <DependentUpon>InicioSesion_23DB.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipal.cs">
+    <Compile Include="MenuPrincipal_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuPrincipal.Designer.cs">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <Compile Include="MenuPrincipal_23DB.Designer.cs">
+      <DependentUpon>MenuPrincipal_23DB.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GestionUsuario.resx">
-      <DependentUpon>GestionUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="GestionUsuario_23DB.resx">
+      <DependentUpon>GestionUsuario_23DB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioSesion.resx">
-      <DependentUpon>InicioSesion.cs</DependentUpon>
+    <EmbeddedResource Include="InicioSesion_23DB.resx">
+      <DependentUpon>InicioSesion_23DB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPrincipal.resx">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="MenuPrincipal_23DB.resx">
+      <DependentUpon>MenuPrincipal_23DB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

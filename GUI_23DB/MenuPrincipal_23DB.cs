@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI_23DB
 {
-    public partial class MenuPrincipal : Form
+    public partial class MenuPrincipal_23DB : Form
     {
-        public MenuPrincipal()
+        public MenuPrincipal_23DB()
         {
             InitializeComponent();
         }

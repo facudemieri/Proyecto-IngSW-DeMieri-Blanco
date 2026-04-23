@@ -1,6 +1,6 @@
 ﻿namespace GUI_23DB
 {
-    partial class MenuPrincipal
+    partial class MenuPrincipal_23DB
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal_23DB));
             this.btnGenerarReporteDash = new System.Windows.Forms.Button();
             this.cmbReporteDASH = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();

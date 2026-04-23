@@ -1,6 +1,6 @@
 ﻿namespace GUI_23DB
 {
-    partial class InicioSesion
+    partial class InicioSesion_23DB
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioSesion));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioSesion_23DB));
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtContraseña = new System.Windows.Forms.TextBox();
