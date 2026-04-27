@@ -59,6 +59,7 @@
             this.ckActivos = new System.Windows.Forms.CheckBox();
             this.ckInactivos = new System.Windows.Forms.CheckBox();
             this.ckTodos = new System.Windows.Forms.CheckBox();
+            this.Mensaje = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -408,11 +409,22 @@
             this.ckTodos.Text = "Todos";
             this.ckTodos.UseVisualStyleBackColor = true;
             // 
-            // GestionUsuario
+            // Mensaje
+            // 
+            this.Mensaje.FormattingEnabled = true;
+            this.Mensaje.ItemHeight = 21;
+            this.Mensaje.Location = new System.Drawing.Point(503, 403);
+            this.Mensaje.Name = "Mensaje";
+            this.Mensaje.Size = new System.Drawing.Size(241, 109);
+            this.Mensaje.TabIndex = 31;
+            this.Mensaje.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // GestionUsuario_23DB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 624);
+            this.Controls.Add(this.Mensaje);
             this.Controls.Add(this.ckTodos);
             this.Controls.Add(this.ckInactivos);
             this.Controls.Add(this.ckActivos);
@@ -429,7 +441,7 @@
             this.Controls.Add(this.btnCrear);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "GestionUsuario";
+            this.Name = "GestionUsuario_23DB";
             this.Text = "GestionUsuario";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -474,5 +486,6 @@
         private System.Windows.Forms.CheckBox ckActivos;
         private System.Windows.Forms.CheckBox ckInactivos;
         private System.Windows.Forms.CheckBox ckTodos;
+        private System.Windows.Forms.ListBox Mensaje;
     }
 }
