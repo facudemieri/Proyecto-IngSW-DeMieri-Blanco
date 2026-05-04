@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditoriaEventos_23DB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuditoriaEventos_23DB.Designer.cs">
+      <DependentUpon>AuditoriaEventos_23DB.cs</DependentUpon>
+    </Compile>
     <Compile Include="CambiarContraseña_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AuditoriaEventos_23DB.resx">
+      <DependentUpon>AuditoriaEventos_23DB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CambiarContraseña_23DB.resx">
       <DependentUpon>CambiarContraseña_23DB.cs</DependentUpon>
     </EmbeddedResource>
