@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL_23DB;
+using BE_23DB;
+using Services_23DB;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,92 @@ namespace GUI_23DB
 {
     public partial class InicioSesion_23DB : Form
     {
+        private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
+        private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
+        private int intentosFallidos_23DB = 0;
         public InicioSesion_23DB()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsuario.Text) || string.IsNullOrEmpty(txtContraseña.Text))
+            {
+                MessageBox.Show("Debe completar todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Buscar usuario por Login para obtener DNI
+            Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+
+            // Si el usuario no existe
+            if (usuarioPorLogin_23DB == null)
+            {
+                intentosFallidos_23DB++;
+                if (intentosFallidos_23DB >= 3)
+                {
+                    MessageBox.Show("Demasiados intentos fallidos. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                    return;
+                }
+                MessageBox.Show($"Credenciales incorrectas. Intentos restantes: {3 - intentosFallidos_23DB}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verificar si está bloqueado
+            if (usuarioPorLogin_23DB.Bloqueado_23DB)
+            {
+                MessageBox.Show("Su cuenta está bloqueada. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verificar si está activo
+            if (!usuarioPorLogin_23DB.Activo_23DB)
+            {
+                MessageBox.Show("Su cuenta está deshabilitada. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Autenticar con password
+            Usuario_23DB usuarioAutenticado_23DB = usuarioBLL_23DB.AutenticarUsuario_23DB(txtUsuario.Text, txtContraseña.Text);
+
+            // Si el password es incorrecto
+            if (usuarioAutenticado_23DB == null)
+            {
+                intentosFallidos_23DB++;
+                if (intentosFallidos_23DB >= 3)
+                {
+                    usuarioBLL_23DB.BloquearUsuario_23DB(usuarioPorLogin_23DB.DNI_23DB);
+                    eventoBLL_23DB.RegistrarEvento_23DB(usuarioPorLogin_23DB.DNI_23DB, "Usuarios", "Bloqueo Automático por Intentos", 1);
+                    MessageBox.Show("Su cuenta ha sido bloqueada por demasiados intentos fallidos. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                    return;
+                }
+                MessageBox.Show($"Credenciales incorrectas. Intentos restantes: {3 - intentosFallidos_23DB}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Inicializar SessionManager
+            SessionManager_23DB.ObtenerInstancia_23DB().InicializarSesion_23DB(
+                usuarioAutenticado_23DB.DNI_23DB,
+                usuarioAutenticado_23DB.Nombre_23DB,
+                usuarioAutenticado_23DB.Apellido_23DB,
+                usuarioAutenticado_23DB.Rol_23DB
+            );
+
+            // Registrar evento
+            eventoBLL_23DB.RegistrarEvento_23DB(usuarioAutenticado_23DB.DNI_23DB, "Usuarios", "Login", 1);
+
+            // Abrir menú principal
+            MenuPrincipal_23DB menuPrincipal_23DB = new MenuPrincipal_23DB();
+            menuPrincipal_23DB.Show();
+            this.Hide();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿using BE_23DB;
+using DAL_23DB;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL_23DB
+{
+    public class EventoBLL_23DB
+    {
+        private mapperEvento_23DB eventoDAL_23DB = new mapperEvento_23DB();
+
+        public void RegistrarEvento_23DB(string dni_23DB, string modulo_23DB, string evento_23DB, int criticidad_23DB)
+        {
+            eventoDAL_23DB.InsertarEvento_23DB(dni_23DB, modulo_23DB, evento_23DB, criticidad_23DB);
+        }
+
+        public List<Evento_23DB> ObtenerEventos_23DB()
+        {
+            DateTime fechaInicio_23DB = DateTime.Now.AddDays(-3).Date;
+            DateTime fechaFin_23DB = DateTime.Now.Date;
+            return eventoDAL_23DB.ObtenerEventos_23DB(fechaInicio_23DB, fechaFin_23DB);
+        }
+
+        public List<Evento_23DB> FiltrarEventos_23DB(string dni_23DB, DateTime fechaInicio_23DB, DateTime fechaFin_23DB, string modulo_23DB, string evento_23DB, int criticidad_23DB)
+        {
+            return eventoDAL_23DB.FiltrarEventos_23DB(dni_23DB, fechaInicio_23DB, fechaFin_23DB, modulo_23DB, evento_23DB, criticidad_23DB);
+        }
+    }
+}
