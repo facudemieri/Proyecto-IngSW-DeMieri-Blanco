@@ -1,4 +1,5 @@
-﻿using Services_23DB;
+﻿using BLL_23DB;
+using Services_23DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,6 +80,9 @@ namespace GUI_23DB
             DialogResult resultado_23DB = MessageBox.Show("¿Está seguro que desea cerrar sesión?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (resultado_23DB == DialogResult.Yes)
             {
+                EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
+                string dni_23DB = SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB;
+                eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Logout", 1);
                 SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
                 this.Hide();
                 InicioSesion_23DB login_23DB = new InicioSesion_23DB();
