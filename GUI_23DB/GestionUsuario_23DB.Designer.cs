@@ -48,7 +48,6 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtRol = new System.Windows.Forms.TextBox();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.txtBloqueado = new System.Windows.Forms.TextBox();
             this.txtActivo = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@
             this.ckInactivos = new System.Windows.Forms.CheckBox();
             this.ckTodos = new System.Windows.Forms.CheckBox();
             this.Mensaje = new System.Windows.Forms.ListBox();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -292,14 +292,6 @@
             this.txtEmail.Size = new System.Drawing.Size(210, 23);
             this.txtEmail.TabIndex = 19;
             // 
-            // txtRol
-            // 
-            this.txtRol.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRol.Location = new System.Drawing.Point(110, 158);
-            this.txtRol.Name = "txtRol";
-            this.txtRol.Size = new System.Drawing.Size(210, 23);
-            this.txtRol.TabIndex = 20;
-            // 
             // txtLogin
             // 
             this.txtLogin.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -339,7 +331,7 @@
             // 
             this.lblnroUsuario.AutoSize = true;
             this.lblnroUsuario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblnroUsuario.Location = new System.Drawing.Point(666, 581);
+            this.lblnroUsuario.Location = new System.Drawing.Point(660, 588);
             this.lblnroUsuario.Name = "lblnroUsuario";
             this.lblnroUsuario.Size = new System.Drawing.Size(166, 21);
             this.lblnroUsuario.TabIndex = 25;
@@ -352,12 +344,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(956, 71);
+            this.panel1.Size = new System.Drawing.Size(942, 71);
             this.panel1.TabIndex = 26;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel2.Controls.Add(this.cmbRol);
             this.panel2.Controls.Add(this.txtDni);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label2);
@@ -367,7 +360,6 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtLogin);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.txtRol);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.txtEmail);
             this.panel2.Controls.Add(this.label7);
@@ -376,7 +368,7 @@
             this.panel2.Controls.Add(this.txtApellido);
             this.panel2.Location = new System.Drawing.Point(14, 304);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(344, 298);
+            this.panel2.Size = new System.Drawing.Size(344, 305);
             this.panel2.TabIndex = 27;
             // 
             // ckActivos
@@ -413,17 +405,26 @@
             // 
             this.Mensaje.FormattingEnabled = true;
             this.Mensaje.ItemHeight = 21;
-            this.Mensaje.Location = new System.Drawing.Point(503, 403);
+            this.Mensaje.Location = new System.Drawing.Point(502, 403);
             this.Mensaje.Name = "Mensaje";
-            this.Mensaje.Size = new System.Drawing.Size(241, 109);
+            this.Mensaje.Size = new System.Drawing.Size(241, 130);
             this.Mensaje.TabIndex = 31;
             this.Mensaje.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // cmbRol
+            // 
+            this.cmbRol.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Location = new System.Drawing.Point(110, 154);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(210, 25);
+            this.cmbRol.TabIndex = 24;
             // 
             // GestionUsuario_23DB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 624);
+            this.ClientSize = new System.Drawing.Size(942, 630);
             this.Controls.Add(this.Mensaje);
             this.Controls.Add(this.ckTodos);
             this.Controls.Add(this.ckInactivos);
@@ -475,7 +476,6 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtRol;
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.TextBox txtBloqueado;
         private System.Windows.Forms.TextBox txtActivo;
@@ -487,5 +487,6 @@
         private System.Windows.Forms.CheckBox ckInactivos;
         private System.Windows.Forms.CheckBox ckTodos;
         private System.Windows.Forms.ListBox Mensaje;
+        private System.Windows.Forms.ComboBox cmbRol;
     }
 }

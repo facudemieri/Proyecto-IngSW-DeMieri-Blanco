@@ -41,6 +41,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.lblLogin = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 73);
+            this.label2.Location = new System.Drawing.Point(46, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 17);
             this.label2.TabIndex = 1;
@@ -76,7 +77,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(162, 73);
+            this.textBox1.Location = new System.Drawing.Point(163, 100);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(186, 23);
@@ -84,7 +85,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(162, 102);
+            this.textBox2.Location = new System.Drawing.Point(163, 129);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(186, 23);
@@ -93,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 102);
+            this.label3.Location = new System.Drawing.Point(41, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 17);
             this.label3.TabIndex = 3;
@@ -101,7 +102,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(162, 131);
+            this.textBox3.Location = new System.Drawing.Point(163, 158);
             this.textBox3.Name = "textBox3";
             this.textBox3.PasswordChar = '*';
             this.textBox3.Size = new System.Drawing.Size(186, 23);
@@ -110,7 +111,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 131);
+            this.label4.Location = new System.Drawing.Point(23, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(138, 17);
             this.label4.TabIndex = 5;
@@ -121,7 +122,7 @@
             this.btnSalir.BackColor = System.Drawing.Color.Orange;
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(90, 212);
+            this.btnSalir.Location = new System.Drawing.Point(91, 239);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(218, 32);
             this.btnSalir.TabIndex = 18;
@@ -133,7 +134,7 @@
             this.btnLogin.BackColor = System.Drawing.Color.SteelBlue;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(90, 171);
+            this.btnLogin.Location = new System.Drawing.Point(91, 198);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(218, 35);
             this.btnLogin.TabIndex = 17;
@@ -143,7 +144,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(355, 78);
+            this.checkBox1.Location = new System.Drawing.Point(356, 105);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 19;
@@ -153,7 +154,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(355, 107);
+            this.checkBox2.Location = new System.Drawing.Point(356, 134);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(15, 14);
             this.checkBox2.TabIndex = 20;
@@ -163,18 +164,28 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(354, 136);
+            this.checkBox3.Location = new System.Drawing.Point(355, 163);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(15, 14);
             this.checkBox3.TabIndex = 21;
             this.checkBox3.UseMnemonic = false;
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // lblLogin
+            // 
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Location = new System.Drawing.Point(160, 63);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(69, 17);
+            this.lblLogin.TabIndex = 22;
+            this.lblLogin.Text = "LOGIN: ...";
+            // 
             // CambiarContraseña_23DB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 272);
+            this.ClientSize = new System.Drawing.Size(408, 287);
+            this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -188,7 +199,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CambiarContraseña_23DB";
             this.Text = "CambiarContraseña_23DB";
             this.panel1.ResumeLayout(false);
@@ -213,5 +224,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Label lblLogin;
     }
 }
