@@ -35,7 +35,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, Rol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login AND Password = @Password";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login AND Password = @Password";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", password_23DB);
@@ -49,7 +49,7 @@ namespace DAL_23DB
                         Nombre_23DB = reader_23DB["Nombre"].ToString(),
                         Email_23DB = reader_23DB["Email"].ToString(),
                         Login_23DB = reader_23DB["Login"].ToString(),
-                        Rol_23DB = reader_23DB["Rol"].ToString(),
+                        IdRol_23DB = Convert.ToInt32(reader_23DB["IdRol"]),
                         Bloqueado_23DB = Convert.ToBoolean(reader_23DB["Bloqueado"]),
                         Activo_23DB = Convert.ToBoolean(reader_23DB["Activo"])
                     };
@@ -68,7 +68,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, Rol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
@@ -81,7 +81,7 @@ namespace DAL_23DB
                         Nombre_23DB = reader_23DB["Nombre"].ToString(),
                         Email_23DB = reader_23DB["Email"].ToString(),
                         Login_23DB = reader_23DB["Login"].ToString(),
-                        Rol_23DB = reader_23DB["Rol"].ToString(),
+                        IdRol_23DB = Convert.ToInt32(reader_23DB["IdRol"]),
                         Bloqueado_23DB = Convert.ToBoolean(reader_23DB["Bloqueado"]),
                         Activo_23DB = Convert.ToBoolean(reader_23DB["Activo"])
                     };

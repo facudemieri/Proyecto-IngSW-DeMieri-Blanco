@@ -81,12 +81,13 @@ namespace GUI_23DB
                 return;
             }
 
-            
+            string nombreRol_23DB = usuarioBLL_23DB.ObtenerNombreRol_23DB(usuarioAutenticado_23DB.IdRol_23DB);
+
             SessionManager_23DB.ObtenerInstancia_23DB().InicializarSesion_23DB(
                 usuarioAutenticado_23DB.DNI_23DB,
                 usuarioAutenticado_23DB.Nombre_23DB,
                 usuarioAutenticado_23DB.Apellido_23DB,
-                usuarioAutenticado_23DB.Rol_23DB
+                nombreRol_23DB
             );
 
             

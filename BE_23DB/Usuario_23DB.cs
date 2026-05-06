@@ -56,9 +56,9 @@ namespace BE_23DB
 			set { Password_ = value; }
 		}
 
-		private string Rol_;
+		private int Rol_;
 
-		public string Rol_23DB
+		public int IdRol_23DB
         {
 			get { return Rol_; }
 			set { Rol_ = value; }

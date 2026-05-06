@@ -33,8 +33,14 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "INSERT INTO Eventos_23DB (DNI, Fecha, Hora, Modulo, Evento, Criticidad) VALUES (@DNI, @Fecha, @Hora, @Modulo, @Evento, @Criticidad)";
+
+                string queryId_23DB = "SELECT ISNULL(MAX(Id_Evento), 0) + 1 FROM Eventos_23DB";
+                SqlCommand cmdId_23DB = new SqlCommand(queryId_23DB, conexion_23DB);
+                int nuevoId_23DB = (int)cmdId_23DB.ExecuteScalar();
+
+                string query_23DB = "INSERT INTO Eventos_23DB (Id_Evento ,DNI, Fecha, Hora, Modulo, Evento, Criticidad) VALUES (@id_Evento, @DNI, @Fecha, @Hora, @Modulo, @Evento, @Criticidad)";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@Id_Evento", nuevoId_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Fecha", DateTime.Now.Date);
                 cmd_23DB.Parameters.AddWithValue("@Hora", DateTime.Now.TimeOfDay);

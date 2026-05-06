@@ -12,6 +12,7 @@ namespace BLL_23DB
     public class UsuarioBLL_23DB
     {
         private mapperUsuario_23DB mapperUsuario_23DB = new mapperUsuario_23DB();
+        private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
 
         public Usuario_23DB AutenticarUsuario_23DB(string login_23DB, string password_23DB)
         {
@@ -35,6 +36,11 @@ namespace BLL_23DB
             mapperUsuario_23DB.BloquearUsuario_23DB(dni_23DB);
         }
 
+        public string ObtenerNombreRol_23DB(int idRol_23DB)
+        {
+            Rol_23DB rol_23DB = rolBLL_23DB.ObtenerRol_23DB(idRol_23DB);
+            return rol_23DB != null ? rol_23DB.NombreRol_23DB : string.Empty;
+        }
         public Usuario_23DB ObtenerUsuarioPorLogin_23DB(string login_23DB)
         {
             return mapperUsuario_23DB.ObtenerUsuarioPorLogin_23DB(login_23DB);

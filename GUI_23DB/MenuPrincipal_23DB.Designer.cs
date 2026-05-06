@@ -34,11 +34,11 @@
             this.cmbReporteDASH = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblRol = new System.Windows.Forms.Label();
             this.lblLoginMp = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnReportes = new System.Windows.Forms.Button();
@@ -50,19 +50,17 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblRol = new System.Windows.Forms.Label();
             this.cmsUsuario = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAdmin = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarIdiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAdmin = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.gestionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitacoraDeEventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,6 +108,16 @@
             this.panel3.Size = new System.Drawing.Size(689, 56);
             this.panel3.TabIndex = 10;
             // 
+            // lblRol
+            // 
+            this.lblRol.AutoSize = true;
+            this.lblRol.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(542, 12);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(36, 17);
+            this.lblRol.TabIndex = 4;
+            this.lblRol.Text = "Rol: ";
+            // 
             // lblLoginMp
             // 
             this.lblLoginMp.AutoSize = true;
@@ -152,22 +160,11 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel6.Controls.Add(this.linkLabel1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(15, 285);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 138);
             this.panel6.TabIndex = 21;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 77);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(102, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Cambiar Contraseña";
             // 
             // btnAyuda
             // 
@@ -307,16 +304,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // lblRol
-            // 
-            this.lblRol.AutoSize = true;
-            this.lblRol.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRol.Location = new System.Drawing.Point(542, 12);
-            this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(36, 17);
-            this.lblRol.TabIndex = 4;
-            this.lblRol.Text = "Rol: ";
-            // 
             // cmsUsuario
             // 
             this.cmsUsuario.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -325,15 +312,6 @@
             this.reloginToolStripMenuItem});
             this.cmsUsuario.Name = "cmsUsuario";
             this.cmsUsuario.Size = new System.Drawing.Size(183, 70);
-            // 
-            // cmsAdmin
-            // 
-            this.cmsAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestionDeUsuariosToolStripMenuItem,
-            this.bitacoraDeEventosToolStripMenuItem,
-            this.gestionDePerfilesToolStripMenuItem});
-            this.cmsAdmin.Name = "cmsAdmin";
-            this.cmsAdmin.Size = new System.Drawing.Size(179, 70);
             // 
             // cambiarContraseñaToolStripMenuItem
             // 
@@ -356,24 +334,33 @@
             this.reloginToolStripMenuItem.Text = "Relogin";
             this.reloginToolStripMenuItem.Click += new System.EventHandler(this.reloginToolStripMenuItem_Click);
             // 
+            // cmsAdmin
+            // 
+            this.cmsAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestionDeUsuariosToolStripMenuItem,
+            this.bitacoraDeEventosToolStripMenuItem,
+            this.gestionDePerfilesToolStripMenuItem});
+            this.cmsAdmin.Name = "cmsAdmin";
+            this.cmsAdmin.Size = new System.Drawing.Size(179, 70);
+            // 
             // gestionDeUsuariosToolStripMenuItem
             // 
             this.gestionDeUsuariosToolStripMenuItem.Name = "gestionDeUsuariosToolStripMenuItem";
-            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.gestionDeUsuariosToolStripMenuItem.Text = "Gestion de Usuarios";
             this.gestionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeUsuariosToolStripMenuItem_Click);
             // 
             // bitacoraDeEventosToolStripMenuItem
             // 
             this.bitacoraDeEventosToolStripMenuItem.Name = "bitacoraDeEventosToolStripMenuItem";
-            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.bitacoraDeEventosToolStripMenuItem.Text = "Bitacora de Eventos";
             this.bitacoraDeEventosToolStripMenuItem.Click += new System.EventHandler(this.bitacoraDeEventosToolStripMenuItem_Click);
             // 
             // gestionDePerfilesToolStripMenuItem
             // 
             this.gestionDePerfilesToolStripMenuItem.Name = "gestionDePerfilesToolStripMenuItem";
-            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.gestionDePerfilesToolStripMenuItem.Text = "Gestion de Perfiles";
             this.gestionDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.gestionDePerfilesToolStripMenuItem_Click);
             // 
@@ -394,8 +381,6 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -428,7 +413,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblLoginMp;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.ContextMenuStrip cmsUsuario;
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;

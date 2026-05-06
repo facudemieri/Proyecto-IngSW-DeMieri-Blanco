@@ -8,7 +8,7 @@ namespace Services_23DB
 {
     public class Conexion_23DB
     {
-        private static string cadena_23DB = @"Server=.;Database=IngSw_23DB;Integrated Security=True;";
+        private static string cadena_23DB = @"Server=.;Database=INGSW_23DB;Integrated Security=True;";
 
         public static string ObtenerCadena_23DB()
         {
