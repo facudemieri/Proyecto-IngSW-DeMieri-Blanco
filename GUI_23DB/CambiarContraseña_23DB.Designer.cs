@@ -208,6 +208,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CambiarContraseña_23DB";
             this.Text = "CambiarContraseña_23DB";
+            this.Load += new System.EventHandler(this.CambiarContraseña_23DB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

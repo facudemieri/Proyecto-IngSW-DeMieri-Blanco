@@ -160,7 +160,7 @@ namespace DAL_23DB
                 Desconectar_23DB();
             }
         }
-        public Usuario_23DB ObtenerUsuario_23DB(string login_23DB, string password_23DB)
+        public Usuario_23DB ObtenerUsuario_23DB(string login_23DB, string password_23DB) // valido credenciales
         {
             Usuario_23DB usuario_23DB = null;
             try
@@ -183,7 +183,7 @@ namespace DAL_23DB
             return usuario_23DB;
         }
 
-        public Usuario_23DB ObtenerUsuarioPorLogin_23DB(string login_23DB)
+        public Usuario_23DB ObtenerUsuarioPorLogin_23DB(string login_23DB) // traigo el dni del usuario antes de validar el password
         {
             Usuario_23DB usuario_23DB = null;
             try

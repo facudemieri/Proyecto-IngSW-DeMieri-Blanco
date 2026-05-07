@@ -91,8 +91,9 @@ namespace BLL_23DB
                 return false;
             if (passwordActual_23DB == passwordNuevo_23DB)
                 return false;
+            
             string passwordActualEncriptado_23DB = CryptoManager_23DB.EncriptarHash_23DB(passwordActual_23DB);
-            Usuario_23DB usuario_23DB = mapperUsuario_23DB.ObtenerUsuario_23DB(
+            Usuario_23DB usuario_23DB = mapperUsuario_23DB.ObtenerUsuarioPorDNI_23DB(
                 SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB,
                 passwordActualEncriptado_23DB
             );

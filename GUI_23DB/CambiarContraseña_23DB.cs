@@ -80,6 +80,11 @@ namespace GUI_23DB
 
         private void lblLogin_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void CambiarContraseña_23DB_Load(object sender, EventArgs e)
+        {
             lblLogin.Text = "LOGIN: " + SessionManager_23DB.ObtenerInstancia_23DB().Nombre_23DB;
         }
     }
