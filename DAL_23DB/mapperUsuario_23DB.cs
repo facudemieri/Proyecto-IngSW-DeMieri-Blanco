@@ -97,11 +97,9 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "UPDATE Usuario_23DB SET Apellido = @Apellido, Nombre = @Nombre, Email = @Email, IdRol = @IdRol WHERE DNI = @DNI";
+                string query_23DB = "UPDATE Usuario_23DB SET Email = @Email, IdRol = @IdRol WHERE DNI = @DNI";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", usuario_23DB.DNI_23DB);
-                cmd_23DB.Parameters.AddWithValue("@Apellido", usuario_23DB.Apellido_23DB);
-                cmd_23DB.Parameters.AddWithValue("@Nombre", usuario_23DB.Nombre_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Email", usuario_23DB.Email_23DB);
                 cmd_23DB.Parameters.AddWithValue("@IdRol", usuario_23DB.IdRol_23DB);
                 cmd_23DB.ExecuteNonQuery();

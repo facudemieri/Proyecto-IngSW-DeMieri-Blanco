@@ -16,5 +16,10 @@ namespace GUI_23DB
         {
             InitializeComponent();
         }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
