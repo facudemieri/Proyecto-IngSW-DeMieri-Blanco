@@ -50,7 +50,8 @@ namespace GUI_23DB
 
         private void cambiarIdiomaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CambiarIdioma_23DB cambiarIdioma_23DB = new CambiarIdioma_23DB();
+            cambiarIdioma_23DB.ShowDialog();
         }
 
         private void reloginToolStripMenuItem_Click(object sender, EventArgs e)
@@ -88,6 +89,16 @@ namespace GUI_23DB
                 InicioSesion_23DB login_23DB = new InicioSesion_23DB();
                 login_23DB.Show();
             }
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

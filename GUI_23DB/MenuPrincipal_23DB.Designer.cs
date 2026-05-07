@@ -180,6 +180,7 @@
             this.btnAyuda.TabIndex = 17;
             this.btnAyuda.Text = "Ayuda";
             this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
             // btnAdmin
             // 
@@ -211,6 +212,7 @@
             this.btnReportes.TabIndex = 15;
             this.btnReportes.Text = "Reportes";
             this.btnReportes.UseVisualStyleBackColor = false;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnUsuario
             // 

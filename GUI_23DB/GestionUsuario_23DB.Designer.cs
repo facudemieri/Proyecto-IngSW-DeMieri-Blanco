@@ -35,7 +35,7 @@
             this.btnAplicar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridUsuarios = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,12 +55,12 @@
             this.lblnroUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
             this.ckActivos = new System.Windows.Forms.CheckBox();
             this.ckInactivos = new System.Windows.Forms.CheckBox();
             this.ckTodos = new System.Windows.Forms.CheckBox();
-            this.Mensaje = new System.Windows.Forms.ListBox();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.Mensaje = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsuarios)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,7 @@
             this.btnCrear.TabIndex = 0;
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = false;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // btnDesbloquear
             // 
@@ -92,6 +93,7 @@
             this.btnDesbloquear.TabIndex = 1;
             this.btnDesbloquear.Text = "Desbloquear";
             this.btnDesbloquear.UseVisualStyleBackColor = false;
+            this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
             // btnModificar
             // 
@@ -106,6 +108,7 @@
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnAct_Des
             // 
@@ -120,6 +123,7 @@
             this.btnAct_Des.TabIndex = 3;
             this.btnAct_Des.Text = "Act. / Desact.";
             this.btnAct_Des.UseVisualStyleBackColor = false;
+            this.btnAct_Des.Click += new System.EventHandler(this.btnAct_Des_Click);
             // 
             // btnAplicar
             // 
@@ -134,6 +138,7 @@
             this.btnAplicar.TabIndex = 4;
             this.btnAplicar.Text = "Aplicar";
             this.btnAplicar.UseVisualStyleBackColor = false;
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
             // 
             // btnCancelar
             // 
@@ -148,6 +153,7 @@
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnSalir
             // 
@@ -162,15 +168,16 @@
             this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // dataGridView1
+            // dataGridUsuarios
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 93);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(658, 179);
-            this.dataGridView1.TabIndex = 7;
+            this.dataGridUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridUsuarios.Location = new System.Drawing.Point(14, 93);
+            this.dataGridUsuarios.Name = "dataGridUsuarios";
+            this.dataGridUsuarios.Size = new System.Drawing.Size(658, 179);
+            this.dataGridUsuarios.TabIndex = 7;
+            this.dataGridUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsuarios_CellClick);
             // 
             // label1
             // 
@@ -371,6 +378,15 @@
             this.panel2.Size = new System.Drawing.Size(344, 305);
             this.panel2.TabIndex = 27;
             // 
+            // cmbRol
+            // 
+            this.cmbRol.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Location = new System.Drawing.Point(110, 154);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(210, 25);
+            this.cmbRol.TabIndex = 24;
+            // 
             // ckActivos
             // 
             this.ckActivos.AutoSize = true;
@@ -380,6 +396,7 @@
             this.ckActivos.TabIndex = 28;
             this.ckActivos.Text = "Activos";
             this.ckActivos.UseVisualStyleBackColor = true;
+            this.ckActivos.CheckedChanged += new System.EventHandler(this.ckActivos_CheckedChanged);
             // 
             // ckInactivos
             // 
@@ -390,6 +407,7 @@
             this.ckInactivos.TabIndex = 29;
             this.ckInactivos.Text = "Inactivos";
             this.ckInactivos.UseVisualStyleBackColor = true;
+            this.ckInactivos.CheckedChanged += new System.EventHandler(this.ckInactivos_CheckedChanged);
             // 
             // ckTodos
             // 
@@ -400,25 +418,15 @@
             this.ckTodos.TabIndex = 30;
             this.ckTodos.Text = "Todos";
             this.ckTodos.UseVisualStyleBackColor = true;
+            this.ckTodos.CheckedChanged += new System.EventHandler(this.ckTodos_CheckedChanged);
             // 
             // Mensaje
             // 
-            this.Mensaje.FormattingEnabled = true;
-            this.Mensaje.ItemHeight = 21;
-            this.Mensaje.Location = new System.Drawing.Point(502, 403);
+            this.Mensaje.Location = new System.Drawing.Point(417, 403);
+            this.Mensaje.Multiline = true;
             this.Mensaje.Name = "Mensaje";
-            this.Mensaje.Size = new System.Drawing.Size(241, 130);
+            this.Mensaje.Size = new System.Drawing.Size(300, 93);
             this.Mensaje.TabIndex = 31;
-            this.Mensaje.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(110, 154);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(210, 25);
-            this.cmbRol.TabIndex = 24;
             // 
             // GestionUsuario_23DB
             // 
@@ -432,7 +440,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblnroUsuario);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridUsuarios);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAplicar);
@@ -444,7 +452,8 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GestionUsuario_23DB";
             this.Text = "GestionUsuario";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.GestionUsuario_23DB_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUsuarios)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -463,7 +472,7 @@
         private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridUsuarios;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -486,7 +495,7 @@
         private System.Windows.Forms.CheckBox ckActivos;
         private System.Windows.Forms.CheckBox ckInactivos;
         private System.Windows.Forms.CheckBox ckTodos;
-        private System.Windows.Forms.ListBox Mensaje;
         private System.Windows.Forms.ComboBox cmbRol;
+        private System.Windows.Forms.TextBox Mensaje;
     }
 }

@@ -60,6 +60,12 @@
     <Compile Include="CambiarContraseña_23DB.Designer.cs">
       <DependentUpon>CambiarContraseña_23DB.cs</DependentUpon>
     </Compile>
+    <Compile Include="CambiarIdioma_23DB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarIdioma_23DB.Designer.cs">
+      <DependentUpon>CambiarIdioma_23DB.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestionUsuario_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambiarContraseña_23DB.resx">
       <DependentUpon>CambiarContraseña_23DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CambiarIdioma_23DB.resx">
+      <DependentUpon>CambiarIdioma_23DB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario_23DB.resx">
       <DependentUpon>GestionUsuario_23DB.cs</DependentUpon>
