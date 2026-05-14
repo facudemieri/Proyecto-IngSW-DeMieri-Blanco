@@ -85,7 +85,7 @@ namespace GUI_23DB
 
         private void CambiarContraseña_23DB_Load(object sender, EventArgs e)
         {
-            lblLogin.Text = "LOGIN: " + SessionManager_23DB.ObtenerInstancia_23DB().Nombre_23DB;
+            lblLogin.Text = "LOGIN: " + SessionManager_23DB.ObtenerInstancia_23DB().Login_23DB;
         }
     }
 }

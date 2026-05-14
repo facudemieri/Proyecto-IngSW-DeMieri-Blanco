@@ -18,6 +18,7 @@ namespace GUI_23DB
         private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
         private int intentosFallidos_23DB = 0;
+        public bool EsRelogin_23DB { get; set; } = false;
         public InicioSesion_23DB()
         {
             InitializeComponent();
@@ -85,18 +86,25 @@ namespace GUI_23DB
 
             SessionManager_23DB.ObtenerInstancia_23DB().InicializarSesion_23DB(
                 usuarioAutenticado_23DB.DNI_23DB,
-                usuarioAutenticado_23DB.Nombre_23DB,
-                usuarioAutenticado_23DB.Apellido_23DB,
+                usuarioAutenticado_23DB.Login_23DB,    
                 nombreRol_23DB
             );
 
             
             eventoBLL_23DB.RegistrarEvento_23DB(usuarioAutenticado_23DB.DNI_23DB, "Usuarios", "Login", 1);
 
+            if (EsRelogin_23DB)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MenuPrincipal_23DB menuPrincipal_23DB = new MenuPrincipal_23DB();
+                menuPrincipal_23DB.Show();
+                this.Hide();
+            }
             
-            MenuPrincipal_23DB menuPrincipal_23DB = new MenuPrincipal_23DB();
-            menuPrincipal_23DB.Show();
-            this.Hide();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

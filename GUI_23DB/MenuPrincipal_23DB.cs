@@ -14,6 +14,7 @@ namespace GUI_23DB
 {
     public partial class MenuPrincipal_23DB : Form
     {
+
         public MenuPrincipal_23DB()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace GUI_23DB
         private void CargarDatosSesion_23DB()
         {
             SessionManager_23DB sesion_23DB = SessionManager_23DB.ObtenerInstancia_23DB();
-            lblLoginMp.Text = "Bienvenido: " + sesion_23DB.Nombre_23DB + " " + sesion_23DB.Apellido_23DB;
+            lblLoginMp.Text = "Bienvenido: " + sesion_23DB.Login_23DB;
             lblRol.Text = "Rol: " + sesion_23DB.Rol_23DB;
         }
 
@@ -56,7 +57,15 @@ namespace GUI_23DB
 
         private void reloginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
+            InicioSesion_23DB login_23DB = new InicioSesion_23DB();
+            login_23DB.EsRelogin_23DB = true;
+            DialogResult resultado_23DB = login_23DB.ShowDialog();
+
+            if (resultado_23DB == DialogResult.OK)
+                CargarDatosSesion_23DB();
+            else
+                this.Close();
         }
 
         private void gestionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,9 +94,7 @@ namespace GUI_23DB
                 string dni_23DB = SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB;
                 eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Logout", 1);
                 SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
-                this.Hide();
-                InicioSesion_23DB login_23DB = new InicioSesion_23DB();
-                login_23DB.Show();
+                Application.Exit();
             }
         }
 
