@@ -73,7 +73,7 @@ namespace DAL_23DB
                         Id_Evento_23DB = Convert.ToInt32(reader_23DB["Id_Evento"]),
                         DNI_23DB = reader_23DB["DNI"].ToString(),
                         Fecha_23DB = Convert.ToDateTime(reader_23DB["Fecha"]),
-                        Hora_23DB = Convert.ToDateTime(reader_23DB["Fecha"].ToString() + " " + reader_23DB["Hora"].ToString()),
+                        Hora_23DB = TimeSpan.Parse(reader_23DB["Hora"].ToString()),
                         Modulo_23DB = reader_23DB["Modulo"].ToString(),
                         Evento23DB = reader_23DB["Evento"].ToString(),
                         Criticidad_23DB = Convert.ToInt32(reader_23DB["Criticidad"])
@@ -127,7 +127,7 @@ namespace DAL_23DB
                         Id_Evento_23DB = Convert.ToInt32(reader_23DB["Id_Evento"]),
                         DNI_23DB = reader_23DB["DNI"].ToString(),
                         Fecha_23DB = Convert.ToDateTime(reader_23DB["Fecha"]),
-                        Hora_23DB = Convert.ToDateTime(reader_23DB["Fecha"].ToString() + " " + reader_23DB["Hora"].ToString()),
+                        Hora_23DB = TimeSpan.Parse(reader_23DB["Hora"].ToString()),
                         Modulo_23DB = reader_23DB["Modulo"].ToString(),
                         Evento23DB = reader_23DB["Evento"].ToString(),
                         Criticidad_23DB = Convert.ToInt32(reader_23DB["Criticidad"])

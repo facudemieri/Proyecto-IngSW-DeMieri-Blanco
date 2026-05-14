@@ -32,9 +32,9 @@ namespace BE_23DB
 			set { fecha_ = value; }
 		}
 		
-		private DateTime Hora_;
+		private TimeSpan Hora_;
 
-		public DateTime Hora_23DB
+		public TimeSpan Hora_23DB
 		{
 			get { return Hora_; }
 			set { Hora_ = value; }
