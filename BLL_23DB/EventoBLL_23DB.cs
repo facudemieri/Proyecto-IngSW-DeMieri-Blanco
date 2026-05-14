@@ -28,5 +28,16 @@ namespace BLL_23DB
         {
             return mapperEvento_23DB.FiltrarEventos_23DB(dni_23DB, fechaInicio_23DB, fechaFin_23DB, modulo_23DB, evento_23DB, criticidad_23DB);
         }
+
+        public List<Usuario_23DB> ObtenerLogins_23DB()
+        {
+            return mapperEvento_23DB.ObtenerLogins_23DB();
+        }
+
+        public Usuario_23DB ObtenerUsuarioPorDNI_23DB(string dni_23DB)
+        {
+            return mapperEvento_23DB.ObtenerUsuarioPorDNI_23DB(dni_23DB);
+        }
+
     }
 }

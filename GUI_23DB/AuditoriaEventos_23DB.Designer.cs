@@ -30,15 +30,15 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.USUARIOS = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvBitacoraEventos = new System.Windows.Forms.DataGridView();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbLogin = new System.Windows.Forms.ComboBox();
             this.cmbModulo = new System.Windows.Forms.ComboBox();
@@ -49,10 +49,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBitacoraEventos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,14 +78,15 @@
             this.USUARIOS.TabIndex = 24;
             this.USUARIOS.Text = "BITACORA DE EVENTOS";
             // 
-            // dataGridView1
+            // dgvBitacoraEventos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 93);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(682, 207);
-            this.dataGridView1.TabIndex = 28;
+            this.dgvBitacoraEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBitacoraEventos.Location = new System.Drawing.Point(34, 93);
+            this.dgvBitacoraEventos.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvBitacoraEventos.Name = "dgvBitacoraEventos";
+            this.dgvBitacoraEventos.Size = new System.Drawing.Size(682, 207);
+            this.dgvBitacoraEventos.TabIndex = 28;
+            this.dgvBitacoraEventos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBitacoraEventos_CellClick);
             // 
             // btnLimpiar
             // 
@@ -101,6 +102,7 @@
             this.btnLimpiar.TabIndex = 29;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnAplicar
             // 
@@ -116,6 +118,7 @@
             this.btnAplicar.TabIndex = 30;
             this.btnAplicar.Text = "Aplicar";
             this.btnAplicar.UseVisualStyleBackColor = false;
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
             // 
             // btnImprimir
             // 
@@ -147,14 +150,15 @@
             this.btnSalir.TabIndex = 32;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.BackColor = System.Drawing.Color.LightBlue;
-            this.textBox1.Location = new System.Drawing.Point(225, 335);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(116, 23);
-            this.textBox1.TabIndex = 32;
+            this.txtNombre.BackColor = System.Drawing.Color.LightBlue;
+            this.txtNombre.Location = new System.Drawing.Point(225, 335);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(116, 23);
+            this.txtNombre.TabIndex = 32;
             // 
             // label1
             // 
@@ -174,13 +178,13 @@
             this.label2.TabIndex = 35;
             this.label2.Text = "Apellido";
             // 
-            // textBox2
+            // txtApellido
             // 
-            this.textBox2.BackColor = System.Drawing.Color.LightBlue;
-            this.textBox2.Location = new System.Drawing.Point(474, 335);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(116, 23);
-            this.textBox2.TabIndex = 34;
+            this.txtApellido.BackColor = System.Drawing.Color.LightBlue;
+            this.txtApellido.Location = new System.Drawing.Point(474, 335);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(116, 23);
+            this.txtApellido.TabIndex = 34;
             // 
             // label3
             // 
@@ -268,19 +272,19 @@
             this.label8.TabIndex = 47;
             this.label8.Text = "Fecha Fin";
             // 
-            // dateTimePicker1
+            // dtpFechaInicio
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(370, 389);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(121, 23);
-            this.dateTimePicker1.TabIndex = 48;
+            this.dtpFechaInicio.Location = new System.Drawing.Point(370, 389);
+            this.dtpFechaInicio.Name = "dtpFechaInicio";
+            this.dtpFechaInicio.Size = new System.Drawing.Size(121, 23);
+            this.dtpFechaInicio.TabIndex = 48;
             // 
-            // dateTimePicker2
+            // dtpFechaFin
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(599, 389);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(121, 23);
-            this.dateTimePicker2.TabIndex = 49;
+            this.dtpFechaFin.Location = new System.Drawing.Point(599, 389);
+            this.dtpFechaFin.Name = "dtpFechaFin";
+            this.dtpFechaFin.Size = new System.Drawing.Size(121, 23);
+            this.dtpFechaFin.TabIndex = 49;
             // 
             // AuditoriaEventos_23DB
             // 
@@ -288,8 +292,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(859, 585);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpFechaFin);
+            this.Controls.Add(this.dtpFechaInicio);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbCriticidad);
@@ -301,21 +305,22 @@
             this.Controls.Add(this.cmbLogin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.btnAplicar);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvBitacoraEventos);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AuditoriaEventos_23DB";
             this.Text = "AuditoriaEventos_23DB";
+            this.Load += new System.EventHandler(this.AuditoriaEventos_23DB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBitacoraEventos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,15 +330,15 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label USUARIOS;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBitacoraEventos;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbLogin;
         private System.Windows.Forms.ComboBox cmbModulo;
@@ -344,7 +349,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicio;
+        private System.Windows.Forms.DateTimePicker dtpFechaFin;
     }
 }

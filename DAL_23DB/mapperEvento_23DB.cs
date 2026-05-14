@@ -140,5 +140,60 @@ namespace DAL_23DB
             }
             return lista_23DB;
         }
+
+        public List<Usuario_23DB> ObtenerLogins_23DB()
+        {
+            List<Usuario_23DB> lista_23DB = new List<Usuario_23DB>();
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT DNI, Login FROM Usuario_23DB ORDER BY Login";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
+                while (reader_23DB.Read())
+                {
+                    lista_23DB.Add(new Usuario_23DB
+                    {
+                        DNI_23DB = reader_23DB["DNI"].ToString(),
+                        Login_23DB = reader_23DB["Login"].ToString()
+                    });
+                }
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+            return lista_23DB;
+        }
+
+        public Usuario_23DB ObtenerUsuarioPorDNI_23DB(string dni_23DB)
+        {
+            Usuario_23DB usuario_23DB = null;
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT DNI, Nombre, Apellido FROM Usuario_23DB WHERE DNI = @DNI";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
+                SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
+                if (reader_23DB.Read())
+                {
+                    usuario_23DB = new Usuario_23DB
+                    {
+                        DNI_23DB = reader_23DB["DNI"].ToString(),
+                        Nombre_23DB = reader_23DB["Nombre"].ToString(),
+                        Apellido_23DB = reader_23DB["Apellido"].ToString()
+                    };
+                }
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+            return usuario_23DB;
+        }
+
+
+
     }
 }
