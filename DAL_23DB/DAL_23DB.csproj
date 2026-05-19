@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conexion_23DB.cs" />
     <Compile Include="mapperEvento_23DB.cs" />
     <Compile Include="mapperRol_23DB.cs" />
     <Compile Include="mapperUsuario_23DB.cs" />

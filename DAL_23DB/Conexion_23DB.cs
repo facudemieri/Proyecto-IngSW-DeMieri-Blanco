@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services_23DB
+namespace DAL_23DB
 {
     public class Conexion_23DB
     {
