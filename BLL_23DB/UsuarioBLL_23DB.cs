@@ -20,17 +20,6 @@ namespace BLL_23DB
             return mapperUsuario_23DB.ObtenerUsuario_23DB(login_23DB, passwordEncriptado_23DB);
         }
 
-        public bool ValidarEstado_23DB(Usuario_23DB usuario_23DB)
-        {
-            if (usuario_23DB == null)
-                return false;
-            if (!usuario_23DB.Activo_23DB)
-                return false;
-            if (usuario_23DB.Bloqueado_23DB)
-                return false;
-            return true;
-        }
-
         public void BloquearUsuario_23DB(string dni_23DB)
         {
             mapperUsuario_23DB.BloquearUsuario_23DB(dni_23DB);

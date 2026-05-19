@@ -167,7 +167,6 @@ namespace GUI_23DB
                 Mensaje.Text = "Debe completar todos los campos obligatorios.";
                 return;
             }
-
             Usuario_23DB usuario_23DB = new Usuario_23DB
             {
                 DNI_23DB = txtDni.Text,
@@ -232,7 +231,7 @@ namespace GUI_23DB
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
-        {
+        {           
             if (string.IsNullOrEmpty(txtDni.Text))
             {
                 Mensaje.Text = "Debe seleccionar un usuario.";
