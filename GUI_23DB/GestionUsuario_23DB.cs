@@ -1,5 +1,4 @@
-﻿using BE_23DB;
-using BLL_23DB;
+﻿using BLL_23DB;
 using Services_23DB;
 using System;
 using System.Collections.Generic;
@@ -71,6 +70,7 @@ namespace GUI_23DB
         }
         private void GestionUsuario_23DB_Load(object sender, EventArgs e)
         {
+            ckTodos.Checked = true;
             CargarRoles_23DB();
             CargarGrilla_23DB(ObtenerFiltroActual_23DB());
             ModoConsulta_23DB();
