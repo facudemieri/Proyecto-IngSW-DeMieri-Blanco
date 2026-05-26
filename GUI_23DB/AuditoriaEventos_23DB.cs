@@ -145,6 +145,18 @@ namespace GUI_23DB
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
+            if (dtpFechaInicio.Value > dtpFechaFin.Value)
+            {
+                MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha fin.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dtpFechaFin.Value > DateTime.Now.Date)
+            {
+                MessageBox.Show("La fecha fin no puede ser posterior a la fecha actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string dni_23DB = cmbLogin.SelectedIndex >= 0 ? cmbLogin.SelectedValue.ToString() : string.Empty;
             string modulo_23DB = cmbModulo.SelectedIndex >= 0 ? cmbModulo.SelectedItem.ToString() : string.Empty;
             string evento_23DB = cmbEvento.SelectedIndex >= 0 ? cmbEvento.SelectedItem.ToString() : string.Empty;
@@ -204,21 +216,20 @@ namespace GUI_23DB
             CargarEventos_23DB();
             CargarCriticidades_23DB();
             CargarGrilla_23DB();
+            dtpFechaInicio.MaxDate = DateTime.Now.Date;
             dtpFechaFin.MaxDate = DateTime.Now.Date;
         }
 
+        private bool actualizandoFecha_23DB = false;
+
         private void dtpFechaInicio_ValueChanged(object sender, EventArgs e)
         {
-            if (dtpFechaInicio.Value > dtpFechaFin.Value)
-                dtpFechaFin.Value = dtpFechaInicio.Value;
+         
         }
 
         private void dtpFechaFin_ValueChanged(object sender, EventArgs e)
         {
-            if (dtpFechaFin.Value > DateTime.Now.Date)
-                dtpFechaFin.Value = DateTime.Now.Date;
-            if (dtpFechaFin.Value < dtpFechaInicio.Value)
-                dtpFechaInicio.Value = dtpFechaFin.Value;
+    
         }
     }
 }

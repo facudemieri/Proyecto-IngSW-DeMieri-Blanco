@@ -58,6 +58,7 @@ namespace GUI_23DB
             SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
             this.Close();
             Application.OpenForms["MenuPrincipal_23DB"].Close();
+            eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Logout", 1);
             InicioSesion_23DB login_23DB = new InicioSesion_23DB();
             login_23DB.Show();
         }
