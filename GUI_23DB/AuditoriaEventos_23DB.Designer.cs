@@ -278,6 +278,7 @@
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(121, 23);
             this.dtpFechaInicio.TabIndex = 48;
+            this.dtpFechaInicio.ValueChanged += new System.EventHandler(this.dtpFechaInicio_ValueChanged);
             // 
             // dtpFechaFin
             // 
@@ -285,6 +286,7 @@
             this.dtpFechaFin.Name = "dtpFechaFin";
             this.dtpFechaFin.Size = new System.Drawing.Size(121, 23);
             this.dtpFechaFin.TabIndex = 49;
+            this.dtpFechaFin.ValueChanged += new System.EventHandler(this.dtpFechaFin_ValueChanged);
             // 
             // AuditoriaEventos_23DB
             // 

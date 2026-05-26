@@ -204,6 +204,21 @@ namespace GUI_23DB
             CargarEventos_23DB();
             CargarCriticidades_23DB();
             CargarGrilla_23DB();
+            dtpFechaFin.MaxDate = DateTime.Now.Date;
+        }
+
+        private void dtpFechaInicio_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpFechaInicio.Value > dtpFechaFin.Value)
+                dtpFechaFin.Value = dtpFechaInicio.Value;
+        }
+
+        private void dtpFechaFin_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpFechaFin.Value > DateTime.Now.Date)
+                dtpFechaFin.Value = DateTime.Now.Date;
+            if (dtpFechaFin.Value < dtpFechaInicio.Value)
+                dtpFechaInicio.Value = dtpFechaFin.Value;
         }
     }
 }

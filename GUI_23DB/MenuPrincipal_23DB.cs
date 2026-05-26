@@ -21,6 +21,8 @@ namespace GUI_23DB
             CargarDatosSesion_23DB();
         }
 
+        private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
+
         private void CargarDatosSesion_23DB()
         {
             SessionManager_23DB sesion_23DB = SessionManager_23DB.ObtenerInstancia_23DB();
@@ -57,11 +59,12 @@ namespace GUI_23DB
 
         private void reloginToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string dni_23DB = SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB;
+            eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Logout", 1);
             SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
             InicioSesion_23DB login_23DB = new InicioSesion_23DB();
             login_23DB.EsRelogin_23DB = true;
             DialogResult resultado_23DB = login_23DB.ShowDialog();
-
             if (resultado_23DB == DialogResult.OK)
                 CargarDatosSesion_23DB();
             else

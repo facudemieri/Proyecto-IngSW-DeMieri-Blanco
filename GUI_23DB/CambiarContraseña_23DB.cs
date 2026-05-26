@@ -54,8 +54,12 @@ namespace GUI_23DB
             }
 
             eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Cambiar Clave", 2);
-            MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Contraseña actualizada correctamente. Debe iniciar sesión nuevamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SessionManager_23DB.ObtenerInstancia_23DB().CerrarSesion_23DB();
             this.Close();
+            Application.OpenForms["MenuPrincipal_23DB"].Close();
+            InicioSesion_23DB login_23DB = new InicioSesion_23DB();
+            login_23DB.Show();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
