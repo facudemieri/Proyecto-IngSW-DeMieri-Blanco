@@ -54,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradorRoles_23DB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdministradorRoles_23DB.Designer.cs">
+      <DependentUpon>AdministradorRoles_23DB.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuditoriaEventos_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,12 @@
     </Compile>
     <Compile Include="CambiarIdioma_23DB.Designer.cs">
       <DependentUpon>CambiarIdioma_23DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrearFamilias_23DB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearFamilias_23DB.Designer.cs">
+      <DependentUpon>CrearFamilias_23DB.cs</DependentUpon>
     </Compile>
     <Compile Include="GestionUsuario_23DB.cs">
       <SubType>Form</SubType>
@@ -92,6 +104,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdministradorRoles_23DB.resx">
+      <DependentUpon>AdministradorRoles_23DB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AuditoriaEventos_23DB.resx">
       <DependentUpon>AuditoriaEventos_23DB.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambiarIdioma_23DB.resx">
       <DependentUpon>CambiarIdioma_23DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearFamilias_23DB.resx">
+      <DependentUpon>CrearFamilias_23DB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario_23DB.resx">
       <DependentUpon>GestionUsuario_23DB.cs</DependentUpon>

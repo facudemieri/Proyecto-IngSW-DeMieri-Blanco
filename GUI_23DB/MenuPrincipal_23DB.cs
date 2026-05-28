@@ -85,7 +85,7 @@ namespace GUI_23DB
 
         private void gestionDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            gestionDePerfilesToolStripMenuItem.DropDown = cmsGestionPerfiles;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -109,6 +109,23 @@ namespace GUI_23DB
         private void btnReportes_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Función en desarrollo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cmsAdmin_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void administradorPerfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CrearFamilias_23DB crearFamilias_23DB = new CrearFamilias_23DB();
+            crearFamilias_23DB.Show();
+        }
+
+        private void administradorRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdministradorRoles_23DB administrador = new AdministradorRoles_23DB();
+            administrador.Show();
         }
     }
 }
