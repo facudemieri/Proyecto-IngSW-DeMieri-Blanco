@@ -80,5 +80,29 @@ namespace Services_23DB
             set { Activo_ = value; }
         }
 
+        private int intentosFallidos_;
+
+        public int IntentosFallidos_23DB
+        {
+            get { return intentosFallidos_; }
+            set { intentosFallidos_ = value; }
+        }
+
+        private string ultimoIdioma_;
+
+        public string UltimoIdioma_23DB
+        {
+            get { return ultimoIdioma_; }
+            set { ultimoIdioma_ = value; }
+        }
+
+        private DateTime? fechaUltimoIntento_;
+
+        public DateTime? FechaUltimoIntento_23DB
+        {
+            get { return fechaUltimoIntento_; }
+            set { fechaUltimoIntento_ = value; }
+        }
+
     }
 }

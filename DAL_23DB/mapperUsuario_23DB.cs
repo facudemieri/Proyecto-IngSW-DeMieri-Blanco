@@ -40,7 +40,10 @@ namespace DAL_23DB
                 Login_23DB = reader_23DB["Login"].ToString(),
                 IdRol_23DB = (int)reader_23DB["IdRol"],
                 Bloqueado_23DB = (bool)reader_23DB["Bloqueado"],
-                Activo_23DB = (bool)reader_23DB["Activo"]
+                Activo_23DB = (bool)reader_23DB["Activo"],
+                IntentosFallidos_23DB = reader_23DB["IntentosFallidos"] == DBNull.Value ? 0 : (int)reader_23DB["IntentosFallidos"],
+                FechaUltimoIntento_23DB = reader_23DB["FechaUltimoIntento"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader_23DB["FechaUltimoIntento"]),
+                UltimoIdioma_23DB = reader_23DB["UltimoIdioma"] == DBNull.Value ? string.Empty : reader_23DB["UltimoIdioma"].ToString()
             };
         }
 
@@ -166,7 +169,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login AND Password = @Password";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB WHERE Login = @Login AND Password = @Password";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", password_23DB);
@@ -189,7 +192,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, Login, IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE Login = @Login";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB WHERE Login = @Login";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
@@ -234,6 +237,56 @@ namespace DAL_23DB
                 string query_23DB = "UPDATE Usuario_23DB SET Bloqueado = 1 WHERE DNI = @DNI";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni);
+                cmd_23DB.ExecuteNonQuery();
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
+
+        public void IncrementarIntentos_23DB(string dni_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "UPDATE Usuario_23DB SET IntentosFallidos = IntentosFallidos + 1, FechaUltimoIntento = @Fecha WHERE DNI = @DNI";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
+                cmd_23DB.Parameters.AddWithValue("@Fecha", DateTime.Now);
+                cmd_23DB.ExecuteNonQuery();
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
+
+        public void ResetearIntentos_23DB(string dni_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "UPDATE Usuario_23DB SET IntentosFallidos = 0, FechaUltimoIntento = NULL WHERE DNI = @DNI";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
+                cmd_23DB.ExecuteNonQuery();
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
+
+        public void ActualizarUltimoIdioma_23DB(string dni_23DB, string idioma_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "UPDATE Usuario_23DB SET UltimoIdioma = @Idioma WHERE DNI = @DNI";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
+                cmd_23DB.Parameters.AddWithValue("@Idioma", idioma_23DB);
                 cmd_23DB.ExecuteNonQuery();
             }
             finally

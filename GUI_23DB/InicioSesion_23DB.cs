@@ -16,7 +16,6 @@ namespace GUI_23DB
     {
         private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
-        private static Dictionary<string, int> intentosPorUsuario_23DB = new Dictionary<string, int>();
         public bool EsRelogin_23DB { get; set; } = false;
         public InicioSesion_23DB()
         {
@@ -31,10 +30,8 @@ namespace GUI_23DB
                 return;
             }
 
-            
             Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
 
-            
             if (usuarioPorLogin_23DB == null)
             {
                 MessageBox.Show("Credenciales incorrectas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -42,41 +39,36 @@ namespace GUI_23DB
             }
 
             
+            if (usuarioBLL_23DB.VerificarTiempoReset_23DB(usuarioPorLogin_23DB.FechaUltimoIntento_23DB))
+                usuarioBLL_23DB.ResetearIntentos_23DB(usuarioPorLogin_23DB.DNI_23DB);
+
             if (usuarioPorLogin_23DB.Bloqueado_23DB)
             {
                 MessageBox.Show("Su cuenta está bloqueada. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
             if (!usuarioPorLogin_23DB.Activo_23DB)
             {
                 MessageBox.Show("Su cuenta está deshabilitada. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
             Usuario_23DB usuarioAutenticado_23DB = usuarioBLL_23DB.AutenticarUsuario_23DB(txtUsuario.Text, txtContraseña.Text);
 
-            
             if (usuarioAutenticado_23DB == null)
             {
-                string dni_23DB = usuarioPorLogin_23DB.DNI_23DB;
+                usuarioBLL_23DB.IncrementarIntentos_23DB(usuarioPorLogin_23DB.DNI_23DB);
+                usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
 
-                if (!intentosPorUsuario_23DB.ContainsKey(dni_23DB))
-                    intentosPorUsuario_23DB[dni_23DB] = 0;
-
-                intentosPorUsuario_23DB[dni_23DB]++;
-
-                if (intentosPorUsuario_23DB[dni_23DB] >= 3)
+                if (usuarioPorLogin_23DB.IntentosFallidos_23DB >= 3)
                 {
-                    usuarioBLL_23DB.BloquearUsuario_23DB(dni_23DB);
-                    eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Usuarios", "Bloqueo Automático por Intentos", 1);
-                    intentosPorUsuario_23DB.Remove(dni_23DB);
+                    usuarioBLL_23DB.BloquearUsuario_23DB(usuarioPorLogin_23DB.DNI_23DB);
+                    eventoBLL_23DB.RegistrarEvento_23DB(usuarioPorLogin_23DB.DNI_23DB, "Usuarios", "Bloqueo Automático por Intentos", 1);
                     MessageBox.Show("Su cuenta ha sido bloqueada por demasiados intentos fallidos. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                MessageBox.Show($"Credenciales incorrectas. Intentos restantes: {3 - intentosPorUsuario_23DB[dni_23DB]}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Credenciales incorrectas. Intentos restantes: {3 - usuarioPorLogin_23DB.IntentosFallidos_23DB}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -84,11 +76,11 @@ namespace GUI_23DB
 
             SessionManager_23DB.ObtenerInstancia_23DB().InicializarSesion_23DB(
                 usuarioAutenticado_23DB.DNI_23DB,
-                usuarioAutenticado_23DB.Login_23DB,    
+                usuarioAutenticado_23DB.Login_23DB,
                 nombreRol_23DB
             );
 
-            intentosPorUsuario_23DB.Remove(usuarioAutenticado_23DB.DNI_23DB);
+            usuarioBLL_23DB.ResetearIntentos_23DB(usuarioAutenticado_23DB.DNI_23DB);
             eventoBLL_23DB.RegistrarEvento_23DB(usuarioAutenticado_23DB.DNI_23DB, "Usuarios", "Login", 1);
 
             if (EsRelogin_23DB)
@@ -102,9 +94,6 @@ namespace GUI_23DB
                 menuPrincipal_23DB.Show();
                 this.Hide();
             }
-
-           
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
