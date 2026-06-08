@@ -377,7 +377,7 @@
             this.administradorPerfilesToolStripMenuItem,
             this.administradorRToolStripMenuItem});
             this.cmsGestionPerfiles.Name = "cmsGestionPerfiles";
-            this.cmsGestionPerfiles.Size = new System.Drawing.Size(197, 70);
+            this.cmsGestionPerfiles.Size = new System.Drawing.Size(197, 48);
             // 
             // administradorPerfilesToolStripMenuItem
             // 
@@ -405,6 +405,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "MenuPrincipal_23DB";
             this.Text = "MenuPrincipal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuPrincipal_23DB_FormClosing);
             this.Load += new System.EventHandler(this.MenuPrincipal_23DB_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -14,6 +14,7 @@ namespace Services_23DB
         public string DNI_23DB { get; private set; }
         public string Login_23DB { get; private set; }
         public string Rol_23DB { get; private set; }
+        public string UltimoIdioma_23DB { get; set; }
 
         private SessionManager_23DB() { }
 
@@ -35,6 +36,7 @@ namespace Services_23DB
             DNI_23DB = dni_23DB;
             Login_23DB = login_23DB;
             Rol_23DB = rol_23DB;
+            UltimoIdioma_23DB = string.Empty;
         }
 
         public void CerrarSesion_23DB()

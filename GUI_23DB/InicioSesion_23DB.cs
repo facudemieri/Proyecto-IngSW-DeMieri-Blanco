@@ -17,9 +17,12 @@ namespace GUI_23DB
         private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
         public bool EsRelogin_23DB { get; set; } = false;
+
+        
         public InicioSesion_23DB()
         {
             InitializeComponent();
+                    
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -80,6 +83,12 @@ namespace GUI_23DB
                 nombreRol_23DB
             );
 
+            string ultimoIdioma_23DB = usuarioAutenticado_23DB.UltimoIdioma_23DB;
+            if (!string.IsNullOrEmpty(ultimoIdioma_23DB))
+            {
+                SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB = ultimoIdioma_23DB;
+            }
+
             usuarioBLL_23DB.ResetearIntentos_23DB(usuarioAutenticado_23DB.DNI_23DB);
             eventoBLL_23DB.RegistrarEvento_23DB(usuarioAutenticado_23DB.DNI_23DB, "Usuarios", "Login", 1);
 
@@ -107,6 +116,11 @@ namespace GUI_23DB
                 txtContraseña.PasswordChar = '\0';
             else
                 txtContraseña.PasswordChar = '*';
+        }
+                
+        private void InicioSesion_23DB_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }

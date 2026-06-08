@@ -12,15 +12,28 @@ using System.Windows.Forms;
 
 namespace GUI_23DB
 {
-    public partial class GestionUsuario_23DB : Form
+    public partial class GestionUsuario_23DB : Form, IIdiomaObserver_23DB
     {
         private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
         private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
         private string modoActual_23DB = "Consulta";
+
+        private void AplicarIdiomaActual_23DB()
+        {
+            string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
+            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            {
+                IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
+                ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
+            }
+        }
         public GestionUsuario_23DB()
         {
             InitializeComponent();
+            Observer_23DB.ObtenerInstancia_23DB().Suscribir_23DB(this);
+            AplicarIdiomaActual_23DB();
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -287,6 +300,33 @@ namespace GUI_23DB
                 ckInactivos.Checked = false;
                 CargarGrilla_23DB("Todos");
             }
+        }
+
+        public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
+        {
+            string formName_23DB = "GestionUsuario";
+            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            {
+                string clave_23DB = formName_23DB + "_" + control_23DB.Name;
+                if (configuracion_23DB.ContainsKey(clave_23DB))
+                    control_23DB.Text = configuracion_23DB[clave_23DB];
+            }
+        }
+
+        private List<Control> ObtenerTodosControles_23DB(Control control_23DB)
+        {
+            List<Control> lista_23DB = new List<Control>();
+            foreach (Control c_23DB in control_23DB.Controls)
+            {
+                lista_23DB.Add(c_23DB);
+                lista_23DB.AddRange(ObtenerTodosControles_23DB(c_23DB));
+            }
+            return lista_23DB;
+        }
+
+        private void GestionUsuario_23DB_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Observer_23DB.ObtenerInstancia_23DB().Desuscribir_23DB(this);
         }
     }
 }

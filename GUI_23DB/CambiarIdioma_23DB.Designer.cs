@@ -115,6 +115,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "CambiarIdioma_23DB";
             this.Text = "CambiarIdioma_23DB";
+            this.Load += new System.EventHandler(this.CambiarIdioma_23DB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

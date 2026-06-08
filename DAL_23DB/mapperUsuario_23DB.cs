@@ -53,7 +53,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo FROM Usuario_23DB";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB";
                 if (filtro_23DB == "Activos")
                     query_23DB += " WHERE Activo = 1";
                 else if (filtro_23DB == "Inactivos")
@@ -135,7 +135,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "UPDATE Usuario_23DB SET Bloqueado = 0, [Password] = @Password WHERE DNI = @DNI";
+                string query_23DB = "UPDATE Usuario_23DB SET Bloqueado = 0, [Password] = @Password, IntentosFallidos = 0 WHERE DNI = @DNI";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", passwordInicial_23DB);

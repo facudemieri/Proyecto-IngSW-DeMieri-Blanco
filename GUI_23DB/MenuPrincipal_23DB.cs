@@ -12,13 +12,23 @@ using System.Windows.Forms;
 
 namespace GUI_23DB
 {
-    public partial class MenuPrincipal_23DB : Form
+    public partial class MenuPrincipal_23DB : Form, IIdiomaObserver_23DB
     {
-
+        private void AplicarIdiomaActual_23DB()
+        {
+            string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
+            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            {
+                IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
+                ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
+            }
+        }
         public MenuPrincipal_23DB()
         {
             InitializeComponent();
             CargarDatosSesion_23DB();
+            Observer_23DB.ObtenerInstancia_23DB().Suscribir_23DB(this);
+            AplicarIdiomaActual_23DB();
         }
 
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
@@ -126,6 +136,56 @@ namespace GUI_23DB
         {
             AdministradorRoles_23DB administrador = new AdministradorRoles_23DB();
             administrador.Show();
+        }
+
+        public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
+        {
+            string formName_23DB = "MenuPrincipal";
+            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            {
+                if (control_23DB.Name == "lblLoginMp" || control_23DB.Name == "lblRol")
+                    continue;
+                string clave_23DB = formName_23DB + "_" + control_23DB.Name;
+                if (configuracion_23DB.ContainsKey(clave_23DB))
+                    control_23DB.Text = configuracion_23DB[clave_23DB];
+            }
+            foreach (ToolStripItem item_23DB in ObtenerTodosMenuItems_23DB())
+            {
+                string clave_23DB = formName_23DB + "_" + item_23DB.Name;
+                if (configuracion_23DB.ContainsKey(clave_23DB))
+                    item_23DB.Text = configuracion_23DB[clave_23DB];
+            }
+        }
+
+        private List<Control> ObtenerTodosControles_23DB(Control control_23DB)
+        {
+            List<Control> lista_23DB = new List<Control>();
+            foreach (Control c_23DB in control_23DB.Controls)
+            {
+                lista_23DB.Add(c_23DB);
+                lista_23DB.AddRange(ObtenerTodosControles_23DB(c_23DB));
+            }
+            return lista_23DB;
+        }
+
+        private List<ToolStripItem> ObtenerTodosMenuItems_23DB()
+        {
+            List<ToolStripItem> lista_23DB = new List<ToolStripItem>();
+            foreach (ToolStripItem item_23DB in cmsUsuario.Items)
+            {
+                lista_23DB.Add(item_23DB);
+            }               
+            foreach (ToolStripItem item_23DB in cmsAdmin.Items)
+            {
+                lista_23DB.Add(item_23DB);
+            }
+                
+            return lista_23DB;
+        }
+
+        private void MenuPrincipal_23DB_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Observer_23DB.ObtenerInstancia_23DB().Desuscribir_23DB(this);
         }
     }
 }
