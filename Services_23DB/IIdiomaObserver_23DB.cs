@@ -9,5 +9,7 @@ namespace Services_23DB
     public interface IIdiomaObserver_23DB
     {
         void ActualizarIdioma_23DB(System.Collections.Generic.Dictionary<string, string> configuracion_23DB);
+
+        void AplicarIdiomaActual_23DB();
     }
 }

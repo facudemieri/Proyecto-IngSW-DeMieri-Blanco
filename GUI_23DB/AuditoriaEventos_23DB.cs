@@ -14,15 +14,7 @@ namespace GUI_23DB
 {
     public partial class AuditoriaEventos_23DB : Form, IIdiomaObserver_23DB
     {
-        private void AplicarIdiomaActual_23DB()
-        {
-            string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
-            {
-                IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
-                ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
-            }
-        }
+        
         public AuditoriaEventos_23DB()
         {
             InitializeComponent();
@@ -270,6 +262,16 @@ namespace GUI_23DB
         private void AuditoriaEventos_23DB_FormClosing(object sender, FormClosingEventArgs e)
         {
             Observer_23DB.ObtenerInstancia_23DB().Desuscribir_23DB(this);
+        }
+
+        public void AplicarIdiomaActual_23DB()
+        {
+            string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
+            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            {
+                IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
+                ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
+            }
         }
     }
 }
