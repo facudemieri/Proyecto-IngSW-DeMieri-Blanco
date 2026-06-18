@@ -58,5 +58,10 @@ namespace BLL_23DB
         {
             return mapperRol_23DB.ObtenerRolCompleto_23DB(idRol_23DB);
         }
+
+        public List<string> ObtenerPatentesDeRol_23DB(int idRol_23DB)
+        {
+            return mapperRol_23DB.ObtenerPatentesDeRol_23DB(idRol_23DB);
+        }
     }
 }

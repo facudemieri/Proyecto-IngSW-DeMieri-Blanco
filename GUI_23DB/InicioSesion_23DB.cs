@@ -16,6 +16,7 @@ namespace GUI_23DB
     {
         private UsuarioBLL_23DB usuarioBLL_23DB = new UsuarioBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
+        private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
         public bool EsRelogin_23DB { get; set; } = false;
 
         
@@ -99,7 +100,8 @@ namespace GUI_23DB
             }
             else
             {
-                MenuPrincipal_23DB menuPrincipal_23DB = new MenuPrincipal_23DB();
+                List<string> patentes_23DB = rolBLL_23DB.ObtenerPatentesDeRol_23DB(usuarioAutenticado_23DB.IdRol_23DB);
+                MenuPrincipal_23DB menuPrincipal_23DB = new MenuPrincipal_23DB(patentes_23DB);
                 menuPrincipal_23DB.Show();
                 this.Hide();
             }

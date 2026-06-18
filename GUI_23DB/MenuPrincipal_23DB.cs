@@ -15,12 +15,21 @@ namespace GUI_23DB
     public partial class MenuPrincipal_23DB : Form, IIdiomaObserver_23DB
     {
       
-        public MenuPrincipal_23DB()
+        public MenuPrincipal_23DB(List<string> patentes_23DB)
         {
             InitializeComponent();
             CargarDatosSesion_23DB();
             Observer_23DB.ObtenerInstancia_23DB().Suscribir_23DB(this);
             AplicarIdiomaActual_23DB();
+            AplicarPatentes_23DB(patentes_23DB);
+        }
+
+        private void AplicarPatentes_23DB(List<string> patentes_23DB)
+        {
+            gestionDeUsuariosToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Usuarios");
+            bitacoraDeEventosToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Bitacora");
+            gestionDePerfilesToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Perfiles");
+            cambiarContraseñaToolStripMenuItem.Visible = patentes_23DB.Contains("Cambio de Clave");
         }
 
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();

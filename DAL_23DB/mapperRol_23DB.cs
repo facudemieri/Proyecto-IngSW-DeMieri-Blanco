@@ -268,6 +268,45 @@ namespace DAL_23DB
             }
             return rol_23DB;
         }
+
+        public List<string> ObtenerPatentesDeRol_23DB(int idRol_23DB)
+        {
+            List<string> patentes_23DB = new List<string>();
+            try
+            {
+                Conectar_23DB();
+
+                // Patentes directas del Rol
+                string queryPat_23DB = "SELECT P.NombrePatente FROM Patente_23DB P INNER JOIN RolPat_23DB RP ON P.IdPatente = RP.IdPatente WHERE RP.IdRol = @IdRol";
+                SqlCommand cmdPat_23DB = new SqlCommand(queryPat_23DB, conexion_23DB);
+                cmdPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
+                SqlDataReader readerPat_23DB = cmdPat_23DB.ExecuteReader();
+                while(readerPat_23DB.Read())
+                    patentes_23DB.Add(readerPat_23DB["NombrePatente"].ToString());
+                readerPat_23DB.Close();
+
+                // Patentes de las Familias del Rol
+                string queryFamPat_23DB = @"SELECT P.NombrePatente FROM Patente_23DB P 
+                                    INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente 
+                                    INNER JOIN RolFam_23DB RF ON FP.IdFamilia = RF.IdFamilia 
+                                    WHERE RF.IdRol = @IdRol";
+                SqlCommand cmdFamPat_23DB = new SqlCommand(queryFamPat_23DB, conexion_23DB);
+                cmdFamPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
+                SqlDataReader readerFamPat_23DB = cmdFamPat_23DB.ExecuteReader();
+                while(readerFamPat_23DB.Read())
+                {
+                    string patente_23DB = readerFamPat_23DB["NombrePatente"].ToString();
+                    if(!patentes_23DB.Contains(patente_23DB))
+                        patentes_23DB.Add(patente_23DB);
+                }
+                readerFamPat_23DB.Close();
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+            return patentes_23DB;
+        }
     }
 }
 
