@@ -49,11 +49,13 @@
   <ItemGroup>
     <Compile Include="CryptoManager_23DB.cs" />
     <Compile Include="Evento_23DB.cs" />
-    <Compile Include="IIdiomaObserver_23DB.cs" />
-    <Compile Include="ISujeto_23DB.cs" />
-    <Compile Include="Observer_23DB.cs" />
+    <Compile Include="Composite\Familia_23DB.cs" />
+    <Compile Include="Observer\IIdiomaObserver_23DB.cs" />
+    <Compile Include="Observer\ISujeto_23DB.cs" />
+    <Compile Include="Observer\Observer_23DB.cs" />
+    <Compile Include="Composite\Patente_23DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rol_23DB.cs" />
+    <Compile Include="Composite\Rol_23DB.cs" />
     <Compile Include="SessionManager_23DB.cs" />
     <Compile Include="Usuario_23DB.cs" />
   </ItemGroup>

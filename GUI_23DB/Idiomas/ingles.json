@@ -88,5 +88,15 @@
   "AdministradorRoles_btnModificar": "Modify",
   "AdministradorRoles_btnEliminar": "Delete",
   "AdministradorRoles_btnCancelar": "Cancel",
-  "AdministradorRoles_btnSalir": "Exit"
+  "AdministradorRoles_btnSalir": "Exit",
+  "AdministradorRoles_btnQuitar": "Remove",
+  "AdministradorRoles_btnAplicar": "Apply",
+
+  "CrearFamilias_btnQuitar": "Remove",
+  "CrearFamilias_btnAplicar": "Apply",
+
+  "RepararInconsistencia_btnRecalcular": "Recalculate DV",
+  "RepararInconsistencia_btnRestore": "Restore DB",
+  "RepararInconsistencia_btnSalir": "Exit",
+  "RepararInconsistencia_lblTitulo": "An inconsistency has been detected, \r\nselect a course of action."
 }

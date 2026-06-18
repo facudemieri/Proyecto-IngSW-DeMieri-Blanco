@@ -87,7 +87,7 @@ namespace GUI_23DB
 
         private void gestionDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gestionDePerfilesToolStripMenuItem.DropDown = cmsGestionPerfiles;
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -188,6 +188,18 @@ namespace GUI_23DB
                 IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
                 ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
             }
+        }
+
+        private void administradorDeRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdministradorRoles_23DB administradorRoles_23DB = new AdministradorRoles_23DB();
+            administradorRoles_23DB.Show();
+        }
+
+        private void administradorDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CrearFamilias_23DB crearFamilias_23DB = new CrearFamilias_23DB();
+            crearFamilias_23DB.Show();
         }
     }
 }

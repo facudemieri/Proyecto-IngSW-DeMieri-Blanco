@@ -14,7 +14,33 @@ namespace GUI_23DB
 {
     public partial class AdministradorRoles_23DB : Form, IIdiomaObserver_23DB
     {
-        
+        private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
+        private FamiliaBLL_23DB familiaBLL_23DB = new FamiliaBLL_23DB();
+        private PatenteBLL_23DB patenteBLL_23DB = new PatenteBLL_23DB();
+        private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
+        private List<Rol_23DB> componentes_23DB = new List<Rol_23DB>();
+        private Rol_23DB rolSeleccionado_23DB = null;
+        private bool modoModificar_23DB = false;
+
+        private void ModoConsulta_23DB()
+        {
+            btnCrear.Enabled = true;
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnAplicar.Enabled = false;
+            btnQuitar.Enabled = false;
+            btnCancelar.Enabled = true;
+        }
+
+        private void ModoModificar_23DB()
+        {
+            btnCrear.Enabled = false;
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnAplicar.Enabled = true;
+            btnQuitar.Enabled = true;
+            btnCancelar.Enabled = true;
+        }
         public AdministradorRoles_23DB()
         {
             InitializeComponent();
@@ -22,10 +48,53 @@ namespace GUI_23DB
             AplicarIdiomaActual_23DB();
         }
 
+        private void CargarListBox_23DB()
+        {
+            lstPatFam.Items.Clear();
+            List<Rol_23DB> roles_23DB = rolBLL_23DB.ObtenerRoles_23DB();
+            List<Patente_23DB> patentes_23DB = patenteBLL_23DB.ObtenerPatentes_23DB();
+            List<Familia_23DB> familias_23DB = familiaBLL_23DB.ObtenerFamilias_23DB();
+            foreach (Rol_23DB rol_23DB in roles_23DB)
+            {
+                lstPatFam.Items.Add(rol_23DB);
+            }
+            foreach (Patente_23DB patente_23DB in patentes_23DB)
+            {
+                lstPatFam.Items.Add(patente_23DB);
+            }
+            foreach (Familia_23DB familia_23DB in familias_23DB)
+            {
+                lstPatFam.Items.Add(familia_23DB);
+            }
+                
+        }
+
+        private void AgregarAlTreeView_23DB(Rol_23DB componente_23DB)
+        {
+            TreeNode nodo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
+            nodo_23DB.Tag = componente_23DB;
+            foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            {
+                TreeNode nodoHijo_23DB = new TreeNode(hijo_23DB.ObtenerNombre_23DB());
+                nodoHijo_23DB.Tag = hijo_23DB;
+                nodo_23DB.Nodes.Add(nodoHijo_23DB);
+            }
+                
+            tvListaPatFam.Nodes.Add(nodo_23DB);
+            tvListaPatFam.ExpandAll();
+        }
+
+        private void LimpiarCampos_23DB()
+        {
+            txtNombre.Text = string.Empty;
+            tvListaPatFam.Nodes.Clear();
+            componentes_23DB.Clear();
+            ModoConsulta_23DB();
+        }
         public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
         {
             string formName_23DB = "AdministradorRoles";
-            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            foreach(Control control_23DB in ObtenerTodosControles_23DB(this))
             {
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
                 if (configuracion_23DB.ContainsKey(clave_23DB))
@@ -38,17 +107,12 @@ namespace GUI_23DB
         private List<Control> ObtenerTodosControles_23DB(Control control_23DB)
         {
             List<Control> lista_23DB = new List<Control>();
-            foreach (Control c_23DB in control_23DB.Controls)
+            foreach(Control c_23DB in control_23DB.Controls)
             {
                 lista_23DB.Add(c_23DB);
                 lista_23DB.AddRange(ObtenerTodosControles_23DB(c_23DB));
             }
             return lista_23DB;
-        }
-
-        private void AdministradorRoles_23DB_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Observer_23DB.ObtenerInstancia_23DB().Desuscribir_23DB(this);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -59,11 +123,248 @@ namespace GUI_23DB
         public void AplicarIdiomaActual_23DB()
         {
             string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            if(!string.IsNullOrEmpty(idiomaActual_23DB))
             {
                 IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
                 ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
             }
+        }
+
+        private void AdministradorRoles_23DB_Load(object sender, EventArgs e)
+        {
+            CargarListBox_23DB();
+            ModoConsulta_23DB();
+        }
+
+        private void btnCrear_Click_1(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Debe ingresar un nombre para el Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(componentes_23DB.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar al menos un elemento.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(!rolBLL_23DB.ValidarNombre_23DB(txtNombre.Text, rolBLL_23DB.ObtenerRoles_23DB()))
+            {
+                MessageBox.Show("Ya existe un Rol con ese nombre.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            rolBLL_23DB.CrearRol_23DB(txtNombre.Text, componentes_23DB);
+            eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Crear Rol", 2);
+            MessageBox.Show("Rol creado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LimpiarCampos_23DB();
+            CargarListBox_23DB();
+        }
+
+        private void lstPatFam_DoubleClick_1(object sender, EventArgs e)
+        {
+            if (lstPatFam.SelectedItem == null) return;
+            Rol_23DB seleccionado_23DB = (Rol_23DB)lstPatFam.SelectedItem;
+
+            // No permitir agregar un Rol dentro de otro Rol
+            if (!(seleccionado_23DB is Patente_23DB) && !(seleccionado_23DB is Familia_23DB))
+            {
+                MessageBox.Show("No se puede agregar un Rol dentro de otro Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (seleccionado_23DB is Familia_23DB)
+                seleccionado_23DB = familiaBLL_23DB.ObtenerFamiliaCompleta_23DB(((Familia_23DB)seleccionado_23DB).IdFamilia_23DB);
+
+            componentes_23DB.Add(seleccionado_23DB);
+            AgregarAlTreeView_23DB(seleccionado_23DB);
+            lstPatFam.Items.Remove(lstPatFam.SelectedItem);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos_23DB();
+            CargarListBox_23DB();
+            ModoConsulta_23DB();
+        }
+
+        private void AdministradorRoles_23DB_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            Observer_23DB.ObtenerInstancia_23DB().Desuscribir_23DB(this);
+        }
+
+        private void lstPatFam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lstPatFam.SelectedItem is Rol_23DB && !(lstPatFam.SelectedItem is Patente_23DB) && !(lstPatFam.SelectedItem is Familia_23DB))
+            {
+                btnModificar.Enabled = true;
+                btnEliminar.Enabled = true;
+            }
+            else
+            {
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (lstPatFam.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
+            {
+                MessageBox.Show("Solo se pueden eliminar Roles.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Rol_23DB rol_23DB = (Rol_23DB)lstPatFam.SelectedItem;
+
+            if (rol_23DB.NombreRol_23DB == "Administrador")
+            {
+                MessageBox.Show("No se puede eliminar el Rol Administrador.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Rol_23DB rolCompleto_23DB = rolBLL_23DB.ObtenerRolCompleto_23DB(rol_23DB.IdRol_23DB);
+            if (rolCompleto_23DB.ObtenerHijos_23DB().Count > 0)
+            {
+                MessageBox.Show("No se puede eliminar un Rol que tiene componentes.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult resultado_23DB = MessageBox.Show($"¿Está seguro que desea eliminar el Rol {rol_23DB.NombreRol_23DB}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (resultado_23DB == DialogResult.Yes)
+            {
+                rolBLL_23DB.EliminarRol_23DB(rol_23DB.IdRol_23DB);
+                eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Eliminar Rol", 2);
+                MessageBox.Show("Rol eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarCampos_23DB();
+                CargarListBox_23DB();
+            }
+            ModoConsulta_23DB();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (lstPatFam.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
+            {
+                MessageBox.Show("Solo se pueden modificar Roles.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Rol_23DB rolBase_23DB = (Rol_23DB)lstPatFam.SelectedItem;
+
+            if (rolBase_23DB.NombreRol_23DB == "Administrador")
+            {
+                MessageBox.Show("No se puede modificar el Rol Administrador.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            rolSeleccionado_23DB = rolBLL_23DB.ObtenerRolCompleto_23DB(rolBase_23DB.IdRol_23DB);
+            modoModificar_23DB = true;
+            txtNombre.Text = rolSeleccionado_23DB.NombreRol_23DB;
+            tvListaPatFam.Nodes.Clear();
+            componentes_23DB.Clear();
+
+            lstPatFam.Items.Remove(lstPatFam.SelectedItem);
+
+            TreeNode nodoRol_23DB = new TreeNode(rolSeleccionado_23DB.ObtenerNombre_23DB());
+            nodoRol_23DB.Tag = rolSeleccionado_23DB;
+
+            foreach (Rol_23DB componente_23DB in rolSeleccionado_23DB.ObtenerHijos_23DB())
+            {
+                componentes_23DB.Add(componente_23DB);
+                TreeNode nodoHijo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
+                nodoHijo_23DB.Tag = componente_23DB;
+                nodoRol_23DB.Nodes.Add(nodoHijo_23DB);
+
+                foreach (object item_23DB in lstPatFam.Items.Cast<object>().ToList())
+                {
+                    if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
+                    {
+                        lstPatFam.Items.Remove(item_23DB);
+                        break;
+                    }
+                }
+            }
+
+            tvListaPatFam.Nodes.Add(nodoRol_23DB);
+            tvListaPatFam.ExpandAll();
+            ModoModificar_23DB();
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (tvListaPatFam.SelectedNode == null)
+            {
+                MessageBox.Show("Debe seleccionar un elemento.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            TreeNode nodoSeleccionado_23DB = tvListaPatFam.SelectedNode;
+            Rol_23DB componente_23DB = (Rol_23DB)nodoSeleccionado_23DB.Tag;
+
+            if (nodoSeleccionado_23DB.Parent == null)
+            {
+                // Modo crear: los nodos raíz son componentes directos
+                componentes_23DB.Remove(componente_23DB);
+                AgregarAListBoxSiNoExiste_23DB(componente_23DB);
+                tvListaPatFam.Nodes.Remove(nodoSeleccionado_23DB);
+            }
+            else
+            {
+                Rol_23DB padre_23DB = (Rol_23DB)nodoSeleccionado_23DB.Parent.Tag;
+                if (modoModificar_23DB && nodoSeleccionado_23DB.Parent.Parent == null)
+                {
+                    // Modo modificar: hijo directo del nodo raíz Rol → actualizar componentes_23DB
+                    componentes_23DB.Remove(componente_23DB);
+                }
+                else
+                {
+                    // Hijo anidado dentro de una Familia
+                    padre_23DB.Quitar_23DB(componente_23DB);
+                }
+                AgregarAListBoxSiNoExiste_23DB(componente_23DB);
+                nodoSeleccionado_23DB.Parent.Nodes.Remove(nodoSeleccionado_23DB);
+            }
+        }
+
+        private void AgregarAListBoxSiNoExiste_23DB(Rol_23DB componente_23DB)
+        {
+            foreach (object item_23DB in lstPatFam.Items)
+            {
+                if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
+                    return;
+            }
+            lstPatFam.Items.Add(componente_23DB);
+        }
+
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+            if (!modoModificar_23DB) return;
+
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Debe ingresar un nombre para el Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+
+            rolBLL_23DB.ModificarRol_23DB(rolSeleccionado_23DB.IdRol_23DB, txtNombre.Text, componentes_23DB);
+            eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Modificar Rol", 2);
+            MessageBox.Show("Rol modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            modoModificar_23DB = false;
+            rolSeleccionado_23DB = null;
+            LimpiarCampos_23DB();
+            CargarListBox_23DB();
+            ModoConsulta_23DB();
         }
     }
 }

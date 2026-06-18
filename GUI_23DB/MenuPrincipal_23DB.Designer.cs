@@ -58,9 +58,8 @@
             this.gestionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitacoraDeEventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsGestionPerfiles = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.administradorPerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administradorRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administradorDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administradorDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
@@ -69,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.cmsUsuario.SuspendLayout();
             this.cmsAdmin.SuspendLayout();
-            this.cmsGestionPerfiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerarReporteDash
@@ -347,51 +345,46 @@
             this.bitacoraDeEventosToolStripMenuItem,
             this.gestionDePerfilesToolStripMenuItem});
             this.cmsAdmin.Name = "cmsAdmin";
-            this.cmsAdmin.Size = new System.Drawing.Size(179, 70);
+            this.cmsAdmin.Size = new System.Drawing.Size(181, 92);
             this.cmsAdmin.Opening += new System.ComponentModel.CancelEventHandler(this.cmsAdmin_Opening);
             // 
             // gestionDeUsuariosToolStripMenuItem
             // 
             this.gestionDeUsuariosToolStripMenuItem.Name = "gestionDeUsuariosToolStripMenuItem";
-            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestionDeUsuariosToolStripMenuItem.Text = "Gestion de Usuarios";
             this.gestionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeUsuariosToolStripMenuItem_Click);
             // 
             // bitacoraDeEventosToolStripMenuItem
             // 
             this.bitacoraDeEventosToolStripMenuItem.Name = "bitacoraDeEventosToolStripMenuItem";
-            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bitacoraDeEventosToolStripMenuItem.Text = "Bitacora de Eventos";
             this.bitacoraDeEventosToolStripMenuItem.Click += new System.EventHandler(this.bitacoraDeEventosToolStripMenuItem_Click);
             // 
             // gestionDePerfilesToolStripMenuItem
             // 
+            this.gestionDePerfilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administradorDeRolesToolStripMenuItem,
+            this.administradorDePerfilesToolStripMenuItem});
             this.gestionDePerfilesToolStripMenuItem.Name = "gestionDePerfilesToolStripMenuItem";
-            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestionDePerfilesToolStripMenuItem.Text = "Gestion de Perfiles";
             this.gestionDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.gestionDePerfilesToolStripMenuItem_Click);
             // 
-            // cmsGestionPerfiles
+            // administradorDeRolesToolStripMenuItem
             // 
-            this.cmsGestionPerfiles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.administradorPerfilesToolStripMenuItem,
-            this.administradorRToolStripMenuItem});
-            this.cmsGestionPerfiles.Name = "cmsGestionPerfiles";
-            this.cmsGestionPerfiles.Size = new System.Drawing.Size(197, 48);
+            this.administradorDeRolesToolStripMenuItem.Name = "administradorDeRolesToolStripMenuItem";
+            this.administradorDeRolesToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.administradorDeRolesToolStripMenuItem.Text = "Administrador de Roles";
+            this.administradorDeRolesToolStripMenuItem.Click += new System.EventHandler(this.administradorDeRolesToolStripMenuItem_Click);
             // 
-            // administradorPerfilesToolStripMenuItem
+            // administradorDePerfilesToolStripMenuItem
             // 
-            this.administradorPerfilesToolStripMenuItem.Name = "administradorPerfilesToolStripMenuItem";
-            this.administradorPerfilesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.administradorPerfilesToolStripMenuItem.Text = "Administrador Familias";
-            this.administradorPerfilesToolStripMenuItem.Click += new System.EventHandler(this.administradorPerfilesToolStripMenuItem_Click);
-            // 
-            // administradorRToolStripMenuItem
-            // 
-            this.administradorRToolStripMenuItem.Name = "administradorRToolStripMenuItem";
-            this.administradorRToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.administradorRToolStripMenuItem.Text = "Administrador Roles";
-            this.administradorRToolStripMenuItem.Click += new System.EventHandler(this.administradorRToolStripMenuItem_Click);
+            this.administradorDePerfilesToolStripMenuItem.Name = "administradorDePerfilesToolStripMenuItem";
+            this.administradorDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.administradorDePerfilesToolStripMenuItem.Text = "Administrador de Perfiles";
+            this.administradorDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.administradorDePerfilesToolStripMenuItem_Click);
             // 
             // MenuPrincipal_23DB
             // 
@@ -417,7 +410,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.cmsUsuario.ResumeLayout(false);
             this.cmsAdmin.ResumeLayout(false);
-            this.cmsGestionPerfiles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,8 +445,7 @@
         private System.Windows.Forms.ToolStripMenuItem gestionDeUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bitacoraDeEventosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionDePerfilesToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip cmsGestionPerfiles;
-        private System.Windows.Forms.ToolStripMenuItem administradorPerfilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem administradorRToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administradorDeRolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administradorDePerfilesToolStripMenuItem;
     }
 }

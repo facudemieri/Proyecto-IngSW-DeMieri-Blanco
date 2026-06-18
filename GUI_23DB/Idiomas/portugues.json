@@ -88,5 +88,15 @@
   "AdministradorRoles_btnModificar": "Modificar",
   "AdministradorRoles_btnEliminar": "Excluir",
   "AdministradorRoles_btnCancelar": "Cancelar",
-  "AdministradorRoles_btnSalir": "Sair"
+  "AdministradorRoles_btnSalir": "Sair",
+  "AdministradorRoles_btnQuitar": "Remover",
+  "AdministradorRoles_btnAplicar": "Aplicar",
+
+  "CrearFamilias_btnQuitar": "Remover",
+  "CrearFamilias_btnAplicar": "Aplicar",
+
+  "RepararInconsistencia_btnRecalcular": "Recalcular DV",
+  "RepararInconsistencia_btnRestore": "Restaurar BD",
+  "RepararInconsistencia_btnSalir": "Sair",
+  "RepararInconsistencia_lblTitulo": "Foi detectada uma inconsistência, \r\nselecione um caminho."
 }

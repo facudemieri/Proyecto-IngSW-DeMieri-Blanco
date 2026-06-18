@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventoBLL_23DB.cs" />
+    <Compile Include="FamiliaBLL_23DB.cs" />
     <Compile Include="IdiomaBLL_23DB.cs" />
+    <Compile Include="PatenteBLL_23DB.cs" />
     <Compile Include="RolBLL_23DB.cs" />
     <Compile Include="UsuarioBLL_23DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
