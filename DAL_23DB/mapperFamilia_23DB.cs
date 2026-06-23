@@ -89,7 +89,7 @@ namespace DAL_23DB
 
             if (familia_23DB == null) return null;
 
-            // Obtener patentes
+            
             string queryPatentes_23DB = "SELECT P.IdPatente, P.NombrePatente, P.Descripcion FROM Patente_23DB P INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente WHERE FP.IdFamilia = @IdFamilia";
             SqlCommand cmdPatentes_23DB = new SqlCommand(queryPatentes_23DB, conexion_23DB);
             cmdPatentes_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
@@ -105,19 +105,22 @@ namespace DAL_23DB
             }
             readerPatentes_23DB.Close();
 
-            // Obtener subfamilias
+            // trae las familias de la familia
             string queryFamilias_23DB = "SELECT IdFamiliaHija FROM FamFam_23DB WHERE IdFamiliaPadre = @IdFamilia";
             SqlCommand cmdFamilias_23DB = new SqlCommand(queryFamilias_23DB, conexion_23DB);
             cmdFamilias_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
             SqlDataReader readerFamilias_23DB = cmdFamilias_23DB.ExecuteReader();
             List<int> idsFamilias_23DB = new List<int>();
             while (readerFamilias_23DB.Read())
+            {
                 idsFamilias_23DB.Add((int)readerFamilias_23DB["IdFamiliaHija"]);
+            }                
             readerFamilias_23DB.Close();
 
             foreach (int idSubFamilia_23DB in idsFamilias_23DB)
+            {
                 familia_23DB.Agregar_23DB(ObtenerFamiliaRecursiva_23DB(idSubFamilia_23DB));
-
+            }              
             return familia_23DB;
         }
         public void InsertarFamilia_23DB(string nombreFamilia_23DB, List<Rol_23DB> componentes_23DB)
@@ -125,20 +128,18 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-
-                // Generar nuevo ID
+                
                 string queryId_23DB = "SELECT ISNULL(MAX(IdFamilia), 0) + 1 FROM Familia_23DB";
                 SqlCommand cmdId_23DB = new SqlCommand(queryId_23DB, conexion_23DB);
                 int nuevoId_23DB = (int)cmdId_23DB.ExecuteScalar();
-
-                // Insertar Familia
+                
                 string queryFamilia_23DB = "INSERT INTO Familia_23DB (IdFamilia, NombreFamilia) VALUES (@IdFamilia, @NombreFamilia)";
                 SqlCommand cmdFamilia_23DB = new SqlCommand(queryFamilia_23DB, conexion_23DB);
                 cmdFamilia_23DB.Parameters.AddWithValue("@IdFamilia", nuevoId_23DB);
                 cmdFamilia_23DB.Parameters.AddWithValue("@NombreFamilia", nombreFamilia_23DB);
                 cmdFamilia_23DB.ExecuteNonQuery();
 
-                // Insertar relaciones
+                
                 foreach(Rol_23DB componente_23DB in componentes_23DB)
                 {
                     if(componente_23DB is Patente_23DB)
@@ -171,14 +172,14 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Actualizar nombre
+                
                 string queryFamilia_23DB = "UPDATE Familia_23DB SET NombreFamilia = @NombreFamilia WHERE IdFamilia = @IdFamilia";
                 SqlCommand cmdFamilia_23DB = new SqlCommand(queryFamilia_23DB, conexion_23DB);
                 cmdFamilia_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
                 cmdFamilia_23DB.Parameters.AddWithValue("@NombreFamilia", nombreFamilia_23DB);
                 cmdFamilia_23DB.ExecuteNonQuery();
 
-                // Eliminar relaciones anteriores
+                
                 string queryDelPat_23DB = "DELETE FROM FamPat_23DB WHERE IdFamilia = @IdFamilia";
                 SqlCommand cmdDelPat_23DB = new SqlCommand(queryDelPat_23DB, conexion_23DB);
                 cmdDelPat_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
@@ -189,7 +190,7 @@ namespace DAL_23DB
                 cmdDelFam_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
                 cmdDelFam_23DB.ExecuteNonQuery();
 
-                // Insertar nuevas relaciones
+                
                 foreach (Rol_23DB componente_23DB in componentes_23DB)
                 {
                     if (componente_23DB is Patente_23DB)
@@ -222,19 +223,19 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Eliminar relaciones con Roles
+                
                 string queryDelRolFam_23DB = "DELETE FROM RolFam_23DB WHERE IdFamilia = @IdFamilia";
                 SqlCommand cmdDelRolFam_23DB = new SqlCommand(queryDelRolFam_23DB, conexion_23DB);
                 cmdDelRolFam_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
                 cmdDelRolFam_23DB.ExecuteNonQuery();
 
-                // Eliminar relaciones con Patentes
+                
                 string queryDelPat_23DB = "DELETE FROM FamPat_23DB WHERE IdFamilia = @IdFamilia";
                 SqlCommand cmdDelPat_23DB = new SqlCommand(queryDelPat_23DB, conexion_23DB);
                 cmdDelPat_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
                 cmdDelPat_23DB.ExecuteNonQuery();
 
-                // Eliminar relaciones con otras Familias
+                
                 string queryDelFam_23DB = "DELETE FROM FamFam_23DB WHERE IdFamiliaPadre = @IdFamilia OR IdFamiliaHija = @IdFamilia";
                 SqlCommand cmdDelFam_23DB = new SqlCommand(queryDelFam_23DB, conexion_23DB);
                 cmdDelFam_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);

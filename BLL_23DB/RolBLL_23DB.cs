@@ -63,5 +63,10 @@ namespace BLL_23DB
         {
             return mapperRol_23DB.ObtenerPatentesDeRol_23DB(idRol_23DB);
         }
+
+        public Rol_23DB ObtenerRolPorNombre_23DB(string nombreRol_23DB)
+        {
+            return mapperRol_23DB.ObtenerRoles_23DB().FirstOrDefault(r => r.NombreRol_23DB == nombreRol_23DB);
+        }
     }
 }

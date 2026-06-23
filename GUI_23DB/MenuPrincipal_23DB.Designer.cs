@@ -375,15 +375,15 @@
             // administradorDeRolesToolStripMenuItem
             // 
             this.administradorDeRolesToolStripMenuItem.Name = "administradorDeRolesToolStripMenuItem";
-            this.administradorDeRolesToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.administradorDeRolesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.administradorDeRolesToolStripMenuItem.Text = "Administrador de Roles";
             this.administradorDeRolesToolStripMenuItem.Click += new System.EventHandler(this.administradorDeRolesToolStripMenuItem_Click);
             // 
             // administradorDePerfilesToolStripMenuItem
             // 
             this.administradorDePerfilesToolStripMenuItem.Name = "administradorDePerfilesToolStripMenuItem";
-            this.administradorDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.administradorDePerfilesToolStripMenuItem.Text = "Administrador de Perfiles";
+            this.administradorDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.administradorDePerfilesToolStripMenuItem.Text = "Administrador de Familias";
             this.administradorDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.administradorDePerfilesToolStripMenuItem_Click);
             // 
             // MenuPrincipal_23DB

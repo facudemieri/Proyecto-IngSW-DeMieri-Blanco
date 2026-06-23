@@ -157,7 +157,7 @@ namespace GUI_23DB
                 MessageBox.Show("Debe ingresar un nombre para la Familia.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (componentes_23DB.Count == 0)
+            if (!familiaBLL_23DB.ValidarElementos_23DB(componentes_23DB))
             {
                 MessageBox.Show("Debe seleccionar al menos un elemento.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -207,14 +207,14 @@ namespace GUI_23DB
             tvListaPatFam.Nodes.Clear();
             componentes_23DB.Clear();
 
-            // Quitar del ListBox la familia seleccionada
+            
             lstPatFam.Items.Remove(lstPatFam.SelectedItem);
 
-            // Mostrar la familia en el TreeView
+           // vuelvo a armar el treeview con la familia como nodo raiz
             TreeNode nodoFamilia_23DB = new TreeNode(familiaSeleccionada_23DB.ObtenerNombre_23DB());
             nodoFamilia_23DB.Tag = familiaSeleccionada_23DB;
 
-            // Cargar componentes en el TreeView
+            
             foreach (Rol_23DB componente_23DB in familiaSeleccionada_23DB.ObtenerHijos_23DB())
             {
                 componentes_23DB.Add(componente_23DB);
@@ -295,7 +295,7 @@ namespace GUI_23DB
 
             if (nodoSeleccionado_23DB.Parent == null)
             {
-                // Es nodo raíz
+                // nodo raiz
                 componentes_23DB.Remove(componente_23DB);
                 AgregarAListBoxSiNoExiste_23DB(componente_23DB);
                 tvListaPatFam.Nodes.Remove(nodoSeleccionado_23DB);

@@ -69,8 +69,8 @@
   "MenuPrincipal_gestionDeUsuariosToolStripMenuItem": "Gestão de Usuários",
   "MenuPrincipal_bitacoraDeEventosToolStripMenuItem": "Registro de Eventos",
   "MenuPrincipal_gestionDePerfilesToolStripMenuItem": "Gestão de Perfis",
-  "MenuPrincipal_administradorPerfilesToolStripMenuItem": "Administrador de Famílias",
-  "MenuPrincipal_administradorRToolStripMenuItem": "Administrador de Funções",
+  "MenuPrincipal_administradorDeRolesToolStripMenuItem": "Administrador de Funções",
+  "MenuPrincipal_administradorDePerfilesToolStripMenuItem": "Administrador de Famílias",
 
   "CrearFamilias_USUARIOS": "ADMINISTRADOR DE FAMÍLIAS",
   "CrearFamilias_label1": "Nome",

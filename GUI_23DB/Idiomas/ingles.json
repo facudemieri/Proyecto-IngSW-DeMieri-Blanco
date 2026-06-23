@@ -69,8 +69,8 @@
   "MenuPrincipal_gestionDeUsuariosToolStripMenuItem": "User Management",
   "MenuPrincipal_bitacoraDeEventosToolStripMenuItem": "Event Log",
   "MenuPrincipal_gestionDePerfilesToolStripMenuItem": "Profile Management",
-  "MenuPrincipal_administradorPerfilesToolStripMenuItem": "Families Administrator",
-  "MenuPrincipal_administradorRToolStripMenuItem": "Roles Administrator",
+  "MenuPrincipal_administradorDeRolesToolStripMenuItem": "Roles Administrator",
+  "MenuPrincipal_administradorDePerfilesToolStripMenuItem": "Families Administrator",
 
   "CrearFamilias_USUARIOS": "FAMILIES ADMINISTRATOR",
   "CrearFamilias_label1": "Name",

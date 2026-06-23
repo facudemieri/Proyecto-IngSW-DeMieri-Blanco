@@ -77,9 +77,20 @@ namespace GUI_23DB
             login_23DB.EsRelogin_23DB = true;
             DialogResult resultado_23DB = login_23DB.ShowDialog();
             if (resultado_23DB == DialogResult.OK)
+            {
                 CargarDatosSesion_23DB();
+                AplicarIdiomaActual_23DB();
+                RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
+                Rol_23DB rol_23DB = rolBLL_23DB.ObtenerRolPorNombre_23DB(SessionManager_23DB.ObtenerInstancia_23DB().Rol_23DB);
+                if (rol_23DB != null)
+                {
+                    AplicarPatentes_23DB(rolBLL_23DB.ObtenerPatentesDeRol_23DB(rol_23DB.IdRol_23DB));
+                }                    
+            }
             else
+            {
                 this.Close();
+            }          
         }
 
         private void gestionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,14 +185,26 @@ namespace GUI_23DB
             List<ToolStripItem> lista_23DB = new List<ToolStripItem>();
             foreach (ToolStripItem item_23DB in cmsUsuario.Items)
             {
-                lista_23DB.Add(item_23DB);
-            }               
+                AgregarMenuItemRecursivo_23DB(item_23DB, lista_23DB);
+            }           
             foreach (ToolStripItem item_23DB in cmsAdmin.Items)
             {
-                lista_23DB.Add(item_23DB);
+                AgregarMenuItemRecursivo_23DB(item_23DB, lista_23DB);
             }
                 
             return lista_23DB;
+        }
+
+        private void AgregarMenuItemRecursivo_23DB(ToolStripItem item_23DB, List<ToolStripItem> lista_23DB)
+        {
+            lista_23DB.Add(item_23DB);
+            if (item_23DB is ToolStripMenuItem menuItem_23DB)
+            {
+                foreach (ToolStripItem hijo_23DB in menuItem_23DB.DropDownItems)
+                {
+                    AgregarMenuItemRecursivo_23DB(hijo_23DB, lista_23DB);
+                }
+            }
         }
 
         private void MenuPrincipal_23DB_FormClosing(object sender, FormClosingEventArgs e)
@@ -192,11 +215,12 @@ namespace GUI_23DB
         public void AplicarIdiomaActual_23DB()
         {
             string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            if (string.IsNullOrEmpty(idiomaActual_23DB))
             {
-                IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
-                ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
-            }
+                idiomaActual_23DB = "español";
+            }                
+            IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
+            ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));
         }
 
         private void administradorDeRolesToolStripMenuItem_Click(object sender, EventArgs e)

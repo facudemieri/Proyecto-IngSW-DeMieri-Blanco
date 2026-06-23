@@ -85,19 +85,19 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Generar nuevo ID
+                
                 string queryId_23DB = "SELECT ISNULL(MAX(IdRol), 0) + 1 FROM Rol_23DB";
                 SqlCommand cmdId_23DB = new SqlCommand(queryId_23DB, conexion_23DB);
                 int nuevoId_23DB = (int)cmdId_23DB.ExecuteScalar();
 
-                // Insertar Rol
+                
                 string queryRol_23DB = "INSERT INTO Rol_23DB (IdRol, NombreRol) VALUES (@IdRol, @NombreRol)";
                 SqlCommand cmdRol_23DB = new SqlCommand(queryRol_23DB, conexion_23DB);
                 cmdRol_23DB.Parameters.AddWithValue("@IdRol", nuevoId_23DB);
                 cmdRol_23DB.Parameters.AddWithValue("@NombreRol", nombreRol_23DB);
                 cmdRol_23DB.ExecuteNonQuery();
 
-                // Insertar relaciones
+                
                 foreach(Rol_23DB componente_23DB in componentes_23DB)
                 {
                     if(componente_23DB is Patente_23DB)
@@ -130,14 +130,13 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Actualizar nombre
+                
                 string queryRol_23DB = "UPDATE Rol_23DB SET NombreRol = @NombreRol WHERE IdRol = @IdRol";
                 SqlCommand cmdRol_23DB = new SqlCommand(queryRol_23DB, conexion_23DB);
                 cmdRol_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 cmdRol_23DB.Parameters.AddWithValue("@NombreRol", nombreRol_23DB);
                 cmdRol_23DB.ExecuteNonQuery();
-
-                // Eliminar relaciones anteriores
+                                
                 string queryDelPat_23DB = "DELETE FROM RolPat_23DB WHERE IdRol = @IdRol";
                 SqlCommand cmdDelPat_23DB = new SqlCommand(queryDelPat_23DB, conexion_23DB);
                 cmdDelPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
@@ -148,7 +147,7 @@ namespace DAL_23DB
                 cmdDelFam_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 cmdDelFam_23DB.ExecuteNonQuery();
 
-                // Insertar nuevas relaciones
+                
                 foreach (Rol_23DB componente_23DB in componentes_23DB)
                 {
                     if(componente_23DB is Patente_23DB)
@@ -209,7 +208,7 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Obtener el rol
+                
                 string queryRol_23DB = "SELECT IdRol, NombreRol FROM Rol_23DB WHERE IdRol = @IdRol";
                 SqlCommand cmdRol_23DB = new SqlCommand(queryRol_23DB, conexion_23DB);
                 cmdRol_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
@@ -226,7 +225,7 @@ namespace DAL_23DB
 
                 if (rol_23DB == null) return null;
 
-                // Obtener patentes del rol
+                
                 string queryPatentes_23DB = "SELECT P.IdPatente, P.NombrePatente, P.Descripcion FROM Patente_23DB P INNER JOIN RolPat_23DB RP ON P.IdPatente = RP.IdPatente WHERE RP.IdRol = @IdRol";
                 SqlCommand cmdPatentes_23DB = new SqlCommand(queryPatentes_23DB, conexion_23DB);
                 cmdPatentes_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
@@ -242,24 +241,28 @@ namespace DAL_23DB
                 }
                 readerPatentes_23DB.Close();
 
-                // Obtener IDs de familias del rol
+                
                 string queryFamilias_23DB = "SELECT RF.IdFamilia FROM RolFam_23DB RF WHERE RF.IdRol = @IdRol";
                 SqlCommand cmdFamilias_23DB = new SqlCommand(queryFamilias_23DB, conexion_23DB);
                 cmdFamilias_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerFamilias_23DB = cmdFamilias_23DB.ExecuteReader();
                 List<int> idsFamilias_23DB = new List<int>();
                 while (readerFamilias_23DB.Read())
+                {
                     idsFamilias_23DB.Add((int)readerFamilias_23DB["IdFamilia"]);
+                }                  
                 readerFamilias_23DB.Close();
 
-                // Cargar cada familia completa (recursiva) compartiendo la conexión
+                // carga cada familia completa 
                 mapperFamilia_23DB mapperFam_23DB = new mapperFamilia_23DB();
-                mapperFam_23DB.SetConexion_23DB(conexion_23DB);
+                mapperFam_23DB.SetConexion_23DB(conexion_23DB); // comparte conexion con mapperFamilia
                 foreach (int idFam_23DB in idsFamilias_23DB)
                 {
                     Familia_23DB familia_23DB = mapperFam_23DB.ObtenerFamiliaRecursiva_23DB(idFam_23DB);
                     if (familia_23DB != null)
+                    {
                         rol_23DB.Agregar_23DB(familia_23DB);
+                    }                        
                 }
             }
             finally
@@ -276,27 +279,34 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
 
-                // Patentes directas del Rol
+                
                 string queryPat_23DB = "SELECT P.NombrePatente FROM Patente_23DB P INNER JOIN RolPat_23DB RP ON P.IdPatente = RP.IdPatente WHERE RP.IdRol = @IdRol";
                 SqlCommand cmdPat_23DB = new SqlCommand(queryPat_23DB, conexion_23DB);
                 cmdPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerPat_23DB = cmdPat_23DB.ExecuteReader();
-                while(readerPat_23DB.Read())
+                while (readerPat_23DB.Read())
+                {
                     patentes_23DB.Add(readerPat_23DB["NombrePatente"].ToString());
+                }
+                    
                 readerPat_23DB.Close();
 
-                // Patentes de las Familias del Rol
-                string queryFamPat_23DB = @"SELECT P.NombrePatente FROM Patente_23DB P 
-                                    INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente 
-                                    INNER JOIN RolFam_23DB RF ON FP.IdFamilia = RF.IdFamilia 
-                                    WHERE RF.IdRol = @IdRol";
+                // trae las patentes de las familias que tenga el rol y las patentes de las familias de las familias
+                string queryFamPat_23DB = @"WITH FamiliasRecursivas AS (SELECT IdFamilia FROM RolFam_23DB WHERE IdRol = @IdRol UNION ALL
+                                            SELECT FF.IdFamiliaHija 
+                                            FROM FamFam_23DB FF
+                                            INNER JOIN FamiliasRecursivas FR ON FF.IdFamiliaPadre = FR.IdFamilia)
+                                        SELECT DISTINCT P.NombrePatente 
+                                        FROM Patente_23DB P
+                                        INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente
+                                        INNER JOIN FamiliasRecursivas FR ON FP.IdFamilia = FR.IdFamilia";
                 SqlCommand cmdFamPat_23DB = new SqlCommand(queryFamPat_23DB, conexion_23DB);
                 cmdFamPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerFamPat_23DB = cmdFamPat_23DB.ExecuteReader();
-                while(readerFamPat_23DB.Read())
+                while (readerFamPat_23DB.Read())
                 {
                     string patente_23DB = readerFamPat_23DB["NombrePatente"].ToString();
-                    if(!patentes_23DB.Contains(patente_23DB))
+                    if (!patentes_23DB.Contains(patente_23DB))
                         patentes_23DB.Add(patente_23DB);
                 }
                 readerFamPat_23DB.Close();
