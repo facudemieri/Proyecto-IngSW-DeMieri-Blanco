@@ -55,8 +55,8 @@
 
   "MenuPrincipal_btnGenerarReporteDash": "Generate Report",
   "MenuPrincipal_label2": "Select Report",
-  "MenuPrincipal_lblRol": "Role: ",
-  "MenuPrincipal_lblLoginMp": "Welcome ...",
+  "MenuPrincipal_lblLoginMp": "Welcome",
+  "MenuPrincipal_lblRol": "Role",
   "MenuPrincipal_btnAyuda": "Help",
   "MenuPrincipal_btnAdmin": "Admin",
   "MenuPrincipal_btnReportes": "Reports",

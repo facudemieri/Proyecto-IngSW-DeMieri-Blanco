@@ -155,8 +155,18 @@ namespace GUI_23DB
             string formName_23DB = "MenuPrincipal";
             foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
             {
-                if (control_23DB.Name == "lblLoginMp" || control_23DB.Name == "lblRol")
+                if (control_23DB.Name == "lblLoginMp")
+                {
+                    if (configuracion_23DB.ContainsKey("MenuPrincipal_lblLoginMp"))
+                        control_23DB.Text = configuracion_23DB["MenuPrincipal_lblLoginMp"] + ": " + SessionManager_23DB.ObtenerInstancia_23DB().Login_23DB;
                     continue;
+                }
+                if (control_23DB.Name == "lblRol")
+                {
+                    if (configuracion_23DB.ContainsKey("MenuPrincipal_lblRol"))
+                        control_23DB.Text = configuracion_23DB["MenuPrincipal_lblRol"] + ": " + SessionManager_23DB.ObtenerInstancia_23DB().Rol_23DB;
+                    continue;
+                }
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
                 if (configuracion_23DB.ContainsKey(clave_23DB))
                     control_23DB.Text = configuracion_23DB[clave_23DB];

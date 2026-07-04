@@ -34,6 +34,30 @@ namespace BLL_23DB
             return true;
         }
 
+        public bool TienePatentesRepetidas_23DB(Rol_23DB componente_23DB, List<string> patentesExistentes_23DB)
+        {
+            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            {
+                if (hijo_23DB is Patente_23DB)
+                {
+                    if (patentesExistentes_23DB.Contains(hijo_23DB.ObtenerNombre_23DB()))
+                        return true;
+                }
+                else
+                {
+                    if (TienePatentesRepetidas_23DB(hijo_23DB, patentesExistentes_23DB))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public bool TieneComponentes_23DB(int idFamilia_23DB)
+        {
+            Familia_23DB familia_23DB = ObtenerFamiliaCompleta_23DB(idFamilia_23DB);
+            return familia_23DB.ObtenerHijos_23DB().Count > 0;
+        }
+
         public bool ValidarElementos_23DB(List<Rol_23DB> componentes_23DB)
         {
             return componentes_23DB != null && componentes_23DB.Count > 0;
@@ -52,6 +76,16 @@ namespace BLL_23DB
         public Familia_23DB ObtenerFamiliaCompleta_23DB(int idFamilia_23DB)
         {
             return mapperFamilia_23DB.ObtenerFamiliaCompleta_23DB(idFamilia_23DB);
+        }
+
+        public bool FamiliaEstaEnRol_23DB(int idFamilia_23DB)
+        {
+            return mapperFamilia_23DB.FamiliaEstaEnRol_23DB(idFamilia_23DB);
+        }
+
+        public bool FamiliaEstaEnFamilia_23DB(int idFamilia_23DB)
+        {
+            return mapperFamilia_23DB.FamiliaEstaEnFamilia_23DB(idFamilia_23DB);
         }
     }
 }

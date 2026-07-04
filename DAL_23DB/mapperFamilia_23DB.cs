@@ -252,5 +252,37 @@ namespace DAL_23DB
                 Desconectar_23DB();
             }
         }
+
+        public bool FamiliaEstaEnRol_23DB(int idFamilia_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT COUNT(*) FROM RolFam_23DB WHERE IdFamilia = @IdFamilia";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
+                return (int)cmd_23DB.ExecuteScalar() > 0;
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
+
+        public bool FamiliaEstaEnFamilia_23DB(int idFamilia_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT COUNT(*) FROM FamFam_23DB WHERE IdFamiliaHija = @IdFamilia";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
+                return (int)cmd_23DB.ExecuteScalar() > 0;
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
     }
 }

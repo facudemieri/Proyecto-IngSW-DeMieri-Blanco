@@ -55,8 +55,8 @@
 
   "MenuPrincipal_btnGenerarReporteDash": "Gerar Relatório",
   "MenuPrincipal_label2": "Selecionar Relatório",
-  "MenuPrincipal_lblRol": "Função: ",
-  "MenuPrincipal_lblLoginMp": "Bem-vindo ...",
+  "MenuPrincipal_lblLoginMp": "Bem-vindo",
+  "MenuPrincipal_lblRol": "Função",
   "MenuPrincipal_btnAyuda": "Ajuda",
   "MenuPrincipal_btnAdmin": "Admin",
   "MenuPrincipal_btnReportes": "Relatórios",

@@ -95,6 +95,17 @@ namespace GUI_23DB
         {
             List<string> idiomas_23DB = idiomaBLL_23DB.ObtenerIdiomas_23DB();
             cmbIdioma.DataSource = idiomas_23DB;
+
+            string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
+            if (!string.IsNullOrEmpty(idiomaActual_23DB) && idiomas_23DB.Contains(idiomaActual_23DB))
+            {
+                cmbIdioma.SelectedItem = idiomaActual_23DB;
+            }
+            else
+            {
+                cmbIdioma.SelectedIndex = -1;
+            }
+                
         }
 
         public void AplicarIdiomaActual_23DB()

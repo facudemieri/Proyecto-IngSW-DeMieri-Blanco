@@ -272,6 +272,21 @@ namespace DAL_23DB
             return rol_23DB;
         }
 
+        public bool RolEstaAsignado_23DB(int idRol_23DB)
+        {
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT COUNT(*) FROM Usuario_23DB WHERE IdRol = @IdRol";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
+                return (int)cmd_23DB.ExecuteScalar() > 0;
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+        }
         public List<string> ObtenerPatentesDeRol_23DB(int idRol_23DB)
         {
             List<string> patentes_23DB = new List<string>();

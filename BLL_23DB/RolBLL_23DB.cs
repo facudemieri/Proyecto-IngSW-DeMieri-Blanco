@@ -68,5 +68,14 @@ namespace BLL_23DB
         {
             return mapperRol_23DB.ObtenerRoles_23DB().FirstOrDefault(r => r.NombreRol_23DB == nombreRol_23DB);
         }
+        public bool RolEstaAsignado_23DB(int idRol_23DB)
+        {
+            return mapperRol_23DB.RolEstaAsignado_23DB(idRol_23DB);
+        }
+
+        public bool EsPropioRol_23DB(string nombreRol_23DB)
+        {
+            return nombreRol_23DB == SessionManager_23DB.ObtenerInstancia_23DB().Rol_23DB;
+        }
     }
 }

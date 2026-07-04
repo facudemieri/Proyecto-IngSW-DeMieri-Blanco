@@ -70,15 +70,20 @@ namespace GUI_23DB
         {
             TreeNode nodo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
             nodo_23DB.Tag = componente_23DB;
+            AgregarHijosAlNodo_23DB(nodo_23DB, componente_23DB);
+            tvListaPatFam.Nodes.Add(nodo_23DB);
+            tvListaPatFam.ExpandAll();
+        }
+
+        private void AgregarHijosAlNodo_23DB(TreeNode nodo_23DB, Rol_23DB componente_23DB)
+        {
             foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
                 TreeNode nodoHijo_23DB = new TreeNode(hijo_23DB.ObtenerNombre_23DB());
                 nodoHijo_23DB.Tag = hijo_23DB;
+                AgregarHijosAlNodo_23DB(nodoHijo_23DB, hijo_23DB);
                 nodo_23DB.Nodes.Add(nodoHijo_23DB);
             }
-            tvListaPatFam.Nodes.Add(nodo_23DB);
-            tvListaPatFam.ExpandAll();
-            tvListaPatFam.Refresh();
         }
 
         private void LimpiarCampos_23DB()
@@ -143,11 +148,80 @@ namespace GUI_23DB
             if (seleccionado_23DB is Familia_23DB)
             {
                 seleccionado_23DB = familiaBLL_23DB.ObtenerFamiliaCompleta_23DB(((Familia_23DB)seleccionado_23DB).IdFamilia_23DB);
+                List<string> patentesTreeView_23DB = ObtenerPatentesDelTreeView_23DB();
+                if (familiaBLL_23DB.TienePatentesRepetidas_23DB(seleccionado_23DB, patentesTreeView_23DB))
+                {
+                    MessageBox.Show("La Familia contiene patentes que ya están incluidas.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Validación para Patentes directas
+            if (seleccionado_23DB is Patente_23DB)
+            {
+                List<string> patentesTreeView_23DB = ObtenerPatentesDelTreeView_23DB();
+                if (patentesTreeView_23DB.Contains(seleccionado_23DB.ObtenerNombre_23DB()))
+                {
+                    MessageBox.Show($"La patente '{seleccionado_23DB.ObtenerNombre_23DB()}' ya está incluida.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Verificar si ya existe en componentes
+            foreach (Rol_23DB comp_23DB in componentes_23DB)
+            {
+                if (comp_23DB.ObtenerNombre_23DB() == seleccionado_23DB.ObtenerNombre_23DB())
+                {
+                    MessageBox.Show("El elemento ya fue agregado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             componentes_23DB.Add(seleccionado_23DB);
             AgregarAlTreeView_23DB(seleccionado_23DB);
             lstPatFam.Items.Remove(lstPatFam.SelectedItem);
+        }
+
+        private List<string> ObtenerPatentesDeRol_23DB(Rol_23DB rol_23DB)
+        {
+            List<string> patentes_23DB = new List<string>();
+            foreach (Rol_23DB hijo_23DB in rol_23DB.ObtenerHijos_23DB())
+            {
+                if (hijo_23DB is Patente_23DB)
+                    patentes_23DB.Add(hijo_23DB.ObtenerNombre_23DB());
+                else
+                    patentes_23DB.AddRange(ObtenerPatentesDeRol_23DB(hijo_23DB));
+            }
+            return patentes_23DB;
+        }
+        private List<string> ObtenerPatentesDelTreeView_23DB()
+        {
+            List<string> patentes_23DB = new List<string>();
+            foreach (TreeNode nodo_23DB in tvListaPatFam.Nodes)
+                ObtenerPatentesDeNodo_23DB(nodo_23DB, patentes_23DB);
+            return patentes_23DB;
+
+
+        }
+
+        private TreeNode CrearNodoRecursivo_23DB(Rol_23DB componente_23DB)
+        {
+            TreeNode nodo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
+            nodo_23DB.Tag = componente_23DB;
+            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+                nodo_23DB.Nodes.Add(CrearNodoRecursivo_23DB(hijo_23DB));
+            return nodo_23DB;
+        }
+        private void ObtenerPatentesDeNodo_23DB(TreeNode nodo_23DB, List<string> patentes_23DB)
+        {
+            Rol_23DB componente_23DB = (Rol_23DB)nodo_23DB.Tag;
+            if (componente_23DB is Patente_23DB)
+            {
+                if (!patentes_23DB.Contains(componente_23DB.ObtenerNombre_23DB()))
+                    patentes_23DB.Add(componente_23DB.ObtenerNombre_23DB());
+            }
+            foreach (TreeNode hijo_23DB in nodo_23DB.Nodes)
+                ObtenerPatentesDeNodo_23DB(hijo_23DB, patentes_23DB);
         }
 
         private void btnCrear_Click_1(object sender, EventArgs e)
@@ -214,13 +288,11 @@ namespace GUI_23DB
             TreeNode nodoFamilia_23DB = new TreeNode(familiaSeleccionada_23DB.ObtenerNombre_23DB());
             nodoFamilia_23DB.Tag = familiaSeleccionada_23DB;
 
-            
+
             foreach (Rol_23DB componente_23DB in familiaSeleccionada_23DB.ObtenerHijos_23DB())
             {
                 componentes_23DB.Add(componente_23DB);
-                TreeNode nodoHijo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
-                nodoHijo_23DB.Tag = componente_23DB;
-                nodoFamilia_23DB.Nodes.Add(nodoHijo_23DB);
+                nodoFamilia_23DB.Nodes.Add(CrearNodoRecursivo_23DB(componente_23DB));
 
                 foreach (object item_23DB in lstPatFam.Items.Cast<object>().ToList())
                 {
@@ -251,10 +323,23 @@ namespace GUI_23DB
                 return;
             }
 
+
             Familia_23DB familia_23DB = (Familia_23DB)lstPatFam.SelectedItem;
 
+            if (familiaBLL_23DB.FamiliaEstaEnRol_23DB(familia_23DB.IdFamilia_23DB))
+            {
+                MessageBox.Show("No se puede eliminar una Familia que está siendo usada por un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (familiaBLL_23DB.FamiliaEstaEnFamilia_23DB(familia_23DB.IdFamilia_23DB))
+            {
+                MessageBox.Show("No se puede eliminar una Familia que está siendo usada por otra Familia.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } 
+
             Familia_23DB familiaCompleta_23DB = familiaBLL_23DB.ObtenerFamiliaCompleta_23DB(familia_23DB.IdFamilia_23DB);
-            if(familiaCompleta_23DB.ObtenerHijos_23DB().Count > 0)
+            if (familiaBLL_23DB.TieneComponentes_23DB(familia_23DB.IdFamilia_23DB))
             {
                 MessageBox.Show("No se puede eliminar una Familia que tiene componentes.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
