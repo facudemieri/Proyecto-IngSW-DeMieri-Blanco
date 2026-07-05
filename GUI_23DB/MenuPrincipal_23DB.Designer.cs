@@ -60,6 +60,7 @@
             this.gestionDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administradorDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administradorDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDeRespaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
@@ -343,22 +344,23 @@
             this.cmsAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gestionDeUsuariosToolStripMenuItem,
             this.bitacoraDeEventosToolStripMenuItem,
-            this.gestionDePerfilesToolStripMenuItem});
+            this.gestionDePerfilesToolStripMenuItem,
+            this.gestionDeRespaldosToolStripMenuItem});
             this.cmsAdmin.Name = "cmsAdmin";
-            this.cmsAdmin.Size = new System.Drawing.Size(181, 92);
+            this.cmsAdmin.Size = new System.Drawing.Size(187, 114);
             this.cmsAdmin.Opening += new System.ComponentModel.CancelEventHandler(this.cmsAdmin_Opening);
             // 
             // gestionDeUsuariosToolStripMenuItem
             // 
             this.gestionDeUsuariosToolStripMenuItem.Name = "gestionDeUsuariosToolStripMenuItem";
-            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.gestionDeUsuariosToolStripMenuItem.Text = "Gestion de Usuarios";
             this.gestionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeUsuariosToolStripMenuItem_Click);
             // 
             // bitacoraDeEventosToolStripMenuItem
             // 
             this.bitacoraDeEventosToolStripMenuItem.Name = "bitacoraDeEventosToolStripMenuItem";
-            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bitacoraDeEventosToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.bitacoraDeEventosToolStripMenuItem.Text = "Bitacora de Eventos";
             this.bitacoraDeEventosToolStripMenuItem.Click += new System.EventHandler(this.bitacoraDeEventosToolStripMenuItem_Click);
             // 
@@ -368,7 +370,7 @@
             this.administradorDeRolesToolStripMenuItem,
             this.administradorDePerfilesToolStripMenuItem});
             this.gestionDePerfilesToolStripMenuItem.Name = "gestionDePerfilesToolStripMenuItem";
-            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.gestionDePerfilesToolStripMenuItem.Text = "Gestion de Perfiles";
             this.gestionDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.gestionDePerfilesToolStripMenuItem_Click);
             // 
@@ -385,6 +387,13 @@
             this.administradorDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.administradorDePerfilesToolStripMenuItem.Text = "Administrador de Familias";
             this.administradorDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.administradorDePerfilesToolStripMenuItem_Click);
+            // 
+            // gestionDeRespaldosToolStripMenuItem
+            // 
+            this.gestionDeRespaldosToolStripMenuItem.Name = "gestionDeRespaldosToolStripMenuItem";
+            this.gestionDeRespaldosToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.gestionDeRespaldosToolStripMenuItem.Text = "Gestion de Respaldos";
+            this.gestionDeRespaldosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeRespaldosToolStripMenuItem_Click);
             // 
             // MenuPrincipal_23DB
             // 
@@ -447,5 +456,6 @@
         private System.Windows.Forms.ToolStripMenuItem gestionDePerfilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administradorDeRolesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administradorDePerfilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionDeRespaldosToolStripMenuItem;
     }
 }

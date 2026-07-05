@@ -34,7 +34,25 @@ namespace GUI_23DB
                 return;
             }
 
+            // Verificar consistencia del DV antes de cualquier otra cosa
+            List<DV_23DB> inconsistencias_23DB = usuarioBLL_23DB.VerificarConsistenciaDV_23DB();
+            if (inconsistencias_23DB.Count > 0)
+            {
+                Usuario_23DB usuarioParaReparar_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+                if (usuarioParaReparar_23DB != null && usuarioBLL_23DB.ObtenerNombreRol_23DB(usuarioParaReparar_23DB.IdRol_23DB) == "Administrador")
+                {
+                    RepararInconsistencia_23DB repararForm_23DB = new RepararInconsistencia_23DB(inconsistencias_23DB);
+                    repararForm_23DB.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("El sistema no está disponible en este momento. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+
             Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+
 
             if (usuarioPorLogin_23DB == null)
             {
@@ -123,6 +141,11 @@ namespace GUI_23DB
         private void InicioSesion_23DB_FormClosing(object sender, FormClosingEventArgs e)
         {
             
+        }
+
+        private void InicioSesion_23DB_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

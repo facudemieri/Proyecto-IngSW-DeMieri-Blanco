@@ -54,15 +54,15 @@ namespace GUI_23DB
             List<Rol_23DB> roles_23DB = rolBLL_23DB.ObtenerRoles_23DB();
             List<Patente_23DB> patentes_23DB = patenteBLL_23DB.ObtenerPatentes_23DB();
             List<Familia_23DB> familias_23DB = familiaBLL_23DB.ObtenerFamilias_23DB();
-            foreach (Rol_23DB rol_23DB in roles_23DB)
+            foreach(Rol_23DB rol_23DB in roles_23DB)
             {
                 lstPatFam.Items.Add(rol_23DB);
             }
-            foreach (Patente_23DB patente_23DB in patentes_23DB)
+            foreach(Patente_23DB patente_23DB in patentes_23DB)
             {
                 lstPatFam.Items.Add(patente_23DB);
             }
-            foreach (Familia_23DB familia_23DB in familias_23DB)
+            foreach(Familia_23DB familia_23DB in familias_23DB)
             {
                 lstPatFam.Items.Add(familia_23DB);
             }
@@ -79,7 +79,7 @@ namespace GUI_23DB
         {
             TreeNode nodo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
             nodo_23DB.Tag = componente_23DB;
-            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
                 nodo_23DB.Nodes.Add(CrearNodoRecursivo_23DB(hijo_23DB));
             }
@@ -168,13 +168,13 @@ namespace GUI_23DB
             Rol_23DB seleccionado_23DB = (Rol_23DB)lstPatFam.SelectedItem;
 
             // No permitir agregar un Rol dentro de otro Rol
-            if (!(seleccionado_23DB is Patente_23DB) && !(seleccionado_23DB is Familia_23DB))
+            if(!(seleccionado_23DB is Patente_23DB) && !(seleccionado_23DB is Familia_23DB))
             {
                 MessageBox.Show("No se puede agregar un Rol dentro de otro Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (seleccionado_23DB is Familia_23DB)
+            if(seleccionado_23DB is Familia_23DB)
             {
                 seleccionado_23DB = familiaBLL_23DB.ObtenerFamiliaCompleta_23DB(((Familia_23DB)seleccionado_23DB).IdFamilia_23DB);
                 List<string> patentesTreeView_23DB = ObtenerPatentesDelTreeView_23DB();
@@ -197,9 +197,9 @@ namespace GUI_23DB
             }
 
             // Verificar si ya existe en componentes
-            foreach (Rol_23DB comp_23DB in componentes_23DB)
+            foreach(Rol_23DB comp_23DB in componentes_23DB)
             {
-                if (comp_23DB.ObtenerNombre_23DB() == seleccionado_23DB.ObtenerNombre_23DB())
+                if(comp_23DB.ObtenerNombre_23DB() == seleccionado_23DB.ObtenerNombre_23DB())
                 {
                     MessageBox.Show("El elemento ya fue agregado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -214,7 +214,7 @@ namespace GUI_23DB
         private List<string> ObtenerPatentesDelTreeView_23DB()
         {
             List<string> patentes_23DB = new List<string>();
-            foreach (TreeNode nodo_23DB in tvListaPatFam.Nodes)
+            foreach(TreeNode nodo_23DB in tvListaPatFam.Nodes)
                 ObtenerPatentesDeNodo_23DB(nodo_23DB, patentes_23DB);
             return patentes_23DB;
         }
@@ -222,7 +222,7 @@ namespace GUI_23DB
         private void ObtenerPatentesDeNodo_23DB(TreeNode nodo_23DB, List<string> patentes_23DB)
         {
             Rol_23DB componente_23DB = (Rol_23DB)nodo_23DB.Tag;
-            if (componente_23DB is Patente_23DB)
+            if(componente_23DB is Patente_23DB)
             {
                 if (!patentes_23DB.Contains(componente_23DB.ObtenerNombre_23DB()))
                     patentes_23DB.Add(componente_23DB.ObtenerNombre_23DB());
@@ -234,9 +234,9 @@ namespace GUI_23DB
         private List<string> ObtenerPatentesDeRol_23DB(Rol_23DB rol_23DB)
         {
             List<string> patentes_23DB = new List<string>();
-            foreach (Rol_23DB hijo_23DB in rol_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB hijo_23DB in rol_23DB.ObtenerHijos_23DB())
             {
-                if (hijo_23DB is Patente_23DB)
+                if(hijo_23DB is Patente_23DB)
                     patentes_23DB.Add(hijo_23DB.ObtenerNombre_23DB());
                 else
                     patentes_23DB.AddRange(ObtenerPatentesDeRol_23DB(hijo_23DB));
@@ -272,12 +272,13 @@ namespace GUI_23DB
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (lstPatFam.SelectedItem == null)
+            if(lstPatFam.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
+            
+            if(!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
             {
                 MessageBox.Show("Solo se pueden eliminar Roles.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -286,21 +287,21 @@ namespace GUI_23DB
             Rol_23DB rol_23DB = (Rol_23DB)lstPatFam.SelectedItem;
 
             // No eliminar el propio Rol del usuario logueado
-            if (rolBLL_23DB.EsPropioRol_23DB(rol_23DB.NombreRol_23DB))
+            if(rolBLL_23DB.EsPropioRol_23DB(rol_23DB.NombreRol_23DB))
             {
                 MessageBox.Show("No puede eliminar su propio Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // No eliminar si está asignado a algún usuario
-            if (rolBLL_23DB.RolEstaAsignado_23DB(rol_23DB.IdRol_23DB))
+            if(rolBLL_23DB.RolEstaAsignado_23DB(rol_23DB.IdRol_23DB))
             {
                 MessageBox.Show("No se puede eliminar un Rol que está asignado a usuarios.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             DialogResult resultado_23DB = MessageBox.Show($"¿Está seguro que desea eliminar el Rol {rol_23DB.NombreRol_23DB}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (resultado_23DB == DialogResult.Yes)
+            if(resultado_23DB == DialogResult.Yes)
             {
                 rolBLL_23DB.EliminarRol_23DB(rol_23DB.IdRol_23DB);
                 eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Eliminar Rol", 2);
@@ -313,12 +314,12 @@ namespace GUI_23DB
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (lstPatFam.SelectedItem == null)
+            if(lstPatFam.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
+            if(!(lstPatFam.SelectedItem is Rol_23DB) || lstPatFam.SelectedItem is Patente_23DB || lstPatFam.SelectedItem is Familia_23DB)
             {
                 MessageBox.Show("Solo se pueden modificar Roles.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -326,7 +327,7 @@ namespace GUI_23DB
 
             Rol_23DB rolBase_23DB = (Rol_23DB)lstPatFam.SelectedItem;
 
-            if (rolBase_23DB.NombreRol_23DB == SessionManager_23DB.ObtenerInstancia_23DB().Rol_23DB)
+            if(rolBase_23DB.NombreRol_23DB == SessionManager_23DB.ObtenerInstancia_23DB().Rol_23DB)
             {
                 MessageBox.Show("No puede modificar su propio Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -343,14 +344,14 @@ namespace GUI_23DB
             TreeNode nodoRol_23DB = new TreeNode(rolSeleccionado_23DB.ObtenerNombre_23DB());
             nodoRol_23DB.Tag = rolSeleccionado_23DB;
 
-            foreach (Rol_23DB componente_23DB in rolSeleccionado_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB componente_23DB in rolSeleccionado_23DB.ObtenerHijos_23DB())
             {
                 componentes_23DB.Add(componente_23DB);
                 nodoRol_23DB.Nodes.Add(CrearNodoRecursivo_23DB(componente_23DB));
 
-                foreach (object item_23DB in lstPatFam.Items.Cast<object>().ToList())
+                foreach(object item_23DB in lstPatFam.Items.Cast<object>().ToList())
                 {
-                    if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
+                    if(item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
                     {
                         lstPatFam.Items.Remove(item_23DB);
                         break;
@@ -366,11 +367,11 @@ namespace GUI_23DB
 
         private void RemoverHijosDelListBox_23DB(Rol_23DB componente_23DB)
         {
-            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
                 foreach (object item_23DB in lstPatFam.Items.Cast<object>().ToList())
                 {
-                    if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == hijo_23DB.ObtenerNombre_23DB())
+                    if(item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == hijo_23DB.ObtenerNombre_23DB())
                     {
                         lstPatFam.Items.Remove(item_23DB);
                         break;
@@ -382,7 +383,7 @@ namespace GUI_23DB
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (tvListaPatFam.SelectedNode == null)
+            if(tvListaPatFam.SelectedNode == null)
             {
                 MessageBox.Show("Debe seleccionar un elemento.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -391,7 +392,7 @@ namespace GUI_23DB
             TreeNode nodoSeleccionado_23DB = tvListaPatFam.SelectedNode;
             Rol_23DB componente_23DB = (Rol_23DB)nodoSeleccionado_23DB.Tag;
 
-            if (nodoSeleccionado_23DB.Parent == null)
+            if(nodoSeleccionado_23DB.Parent == null)
             {
                 componentes_23DB.Remove(componente_23DB);
                 AgregarAListBoxSiNoExiste_23DB(componente_23DB);
@@ -400,12 +401,12 @@ namespace GUI_23DB
             else
             {
                 Rol_23DB padre_23DB = (Rol_23DB)nodoSeleccionado_23DB.Parent.Tag;
-                if (padre_23DB is Familia_23DB)
+                if(padre_23DB is Familia_23DB)
                 {
                     MessageBox.Show("No se puede quitar un elemento de dentro de una Familia. Quite la Familia completa.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (modoModificar_23DB && nodoSeleccionado_23DB.Parent.Parent == null)
+                if(modoModificar_23DB && nodoSeleccionado_23DB.Parent.Parent == null)
                 {
                     componentes_23DB.Remove(componente_23DB);
                 }
@@ -414,7 +415,7 @@ namespace GUI_23DB
                     padre_23DB.Quitar_23DB(componente_23DB);
                 }
                 AgregarAListBoxSiNoExiste_23DB(componente_23DB);
-                if (componente_23DB is Familia_23DB)
+                if(componente_23DB is Familia_23DB)
                 {
                     DevolverHijosAlListBox_23DB(componente_23DB);
                 }
@@ -425,7 +426,7 @@ namespace GUI_23DB
 
         private void DevolverHijosAlListBox_23DB(Rol_23DB componente_23DB)
         {
-            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
                 AgregarAListBoxSiNoExiste_23DB(hijo_23DB);
                 DevolverHijosAlListBox_23DB(hijo_23DB);
@@ -434,7 +435,7 @@ namespace GUI_23DB
 
         private void AgregarAListBoxSiNoExiste_23DB(Rol_23DB componente_23DB)
         {
-            foreach (object item_23DB in lstPatFam.Items)
+            foreach(object item_23DB in lstPatFam.Items)
             {
                 if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
                     return;
@@ -444,14 +445,18 @@ namespace GUI_23DB
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            if (!modoModificar_23DB) return;
+            if(!modoModificar_23DB) return;
 
-            if (string.IsNullOrEmpty(txtNombre.Text))
+            if(string.IsNullOrEmpty(txtNombre.Text))
             {
                 MessageBox.Show("Debe ingresar un nombre para el Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+            if(!rolBLL_23DB.ValidarNombre_23DB(txtNombre.Text, rolBLL_23DB.ObtenerRoles_23DB().FindAll(r => r.IdRol_23DB != rolSeleccionado_23DB.IdRol_23DB)))
+            {
+                MessageBox.Show("Ya existe un Rol con ese nombre.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             rolBLL_23DB.ModificarRol_23DB(rolSeleccionado_23DB.IdRol_23DB, txtNombre.Text, componentes_23DB);
             eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Modificar Rol", 2);

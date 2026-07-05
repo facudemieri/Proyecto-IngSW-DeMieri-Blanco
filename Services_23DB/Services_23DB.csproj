@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoManager_23DB.cs" />
+    <Compile Include="DV_23DB.cs" />
     <Compile Include="Evento_23DB.cs" />
     <Compile Include="Composite\Familia_23DB.cs" />
     <Compile Include="Observer\IIdiomaObserver_23DB.cs" />

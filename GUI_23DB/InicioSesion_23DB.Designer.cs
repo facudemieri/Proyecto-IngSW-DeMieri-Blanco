@@ -163,6 +163,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "InicioSesion_23DB";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.InicioSesion_23DB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -12,6 +12,7 @@ namespace BLL_23DB
     {
         private mapperUsuario_23DB mapperUsuario_23DB = new mapperUsuario_23DB();
         private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
+        private DVBLL_23DB dvBLL_23DB = new DVBLL_23DB();
 
         public Usuario_23DB AutenticarUsuario_23DB(string login_23DB, string password_23DB)
         {
@@ -55,29 +56,34 @@ namespace BLL_23DB
             usuario_23DB.Bloqueado_23DB = false;
             usuario_23DB.Activo_23DB = true;
             mapperUsuario_23DB.Insertar_23DB(usuario_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public void ModificarUsuario_23DB(Usuario_23DB usuario_23DB)
         {
             mapperUsuario_23DB.Modificar_23DB(usuario_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public void CambiarEstado_23DB(string dni_23DB, bool activo_23DB)
         {
             mapperUsuario_23DB.CambiarEstado_23DB(dni_23DB, activo_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public void DesbloquearUsuario_23DB(string dni_23DB, string apellido_23DB)
         {
             string passwordInicial_23DB = GenerarPasswordInicial_23DB(dni_23DB, apellido_23DB);
             mapperUsuario_23DB.Desbloquear_23DB(dni_23DB, passwordInicial_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public bool CambiarClave_23DB(string dni_23DB, string passwordActual_23DB, string passwordNuevo_23DB, string confirmarPassword_23DB)
         {
-            if (passwordNuevo_23DB != confirmarPassword_23DB)
+            if(passwordNuevo_23DB != confirmarPassword_23DB)
                 return false;
-            if (passwordActual_23DB == passwordNuevo_23DB)
+
+            if(passwordActual_23DB == passwordNuevo_23DB)
                 return false;
             
             string passwordActualEncriptado_23DB = CryptoManager_23DB.EncriptarHash_23DB(passwordActual_23DB);
@@ -85,10 +91,13 @@ namespace BLL_23DB
                 SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB,
                 passwordActualEncriptado_23DB
             );
-            if (usuario_23DB == null)
+
+            if(usuario_23DB == null)
                 return false;
+
             string passwordNuevoEncriptado_23DB = CryptoManager_23DB.EncriptarHash_23DB(passwordNuevo_23DB);
             mapperUsuario_23DB.ActualizarPassword_23DB(dni_23DB, passwordNuevoEncriptado_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
             return true;
         }
 
@@ -109,9 +118,15 @@ namespace BLL_23DB
 
         public bool VerificarTiempoReset_23DB(DateTime? fechaUltimoIntento_23DB)
         {
-            if (fechaUltimoIntento_23DB == null)
+            if(fechaUltimoIntento_23DB == null)
                 return false;
+            
             return (DateTime.Now - fechaUltimoIntento_23DB.Value).TotalHours >= 5;
+        }
+
+        public List<DV_23DB> VerificarConsistenciaDV_23DB()
+        {
+            return dvBLL_23DB.VerificarTodasLasTablas_23DB();
         }
     }
 }

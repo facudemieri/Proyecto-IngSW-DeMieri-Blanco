@@ -18,8 +18,9 @@ namespace GUI_23DB
         private RolBLL_23DB rolBLL_23DB = new RolBLL_23DB();
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
         private string modoActual_23DB = "Consulta";
-
         
+
+
         public GestionUsuario_23DB()
         {
             InitializeComponent();
@@ -159,9 +160,9 @@ namespace GUI_23DB
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            if (modoActual_23DB == "Anadir")
+            if(modoActual_23DB == "Anadir")
                 Crear_23DB();
-            else if (modoActual_23DB == "Modificar")
+            else if(modoActual_23DB == "Modificar")
                 Modificar_23DB();
         }
 

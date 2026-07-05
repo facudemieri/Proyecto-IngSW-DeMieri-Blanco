@@ -84,6 +84,12 @@
     <Compile Include="CrearFamilias_23DB.Designer.cs">
       <DependentUpon>CrearFamilias_23DB.cs</DependentUpon>
     </Compile>
+    <Compile Include="GestionRespaldo_23DB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionRespaldo_23DB.Designer.cs">
+      <DependentUpon>GestionRespaldo_23DB.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestionUsuario_23DB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearFamilias_23DB.resx">
       <DependentUpon>CrearFamilias_23DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionRespaldo_23DB.resx">
+      <DependentUpon>GestionRespaldo_23DB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario_23DB.resx">
       <DependentUpon>GestionUsuario_23DB.cs</DependentUpon>

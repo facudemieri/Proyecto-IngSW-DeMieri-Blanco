@@ -11,6 +11,7 @@ namespace BLL_23DB
     public class FamiliaBLL_23DB
     {
         private mapperFamilia_23DB mapperFamilia_23DB = new mapperFamilia_23DB();
+        private DVBLL_23DB dvBLL_23DB = new DVBLL_23DB();
 
         public List<Familia_23DB> ObtenerFamilias_23DB()
         {
@@ -20,6 +21,9 @@ namespace BLL_23DB
         public void CrearFamilia_23DB(string nombreFamilia_23DB, List<Rol_23DB> componentes_23DB)
         {
             mapperFamilia_23DB.InsertarFamilia_23DB(nombreFamilia_23DB, componentes_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Familia_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamPat_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamFam_23DB");
         }
 
         public bool ValidarNombre_23DB(string nombreFamilia_23DB, List<Familia_23DB> familias_23DB)
@@ -66,11 +70,17 @@ namespace BLL_23DB
         public void ModificarFamilia_23DB(int idFamilia_23DB, string nombreFamilia_23DB, List<Rol_23DB> componentes_23DB)
         {
             mapperFamilia_23DB.ModificarFamilia_23DB(idFamilia_23DB, nombreFamilia_23DB, componentes_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Familia_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamPat_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamFam_23DB");
         }
 
         public void EliminarFamilia_23DB(int idFamilia_23DB)
         {
             mapperFamilia_23DB.EliminarFamilia_23DB(idFamilia_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Familia_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamPat_23DB");
+            dvBLL_23DB.RecalcularDVTabla_23DB("FamFam_23DB");
         }
 
         public Familia_23DB ObtenerFamiliaCompleta_23DB(int idFamilia_23DB)

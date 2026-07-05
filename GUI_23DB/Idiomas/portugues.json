@@ -71,6 +71,7 @@
   "MenuPrincipal_gestionDePerfilesToolStripMenuItem": "Gestão de Perfis",
   "MenuPrincipal_administradorDeRolesToolStripMenuItem": "Administrador de Funções",
   "MenuPrincipal_administradorDePerfilesToolStripMenuItem": "Administrador de Famílias",
+  "MenuPrincipal_gestionDeRespaldosToolStripMenuItem": "Gestão de Backups",
 
   "CrearFamilias_USUARIOS": "ADMINISTRADOR DE FAMÍLIAS",
   "CrearFamilias_label1": "Nome",
@@ -98,5 +99,10 @@
   "RepararInconsistencia_btnRecalcular": "Recalcular DV",
   "RepararInconsistencia_btnRestore": "Restaurar BD",
   "RepararInconsistencia_btnSalir": "Sair",
-  "RepararInconsistencia_lblTitulo": "Foi detectada uma inconsistência, \r\nselecione um caminho."
+  "RepararInconsistencia_lblTitulo": "Foi detectada uma inconsistência, \r\nselecione um caminho.",
+
+  "GestionRespaldo_USUARIOS": "GESTÃO DE BACKUP",
+  "GestionRespaldo_btnBackup": "Back Up",
+  "GestionRespaldo_btnRestore": "Restaurar",
+  "GestionRespaldo_btnCancelar": "Cancelar"
 }

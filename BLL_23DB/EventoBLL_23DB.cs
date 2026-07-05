@@ -11,10 +11,13 @@ namespace BLL_23DB
     public class EventoBLL_23DB
     {
         private mapperEvento_23DB mapperEvento_23DB = new mapperEvento_23DB();
+        private DVBLL_23DB dvBLL_23DB = new DVBLL_23DB();
+
 
         public void RegistrarEvento_23DB(string dni_23DB, string modulo_23DB, string evento_23DB, int criticidad_23DB)
         {
             mapperEvento_23DB.InsertarEvento_23DB(dni_23DB, modulo_23DB, evento_23DB, criticidad_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Eventos_23DB");
         }
 
         public List<Evento_23DB> ObtenerEventos_23DB()

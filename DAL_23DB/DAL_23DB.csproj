@@ -48,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion_23DB.cs" />
+    <Compile Include="mapperDV_23DB.cs" />
     <Compile Include="mapperEvento_23DB.cs" />
     <Compile Include="mapperFamilia_23DB.cs" />
     <Compile Include="mapperPatente_23DB.cs" />
+    <Compile Include="mapperRespaldo_23DB.cs" />
     <Compile Include="mapperRol_23DB.cs" />
     <Compile Include="mapperUsuario_23DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -71,6 +71,7 @@
   "MenuPrincipal_gestionDePerfilesToolStripMenuItem": "Profile Management",
   "MenuPrincipal_administradorDeRolesToolStripMenuItem": "Roles Administrator",
   "MenuPrincipal_administradorDePerfilesToolStripMenuItem": "Families Administrator",
+  "MenuPrincipal_gestionDeRespaldosToolStripMenuItem": "Backup Management",
 
   "CrearFamilias_USUARIOS": "FAMILIES ADMINISTRATOR",
   "CrearFamilias_label1": "Name",
@@ -98,5 +99,10 @@
   "RepararInconsistencia_btnRecalcular": "Recalculate DV",
   "RepararInconsistencia_btnRestore": "Restore DB",
   "RepararInconsistencia_btnSalir": "Exit",
-  "RepararInconsistencia_lblTitulo": "An inconsistency has been detected, \r\nselect a course of action."
+  "RepararInconsistencia_lblTitulo": "An inconsistency has been detected, \r\nselect a course of action.",
+
+  "GestionRespaldo_USUARIOS": "BACKUP MANAGEMENT",
+  "GestionRespaldo_btnBackup": "Back Up",
+  "GestionRespaldo_btnRestore": "Restore",
+  "GestionRespaldo_btnCancelar": "Cancel"
 }

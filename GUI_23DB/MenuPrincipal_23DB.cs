@@ -30,6 +30,7 @@ namespace GUI_23DB
             bitacoraDeEventosToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Bitacora");
             gestionDePerfilesToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Perfiles");
             cambiarContraseñaToolStripMenuItem.Visible = patentes_23DB.Contains("Cambio de Clave");
+            gestionDeRespaldosToolStripMenuItem.Visible = patentes_23DB.Contains("Gestion de Respaldo");
         }
 
         private EventoBLL_23DB eventoBLL_23DB = new EventoBLL_23DB();
@@ -243,6 +244,12 @@ namespace GUI_23DB
         {
             CrearFamilias_23DB crearFamilias_23DB = new CrearFamilias_23DB();
             crearFamilias_23DB.Show();
+        }
+
+        private void gestionDeRespaldosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionRespaldo_23DB gestionRespaldo_23DB = new GestionRespaldo_23DB();
+            gestionRespaldo_23DB.Show();
         }
     }
 }

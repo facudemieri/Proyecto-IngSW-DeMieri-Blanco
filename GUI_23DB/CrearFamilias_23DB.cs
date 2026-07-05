@@ -406,7 +406,11 @@ namespace GUI_23DB
                 MessageBox.Show("Debe ingresar un nombre para la Familia.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+            if (!familiaBLL_23DB.ValidarNombre_23DB(txtNombre.Text, familiaBLL_23DB.ObtenerFamilias_23DB().FindAll(f => f.IdFamilia_23DB != familiaSeleccionada_23DB.IdFamilia_23DB)))
+            {
+                MessageBox.Show("Ya existe una Familia con ese nombre.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             familiaBLL_23DB.ModificarFamilia_23DB(familiaSeleccionada_23DB.IdFamilia_23DB, txtNombre.Text, componentes_23DB);
             eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Modificar Familia", 2);
