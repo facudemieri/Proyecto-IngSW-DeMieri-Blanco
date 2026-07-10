@@ -347,7 +347,7 @@
             this.gestionDePerfilesToolStripMenuItem,
             this.gestionDeRespaldosToolStripMenuItem});
             this.cmsAdmin.Name = "cmsAdmin";
-            this.cmsAdmin.Size = new System.Drawing.Size(187, 114);
+            this.cmsAdmin.Size = new System.Drawing.Size(187, 92);
             this.cmsAdmin.Opening += new System.ComponentModel.CancelEventHandler(this.cmsAdmin_Opening);
             // 
             // gestionDeUsuariosToolStripMenuItem
@@ -405,6 +405,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MenuPrincipal_23DB";
             this.Text = "MenuPrincipal";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuPrincipal_23DB_FormClosing);

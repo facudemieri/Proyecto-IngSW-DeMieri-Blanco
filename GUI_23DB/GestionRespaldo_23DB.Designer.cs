@@ -197,6 +197,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GestionRespaldo_23DB";
             this.Text = "GestionRespaldo_23DB";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GestionRespaldo_23DB_FormClosing);

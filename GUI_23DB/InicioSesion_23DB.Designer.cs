@@ -161,6 +161,7 @@
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "InicioSesion_23DB";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.InicioSesion_23DB_Load);

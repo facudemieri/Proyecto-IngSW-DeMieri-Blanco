@@ -113,6 +113,7 @@
             this.Controls.Add(this.cmbIdioma);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CambiarIdioma_23DB";
             this.Text = "CambiarIdioma_23DB";
             this.Load += new System.EventHandler(this.CambiarIdioma_23DB_Load);

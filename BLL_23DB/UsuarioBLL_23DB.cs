@@ -114,6 +114,7 @@ namespace BLL_23DB
         public void ActualizarUltimoIdioma_23DB(string dni_23DB, string idioma_23DB)
         {
             mapperUsuario_23DB.ActualizarUltimoIdioma_23DB(dni_23DB, idioma_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public bool VerificarTiempoReset_23DB(DateTime? fechaUltimoIntento_23DB)

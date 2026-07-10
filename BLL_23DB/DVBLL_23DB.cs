@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DAL_23DB;
+using Services_23DB;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using DAL_23DB;
-using Services_23DB;
+using System.Linq;
 
 namespace BLL_23DB
 {
@@ -112,6 +113,12 @@ namespace BLL_23DB
                     
             }
             return inconsistencias_23DB;
+        }
+
+        public bool EsPrimeraInstalacion_23DB()
+        {
+            List<DV_23DB> tablas_23DB = mapperDV_23DB.ObtenerTodosDV_23DB();
+            return tablas_23DB.All(t => t.DVH_23DB == 0 && t.DVV_23DB == 0);
         }
     }
 }

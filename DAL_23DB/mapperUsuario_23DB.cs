@@ -23,7 +23,7 @@ namespace DAL_23DB
 
         private void Desconectar_23DB()
         {
-            if (conexion_23DB != null && conexion_23DB.State == ConnectionState.Open) 
+            if(conexion_23DB != null && conexion_23DB.State == ConnectionState.Open) 
             {
                 conexion_23DB.Close();
             }
