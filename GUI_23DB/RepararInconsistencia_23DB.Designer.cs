@@ -115,7 +115,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(569, 254);
+            this.ControlBox = false;
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RepararInconsistencia_23DB";
             this.Text = "RepararInconsistencia_23DB";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RepararInconsistencia_23DB_FormClosing);

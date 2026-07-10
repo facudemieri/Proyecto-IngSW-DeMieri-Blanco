@@ -108,12 +108,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 249);
+            this.ControlBox = false;
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.cmbIdioma);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CambiarIdioma_23DB";
             this.Text = "CambiarIdioma_23DB";
             this.Load += new System.EventHandler(this.CambiarIdioma_23DB_Load);

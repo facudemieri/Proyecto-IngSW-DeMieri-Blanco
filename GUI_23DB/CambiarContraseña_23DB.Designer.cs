@@ -191,6 +191,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 287);
+            this.ControlBox = false;
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.chkMostrarConfirmacion);
             this.Controls.Add(this.chkMostrarNueva);
@@ -205,7 +206,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CambiarContraseña_23DB";
             this.Text = "CambiarContraseña_23DB";

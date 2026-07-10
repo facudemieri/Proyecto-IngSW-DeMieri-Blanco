@@ -153,6 +153,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 590);
+            this.ControlBox = false;
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnLogin);
@@ -161,7 +162,7 @@
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InicioSesion_23DB";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.InicioSesion_23DB_Load);

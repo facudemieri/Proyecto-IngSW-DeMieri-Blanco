@@ -50,12 +50,14 @@ namespace GUI_23DB
                 {
                     RepararInconsistencia_23DB repararForm_23DB = new RepararInconsistencia_23DB(inconsistencias_23DB);
                     repararForm_23DB.ShowDialog();
+                    return;
                 }
                 else
                 {
                     MessageBox.Show("El sistema no está disponible en este momento. Contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                return;
+                
             }
 
             Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);

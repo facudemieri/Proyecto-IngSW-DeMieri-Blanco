@@ -433,6 +433,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 630);
+            this.ControlBox = false;
             this.Controls.Add(this.Mensaje);
             this.Controls.Add(this.ckTodos);
             this.Controls.Add(this.ckInactivos);
@@ -449,7 +450,7 @@
             this.Controls.Add(this.btnDesbloquear);
             this.Controls.Add(this.btnCrear);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GestionUsuario_23DB";
             this.Text = "GestionUsuario";
