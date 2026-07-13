@@ -163,7 +163,20 @@
     <!-- ==================== Registro de Windows ==================== -->
     <ComponentGroup Id="RegistryComponents">
 
-      <!-- Guarda el servidor SQL ingresado por el usuario en HKLM\SOFTWARE\AeroManager\Server -->
+      <!--
+        Guarda el servidor SQL ingresado por el usuario en HKLM\SOFTWARE\AeroManager\Server.
+        El paquete no declara Platform="x64" (Package sin atributo Platform => x86 por
+        defecto en WiX 3.11), así que este componente corre como proceso de 32 bits.
+        En un SO de 64 bits, WOW64 redirige automáticamente cualquier escritura de un
+        proceso de 32 bits en HKLM\SOFTWARE\AeroManager hacia
+        HKLM\SOFTWARE\WOW6432Node\AeroManager; no hace falta declarar la ruta
+        WOW6432Node de forma explícita porque el sistema operativo ya resuelve esa
+        redirección de forma transparente para este componente. Declarar además un
+        componente separado con Key="SOFTWARE\WOW6432Node\AeroManager" apuntaría en un
+        SO de 64 bits a la misma ubicación física que este componente (WOW64 no
+        redirige una ruta que ya empieza con "WOW6432Node"), lo que generaría dos
+        componentes escribiendo la misma clave de registro -> se descartó por conflicto.
+      -->
       <Component Id="CompRegistryServer" Directory="INSTALLFOLDER" Guid="*">
         <RegistryValue Root="HKLM" Key="SOFTWARE\AeroManager" Name="Server" Type="string" Value="[SQLSERVERNAME]" KeyPath="yes" />
       </Component>
