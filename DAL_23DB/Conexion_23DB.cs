@@ -16,18 +16,8 @@ namespace DAL_23DB
         {
             string servidor_23DB = ".";
 
-            // Intentar leer desde SOFTWARE\AeroManager (64-bit)
-            using (RegistryKey key_23DB = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\AeroManager"))
-            {
-                if (key_23DB != null)
-                {
-                    servidor_23DB = key_23DB.GetValue("Server", ".").ToString();
-                    return $"Server={servidor_23DB};Database=INGSW_23DB;Integrated Security=True;";
-                }
-            }
-
-            // Si no encuentra, intentar WOW6432Node (32-bit)
-            using (RegistryKey key_23DB = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\AeroManager"))
+            using (RegistryKey baseKey_23DB = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+            using (RegistryKey key_23DB = baseKey_23DB.OpenSubKey(@"SOFTWARE\AeroManager"))
             {
                 if (key_23DB != null)
                     servidor_23DB = key_23DB.GetValue("Server", ".").ToString();
