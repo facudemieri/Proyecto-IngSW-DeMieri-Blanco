@@ -22,7 +22,7 @@ namespace DAL_23DB
 
         private void Desconectar_23DB()
         {
-            if (conexion_23DB != null && conexion_23DB.State == ConnectionState.Open)
+            if(conexion_23DB != null && conexion_23DB.State == ConnectionState.Open)
             {
                 conexion_23DB.Close();
             }
@@ -66,7 +66,7 @@ namespace DAL_23DB
                 cmd_23DB.Parameters.AddWithValue("@FechaInicio", fechaInicio_23DB.Date);
                 cmd_23DB.Parameters.AddWithValue("@FechaFin", fechaFin_23DB.Date);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     lista_23DB.Add(new Evento_23DB
                     {
@@ -95,13 +95,13 @@ namespace DAL_23DB
                 Conectar_23DB();
                 string query_23DB = "SELECT Id_Evento, DNI, Fecha, Hora, Modulo, Evento, Criticidad FROM Eventos_23DB WHERE Fecha BETWEEN @FechaInicio AND @FechaFin";
 
-                if (!string.IsNullOrEmpty(dni_23DB))
+                if(!string.IsNullOrEmpty(dni_23DB))
                     query_23DB += " AND DNI = @DNI";
-                if (!string.IsNullOrEmpty(modulo_23DB))
+                if(!string.IsNullOrEmpty(modulo_23DB))
                     query_23DB += " AND Modulo = @Modulo";
-                if (!string.IsNullOrEmpty(evento_23DB))
+                if(!string.IsNullOrEmpty(evento_23DB))
                     query_23DB += " AND Evento = @Evento";
-                if (criticidad_23DB > 0)
+                if(criticidad_23DB > 0)
                     query_23DB += " AND Criticidad = @Criticidad";
 
                 query_23DB += " ORDER BY Fecha DESC, Hora DESC";
@@ -110,17 +110,17 @@ namespace DAL_23DB
                 cmd_23DB.Parameters.AddWithValue("@FechaInicio", fechaInicio_23DB.Date);
                 cmd_23DB.Parameters.AddWithValue("@FechaFin", fechaFin_23DB.Date);
 
-                if (!string.IsNullOrEmpty(dni_23DB))
+                if(!string.IsNullOrEmpty(dni_23DB))
                     cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
-                if (!string.IsNullOrEmpty(modulo_23DB))
+                if(!string.IsNullOrEmpty(modulo_23DB))
                     cmd_23DB.Parameters.AddWithValue("@Modulo", modulo_23DB);
-                if (!string.IsNullOrEmpty(evento_23DB))
+                if(!string.IsNullOrEmpty(evento_23DB))
                     cmd_23DB.Parameters.AddWithValue("@Evento", evento_23DB);
-                if (criticidad_23DB > 0)
+                if(criticidad_23DB > 0)
                     cmd_23DB.Parameters.AddWithValue("@Criticidad", criticidad_23DB);
 
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     lista_23DB.Add(new Evento_23DB
                     {
@@ -150,7 +150,7 @@ namespace DAL_23DB
                 string query_23DB = "SELECT DNI, Login FROM Usuario_23DB ORDER BY Login";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     lista_23DB.Add(new Usuario_23DB
                     {
@@ -176,7 +176,7 @@ namespace DAL_23DB
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                if (reader_23DB.Read())
+                if(reader_23DB.Read())
                 {
                     usuario_23DB = new Usuario_23DB
                     {

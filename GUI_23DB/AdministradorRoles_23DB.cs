@@ -54,6 +54,7 @@ namespace GUI_23DB
             List<Rol_23DB> roles_23DB = rolBLL_23DB.ObtenerRoles_23DB();
             List<Patente_23DB> patentes_23DB = patenteBLL_23DB.ObtenerPatentes_23DB();
             List<Familia_23DB> familias_23DB = familiaBLL_23DB.ObtenerFamilias_23DB();
+            
             foreach(Rol_23DB rol_23DB in roles_23DB)
             {
                 lstPatFam.Items.Add(rol_23DB);
@@ -79,6 +80,7 @@ namespace GUI_23DB
         {
             TreeNode nodo_23DB = new TreeNode(componente_23DB.ObtenerNombre_23DB());
             nodo_23DB.Tag = componente_23DB;
+            
             foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
                 nodo_23DB.Nodes.Add(CrearNodoRecursivo_23DB(hijo_23DB));
@@ -96,6 +98,7 @@ namespace GUI_23DB
         public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
         {
             string formName_23DB = "AdministradorRoles";
+            
             foreach(Control control_23DB in ObtenerTodosControles_23DB(this))
             {
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
@@ -164,7 +167,7 @@ namespace GUI_23DB
 
         private void lstPatFam_DoubleClick_1(object sender, EventArgs e)
         {
-            if (lstPatFam.SelectedItem == null) return;
+            if(lstPatFam.SelectedItem == null) return;
             Rol_23DB seleccionado_23DB = (Rol_23DB)lstPatFam.SelectedItem;
 
             // No permitir agregar un Rol dentro de otro Rol
@@ -178,7 +181,7 @@ namespace GUI_23DB
             {
                 seleccionado_23DB = familiaBLL_23DB.ObtenerFamiliaCompleta_23DB(((Familia_23DB)seleccionado_23DB).IdFamilia_23DB);
                 List<string> patentesTreeView_23DB = ObtenerPatentesDelTreeView_23DB();
-                if (familiaBLL_23DB.TienePatentesRepetidas_23DB(seleccionado_23DB, patentesTreeView_23DB))
+                if(familiaBLL_23DB.TienePatentesRepetidas_23DB(seleccionado_23DB, patentesTreeView_23DB))
                 {
                     MessageBox.Show("La Familia contiene patentes que ya están incluidas.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -186,10 +189,10 @@ namespace GUI_23DB
             }
 
             // Validación para Patentes directas
-            if (seleccionado_23DB is Patente_23DB)
+            if(seleccionado_23DB is Patente_23DB)
             {
                 List<string> patentesTreeView_23DB = ObtenerPatentesDelTreeView_23DB();
-                if (patentesTreeView_23DB.Contains(seleccionado_23DB.ObtenerNombre_23DB()))
+                if(patentesTreeView_23DB.Contains(seleccionado_23DB.ObtenerNombre_23DB()))
                 {
                     MessageBox.Show($"La patente '{seleccionado_23DB.ObtenerNombre_23DB()}' ya está incluida.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -215,7 +218,9 @@ namespace GUI_23DB
         {
             List<string> patentes_23DB = new List<string>();
             foreach(TreeNode nodo_23DB in tvListaPatFam.Nodes)
+            { 
                 ObtenerPatentesDeNodo_23DB(nodo_23DB, patentes_23DB);
+            }
             return patentes_23DB;
         }
 
@@ -224,11 +229,15 @@ namespace GUI_23DB
             Rol_23DB componente_23DB = (Rol_23DB)nodo_23DB.Tag;
             if(componente_23DB is Patente_23DB)
             {
-                if (!patentes_23DB.Contains(componente_23DB.ObtenerNombre_23DB()))
-                    patentes_23DB.Add(componente_23DB.ObtenerNombre_23DB());
+                if(!patentes_23DB.Contains(componente_23DB.ObtenerNombre_23DB()))
+                { 
+                    patentes_23DB.Add(componente_23DB.ObtenerNombre_23DB()); 
+                }
             }
-            foreach (TreeNode hijo_23DB in nodo_23DB.Nodes)
-                ObtenerPatentesDeNodo_23DB(hijo_23DB, patentes_23DB);
+            foreach(TreeNode hijo_23DB in nodo_23DB.Nodes)
+            { 
+                ObtenerPatentesDeNodo_23DB(hijo_23DB, patentes_23DB); 
+            }
         }
 
         private List<string> ObtenerPatentesDeRol_23DB(Rol_23DB rol_23DB)
@@ -237,9 +246,13 @@ namespace GUI_23DB
             foreach(Rol_23DB hijo_23DB in rol_23DB.ObtenerHijos_23DB())
             {
                 if(hijo_23DB is Patente_23DB)
-                    patentes_23DB.Add(hijo_23DB.ObtenerNombre_23DB());
+                { 
+                    patentes_23DB.Add(hijo_23DB.ObtenerNombre_23DB()); 
+                }
                 else
-                    patentes_23DB.AddRange(ObtenerPatentesDeRol_23DB(hijo_23DB));
+                { 
+                    patentes_23DB.AddRange(ObtenerPatentesDeRol_23DB(hijo_23DB)); 
+                }
             }
             return patentes_23DB;
         }
@@ -293,7 +306,7 @@ namespace GUI_23DB
                 return;
             }
 
-            // No eliminar si está asignado a algún usuario
+            // No eliminar si esta asignado a algun usuario
             if(rolBLL_23DB.RolEstaAsignado_23DB(rol_23DB.IdRol_23DB))
             {
                 MessageBox.Show("No se puede eliminar un Rol que está asignado a usuarios.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -369,7 +382,7 @@ namespace GUI_23DB
         {
             foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
-                foreach (object item_23DB in lstPatFam.Items.Cast<object>().ToList())
+                foreach(object item_23DB in lstPatFam.Items.Cast<object>().ToList())
                 {
                     if(item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == hijo_23DB.ObtenerNombre_23DB())
                     {
@@ -437,8 +450,7 @@ namespace GUI_23DB
         {
             foreach(object item_23DB in lstPatFam.Items)
             {
-                if (item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB())
-                    return;
+                if(item_23DB is Rol_23DB rol_23DB && rol_23DB.ObtenerNombre_23DB() == componente_23DB.ObtenerNombre_23DB()) return;
             }
             lstPatFam.Items.Add(componente_23DB);
         }

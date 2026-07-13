@@ -37,8 +37,10 @@ namespace BLL_23DB
             foreach(DataRow fila_23DB in tabla_23DB.Rows)
             {
                 long dvhFila_23DB = 0;
-                foreach (DataColumn col_23DB in tabla_23DB.Columns)
-                    dvhFila_23DB += ConvertirANumero_23DB(fila_23DB[col_23DB]);
+                foreach(DataColumn col_23DB in tabla_23DB.Columns)
+                { 
+                    dvhFila_23DB += ConvertirANumero_23DB(fila_23DB[col_23DB]); 
+                }
                 dvh_23DB += dvhFila_23DB;
             }
 
@@ -46,7 +48,7 @@ namespace BLL_23DB
             foreach(DataColumn col_23DB in tabla_23DB.Columns)
             {
                 long dvvCol_23DB = 0;
-                foreach (DataRow fila_23DB in tabla_23DB.Rows)
+                foreach(DataRow fila_23DB in tabla_23DB.Rows)
                 {
                     dvvCol_23DB += ConvertirANumero_23DB(fila_23DB[col_23DB]);
                 }
@@ -87,7 +89,7 @@ namespace BLL_23DB
             DataTable datos_23DB = mapperDV_23DB.ObtenerDatosTabla_23DB(nombreTabla_23DB);
             var (dvh, dvv) = CalcularDV_23DB(datos_23DB);
 
-            if (dvh != dvAlmacenado_23DB.DVH_23DB || dvv != dvAlmacenado_23DB.DVV_23DB)
+            if(dvh != dvAlmacenado_23DB.DVH_23DB || dvv != dvAlmacenado_23DB.DVV_23DB)
             {
                 return new DV_23DB
                 {

@@ -53,7 +53,7 @@ namespace DAL_23DB
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@IdTabla", idTabla_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                if (reader_23DB.Read())
+                if(reader_23DB.Read())
                 {
                     dv_23DB = new DV_23DB
                     {
@@ -80,7 +80,7 @@ namespace DAL_23DB
                 string query_23DB = "SELECT IdTabla, NombreTabla, DVH, DVV FROM DV_23DB";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     lista_23DB.Add(new DV_23DB
                     {

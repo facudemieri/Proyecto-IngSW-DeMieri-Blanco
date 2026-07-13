@@ -134,7 +134,7 @@ namespace GUI_23DB
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDni.Text))
+            if(string.IsNullOrEmpty(txtDni.Text))
             {
                 Mensaje.Text = "Debe seleccionar un usuario.";
                 return;
@@ -144,7 +144,7 @@ namespace GUI_23DB
 
         private void dataGridUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if(e.RowIndex >= 0)
             {
                 DataGridViewRow fila_23DB = dataGridUsuarios.Rows[e.RowIndex];
                 txtDni.Text = fila_23DB.Cells["DNI_23DB"].Value.ToString();
@@ -168,7 +168,7 @@ namespace GUI_23DB
 
         private void Modificar_23DB()
         {
-            if (string.IsNullOrEmpty(txtEmail.Text))
+            if(string.IsNullOrEmpty(txtEmail.Text))
             {
                 Mensaje.Text = "Debe completar todos los campos obligatorios.";
                 return;
@@ -191,15 +191,14 @@ namespace GUI_23DB
 
         private string ObtenerFiltroActual_23DB()
         {
-            if (ckActivos.Checked) return "Activos";
-            if (ckInactivos.Checked) return "Inactivos";
+            if(ckActivos.Checked) return "Activos";
+            if(ckInactivos.Checked) return "Inactivos";
             return "Todos";
         }
 
         private void Crear_23DB()
         {
-            if (string.IsNullOrEmpty(txtDni.Text) || string.IsNullOrEmpty(txtApellido.Text) ||
-            string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtEmail.Text))
+            if(string.IsNullOrEmpty(txtDni.Text) || string.IsNullOrEmpty(txtApellido.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtEmail.Text))
             {
                 Mensaje.Text = "Debe completar todos los campos obligatorios.";
                 return;
@@ -223,7 +222,7 @@ namespace GUI_23DB
 
         private void btnAct_Des_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDni.Text))
+            if(string.IsNullOrEmpty(txtDni.Text))
             {
                 Mensaje.Text = "Debe seleccionar un usuario.";
                 return;
@@ -238,12 +237,12 @@ namespace GUI_23DB
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
         {           
-            if (string.IsNullOrEmpty(txtDni.Text))
+            if(string.IsNullOrEmpty(txtDni.Text))
             {
                 Mensaje.Text = "Debe seleccionar un usuario.";
                 return;
             }
-            if (txtBloqueado.Text == "False")
+            if(txtBloqueado.Text == "False")
             {
                 Mensaje.Text = "El usuario no está bloqueado.";
                 return;
@@ -267,7 +266,7 @@ namespace GUI_23DB
 
         private void ckActivos_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckActivos.Checked)
+            if(ckActivos.Checked)
             {
                 ckInactivos.Checked = false;
                 ckTodos.Checked = false;
@@ -277,7 +276,7 @@ namespace GUI_23DB
 
         private void ckInactivos_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckInactivos.Checked)
+            if(ckInactivos.Checked)
             {
                 ckActivos.Checked = false;
                 ckTodos.Checked = false;
@@ -287,7 +286,7 @@ namespace GUI_23DB
 
         private void ckTodos_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckTodos.Checked)
+            if(ckTodos.Checked)
             {
                 ckActivos.Checked = false;
                 ckInactivos.Checked = false;
@@ -298,18 +297,20 @@ namespace GUI_23DB
         public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
         {
             string formName_23DB = "GestionUsuario";
-            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            foreach(Control control_23DB in ObtenerTodosControles_23DB(this))
             {
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
-                if (configuracion_23DB.ContainsKey(clave_23DB))
-                    control_23DB.Text = configuracion_23DB[clave_23DB];
+                if(configuracion_23DB.ContainsKey(clave_23DB))
+                { 
+                    control_23DB.Text = configuracion_23DB[clave_23DB]; 
+                }
             }
         }
 
         private List<Control> ObtenerTodosControles_23DB(Control control_23DB)
         {
             List<Control> lista_23DB = new List<Control>();
-            foreach (Control c_23DB in control_23DB.Controls)
+            foreach(Control c_23DB in control_23DB.Controls)
             {
                 lista_23DB.Add(c_23DB);
                 lista_23DB.AddRange(ObtenerTodosControles_23DB(c_23DB));
@@ -325,7 +326,7 @@ namespace GUI_23DB
         public void AplicarIdiomaActual_23DB()
         {
             string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            if(!string.IsNullOrEmpty(idiomaActual_23DB))
             {
                 IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
                 ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));

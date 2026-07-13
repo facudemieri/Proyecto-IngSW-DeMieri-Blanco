@@ -35,18 +35,20 @@ namespace GUI_23DB
                 return;
             }
 
-            
+            Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+
             List<DV_23DB> inconsistencias_23DB = usuarioBLL_23DB.VerificarConsistenciaDV_23DB();
             if(inconsistencias_23DB.Count > 0)
             {
-                Usuario_23DB usuarioParaReparar_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+                
                 bool primeraInstalacion_23DB = dvBLL_23DB.EsPrimeraInstalacion_23DB();
 
                 if(primeraInstalacion_23DB)
                 {
                     new DVBLL_23DB().RecalcularDV_23DB();
+                    
                 }
-                else if(usuarioParaReparar_23DB != null && usuarioBLL_23DB.ObtenerNombreRol_23DB(usuarioParaReparar_23DB.IdRol_23DB) == "Administrador")
+                else if(usuarioPorLogin_23DB != null && usuarioBLL_23DB.ObtenerNombreRol_23DB(usuarioPorLogin_23DB.IdRol_23DB) == "Administrador")
                 {
                     RepararInconsistencia_23DB repararForm_23DB = new RepararInconsistencia_23DB(inconsistencias_23DB);
                     repararForm_23DB.ShowDialog();
@@ -60,7 +62,7 @@ namespace GUI_23DB
                 
             }
 
-            Usuario_23DB usuarioPorLogin_23DB = usuarioBLL_23DB.ObtenerUsuarioPorLogin_23DB(txtUsuario.Text);
+            
 
 
             if(usuarioPorLogin_23DB == null)

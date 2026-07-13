@@ -74,7 +74,7 @@ namespace GUI_23DB
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            if (dgvBitacoraEventos.Rows.Count == 0)
+            if(dgvBitacoraEventos.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos para imprimir.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -84,7 +84,7 @@ namespace GUI_23DB
             saveDialog_23DB.Filter = "PDF files (*.pdf)|*.pdf";
             saveDialog_23DB.FileName = "BitacoraEventos_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-            if (saveDialog_23DB.ShowDialog() == DialogResult.OK)
+            if(saveDialog_23DB.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -92,26 +92,26 @@ namespace GUI_23DB
                     iTextSharp.text.pdf.PdfWriter.GetInstance(doc_23DB, new System.IO.FileStream(saveDialog_23DB.FileName, System.IO.FileMode.Create));
                     doc_23DB.Open();
 
-                    // Título
+                    // titulo
                     iTextSharp.text.Font titleFont_23DB = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 16, iTextSharp.text.Font.BOLD);
                     iTextSharp.text.Paragraph title_23DB = new iTextSharp.text.Paragraph("Bitácora de Eventos", titleFont_23DB);
                     title_23DB.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
                     doc_23DB.Add(title_23DB);
 
-                    // Fecha de generación
+                    // fecha
                     iTextSharp.text.Font dateFont_23DB = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10);
                     iTextSharp.text.Paragraph date_23DB = new iTextSharp.text.Paragraph("Generado el: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), dateFont_23DB);
                     date_23DB.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
                     doc_23DB.Add(date_23DB);
                     doc_23DB.Add(new iTextSharp.text.Paragraph(" "));
 
-                    // Tabla
+                    // tabla
                     iTextSharp.text.pdf.PdfPTable tabla_23DB = new iTextSharp.text.pdf.PdfPTable(dgvBitacoraEventos.Columns.Count);
                     tabla_23DB.WidthPercentage = 100;
 
-                    // Encabezados
+                    // encabezados
                     iTextSharp.text.Font headerFont_23DB = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.WHITE);
-                    foreach (DataGridViewColumn col_23DB in dgvBitacoraEventos.Columns)
+                    foreach(DataGridViewColumn col_23DB in dgvBitacoraEventos.Columns)
                     {
                         iTextSharp.text.pdf.PdfPCell cell_23DB = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col_23DB.HeaderText, headerFont_23DB));
                         cell_23DB.BackgroundColor = new iTextSharp.text.BaseColor(31, 78, 121);
@@ -120,14 +120,13 @@ namespace GUI_23DB
                         tabla_23DB.AddCell(cell_23DB);
                     }
 
-                    // Datos
+                    // datos
                     iTextSharp.text.Font dataFont_23DB = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 9);
-                    foreach (DataGridViewRow row_23DB in dgvBitacoraEventos.Rows)
+                    foreach(DataGridViewRow row_23DB in dgvBitacoraEventos.Rows)
                     {
-                        foreach (DataGridViewCell cell_23DB in row_23DB.Cells)
+                        foreach(DataGridViewCell cell_23DB in row_23DB.Cells)
                         {
-                            iTextSharp.text.pdf.PdfPCell pdfCell_23DB = new iTextSharp.text.pdf.PdfPCell(
-                                new iTextSharp.text.Phrase(cell_23DB.Value?.ToString() ?? string.Empty, dataFont_23DB));
+                            iTextSharp.text.pdf.PdfPCell pdfCell_23DB = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(cell_23DB.Value?.ToString() ?? string.Empty, dataFont_23DB));
                             pdfCell_23DB.Padding = 4;
                             tabla_23DB.AddCell(pdfCell_23DB);
                         }
@@ -139,7 +138,7 @@ namespace GUI_23DB
                     MessageBox.Show("PDF generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     System.Diagnostics.Process.Start(saveDialog_23DB.FileName);
                 }
-                catch (Exception ex_23DB)
+                catch(Exception ex_23DB)
                 {
                     MessageBox.Show("Error al generar el PDF: " + ex_23DB.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -148,13 +147,13 @@ namespace GUI_23DB
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            if (dtpFechaInicio.Value > dtpFechaFin.Value)
+            if(dtpFechaInicio.Value > dtpFechaFin.Value)
             {
                 MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha fin.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (dtpFechaFin.Value > DateTime.Now.Date)
+            if(dtpFechaFin.Value > DateTime.Now.Date)
             {
                 MessageBox.Show("La fecha fin no puede ser posterior a la fecha actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -165,28 +164,23 @@ namespace GUI_23DB
             string evento_23DB = cmbEvento.SelectedIndex >= 0 ? cmbEvento.SelectedItem.ToString() : string.Empty;
             int criticidad_23DB = cmbCriticidad.SelectedIndex >= 0 ? cmbCriticidad.SelectedIndex + 1 : 0;
 
-            List<Evento_23DB> lista_23DB = eventoBLL_23DB.FiltrarEventos_23DB(
-                dni_23DB,
-                dtpFechaInicio.Value.Date,
-                dtpFechaFin.Value.Date,
-                modulo_23DB,
-                evento_23DB,
-                criticidad_23DB
-            );
+            List<Evento_23DB> lista_23DB = eventoBLL_23DB.FiltrarEventos_23DB(dni_23DB, dtpFechaInicio.Value.Date, dtpFechaFin.Value.Date, modulo_23DB, evento_23DB, criticidad_23DB);
 
             dgvBitacoraEventos.DataSource = lista_23DB;
 
-            if (lista_23DB.Count == 0)
-                MessageBox.Show("No se encontraron eventos con los criterios ingresados.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(lista_23DB.Count == 0)
+            { 
+                MessageBox.Show("No se encontraron eventos con los criterios ingresados.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
         }
 
         private void dgvBitacoraEventos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if(e.RowIndex >= 0)
             {
                 string dni_23DB = dgvBitacoraEventos.Rows[e.RowIndex].Cells["DNI_23DB"].Value.ToString();
                 Usuario_23DB usuario_23DB = eventoBLL_23DB.ObtenerUsuarioPorDNI_23DB(dni_23DB);
-                if (usuario_23DB != null)
+                if(usuario_23DB != null)
                 {
                     txtNombre.Text = usuario_23DB.Nombre_23DB;
                     txtApellido.Text = usuario_23DB.Apellido_23DB;
@@ -238,10 +232,10 @@ namespace GUI_23DB
         public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
         {
             string formName_23DB = "AuditoriaEventos";
-            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            foreach(Control control_23DB in ObtenerTodosControles_23DB(this))
             {
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
-                if (configuracion_23DB.ContainsKey(clave_23DB))
+                if(configuracion_23DB.ContainsKey(clave_23DB))
                 {
                     control_23DB.Text = configuracion_23DB[clave_23DB];
                 }                    
@@ -251,7 +245,7 @@ namespace GUI_23DB
         private List<Control> ObtenerTodosControles_23DB(Control control_23DB)
         {
             List<Control> lista_23DB = new List<Control>();
-            foreach (Control c_23DB in control_23DB.Controls)
+            foreach(Control c_23DB in control_23DB.Controls)
             {
                 lista_23DB.Add(c_23DB);
                 lista_23DB.AddRange(ObtenerTodosControles_23DB(c_23DB));
@@ -267,7 +261,7 @@ namespace GUI_23DB
         public void AplicarIdiomaActual_23DB()
         {
             string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            if(!string.IsNullOrEmpty(idiomaActual_23DB))
             {
                 IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
                 ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));

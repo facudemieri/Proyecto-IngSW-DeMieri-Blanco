@@ -126,10 +126,10 @@ namespace GUI_23DB
         public void ActualizarIdioma_23DB(Dictionary<string, string> configuracion_23DB)
         {
             string formName_23DB = "GestionRespaldo";
-            foreach (Control control_23DB in ObtenerTodosControles_23DB(this))
+            foreach(Control control_23DB in ObtenerTodosControles_23DB(this))
             {
                 string clave_23DB = formName_23DB + "_" + control_23DB.Name;
-                if (configuracion_23DB.ContainsKey(clave_23DB))
+                if(configuracion_23DB.ContainsKey(clave_23DB))
                 {
                     control_23DB.Text = configuracion_23DB[clave_23DB];
                 }
@@ -139,7 +139,7 @@ namespace GUI_23DB
         public void AplicarIdiomaActual_23DB()
         {
             string idiomaActual_23DB = SessionManager_23DB.ObtenerInstancia_23DB().UltimoIdioma_23DB;
-            if (!string.IsNullOrEmpty(idiomaActual_23DB))
+            if(!string.IsNullOrEmpty(idiomaActual_23DB))
             {
                 IdiomaBLL_23DB idiomaBLL_23DB = new IdiomaBLL_23DB();
                 ActualizarIdioma_23DB(idiomaBLL_23DB.CargarConfiguracion_23DB(idiomaActual_23DB));

@@ -40,17 +40,15 @@ namespace BLL_23DB
 
         public bool TienePatentesRepetidas_23DB(Rol_23DB componente_23DB, List<string> patentesExistentes_23DB)
         {
-            foreach (Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
+            foreach(Rol_23DB hijo_23DB in componente_23DB.ObtenerHijos_23DB())
             {
-                if (hijo_23DB is Patente_23DB)
+                if(hijo_23DB is Patente_23DB)
                 {
-                    if (patentesExistentes_23DB.Contains(hijo_23DB.ObtenerNombre_23DB()))
-                        return true;
+                    if(patentesExistentes_23DB.Contains(hijo_23DB.ObtenerNombre_23DB())) return true;
                 }
                 else
                 {
-                    if (TienePatentesRepetidas_23DB(hijo_23DB, patentesExistentes_23DB))
-                        return true;
+                    if(TienePatentesRepetidas_23DB(hijo_23DB, patentesExistentes_23DB)) return true;
                 }
             }
             return false;

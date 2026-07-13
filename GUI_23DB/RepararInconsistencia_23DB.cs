@@ -29,7 +29,7 @@ namespace GUI_23DB
             dvBLL_23DB.RecalcularDV_23DB();
 
             string dni_23DB = SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB;
-            if (!string.IsNullOrEmpty(dni_23DB))
+            if(!string.IsNullOrEmpty(dni_23DB))
             {
                 eventoBLL_23DB.RegistrarEvento_23DB(dni_23DB, "Administrador", "Recalcular DV", 1);
             }

@@ -54,15 +54,21 @@ namespace DAL_23DB
             {
                 Conectar_23DB();
                 string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB";
-                if (filtro_23DB == "Activos")
-                    query_23DB += " WHERE Activo = 1";
-                else if (filtro_23DB == "Inactivos")
-                    query_23DB += " WHERE Activo = 0";
+                if(filtro_23DB == "Activos")
+                { 
+                    query_23DB += " WHERE Activo = 1"; 
+                }
+                else if(filtro_23DB == "Inactivos")
+                { 
+                    query_23DB += " WHERE Activo = 0"; 
+                }
                 query_23DB += " ORDER BY Apellido, Nombre";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
-                    lista_23DB.Add(MapearUsuario_23DB(reader_23DB));
+                while(reader_23DB.Read())
+                { 
+                    lista_23DB.Add(MapearUsuario_23DB(reader_23DB)); 
+                }
             }
             finally
             {
@@ -174,7 +180,7 @@ namespace DAL_23DB
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", password_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     usuario_23DB = MapearUsuario_23DB(reader_23DB);
                 }
@@ -196,7 +202,7 @@ namespace DAL_23DB
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Login", login_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                while (reader_23DB.Read())
+                while(reader_23DB.Read())
                 {
                     usuario_23DB = MapearUsuario_23DB(reader_23DB);
                 }
@@ -219,8 +225,10 @@ namespace DAL_23DB
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", password_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
-                if (reader_23DB.Read())
-                    usuario_23DB = MapearUsuario_23DB(reader_23DB);
+                if(reader_23DB.Read())
+                { 
+                    usuario_23DB = MapearUsuario_23DB(reader_23DB); 
+                }
             }
             finally
             {

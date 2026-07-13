@@ -80,20 +80,14 @@ namespace BLL_23DB
 
         public bool CambiarClave_23DB(string dni_23DB, string passwordActual_23DB, string passwordNuevo_23DB, string confirmarPassword_23DB)
         {
-            if(passwordNuevo_23DB != confirmarPassword_23DB)
-                return false;
+            if(passwordNuevo_23DB != confirmarPassword_23DB) return false;
 
-            if(passwordActual_23DB == passwordNuevo_23DB)
-                return false;
+            if(passwordActual_23DB == passwordNuevo_23DB) return false;
             
             string passwordActualEncriptado_23DB = CryptoManager_23DB.EncriptarHash_23DB(passwordActual_23DB);
-            Usuario_23DB usuario_23DB = mapperUsuario_23DB.ObtenerUsuarioPorDNI_23DB(
-                SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB,
-                passwordActualEncriptado_23DB
-            );
+            Usuario_23DB usuario_23DB = mapperUsuario_23DB.ObtenerUsuarioPorDNI_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, passwordActualEncriptado_23DB);
 
-            if(usuario_23DB == null)
-                return false;
+            if(usuario_23DB == null) return false;
 
             string passwordNuevoEncriptado_23DB = CryptoManager_23DB.EncriptarHash_23DB(passwordNuevo_23DB);
             mapperUsuario_23DB.ActualizarPassword_23DB(dni_23DB, passwordNuevoEncriptado_23DB);
@@ -119,8 +113,7 @@ namespace BLL_23DB
 
         public bool VerificarTiempoReset_23DB(DateTime? fechaUltimoIntento_23DB)
         {
-            if(fechaUltimoIntento_23DB == null)
-                return false;
+            if(fechaUltimoIntento_23DB == null) return false;
             
             return (DateTime.Now - fechaUltimoIntento_23DB.Value).TotalHours >= 5;
         }

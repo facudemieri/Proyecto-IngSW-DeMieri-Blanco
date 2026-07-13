@@ -77,7 +77,7 @@ namespace DAL_23DB
             cmdFamilia_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
             SqlDataReader readerFamilia_23DB = cmdFamilia_23DB.ExecuteReader();
             Familia_23DB familia_23DB = null;
-            if (readerFamilia_23DB.Read())
+            if(readerFamilia_23DB.Read())
             {
                 familia_23DB = new Familia_23DB
                 {
@@ -87,14 +87,14 @@ namespace DAL_23DB
             }
             readerFamilia_23DB.Close();
 
-            if (familia_23DB == null) return null;
+            if(familia_23DB == null) return null;
 
             
             string queryPatentes_23DB = "SELECT P.IdPatente, P.NombrePatente, P.Descripcion FROM Patente_23DB P INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente WHERE FP.IdFamilia = @IdFamilia";
             SqlCommand cmdPatentes_23DB = new SqlCommand(queryPatentes_23DB, conexion_23DB);
             cmdPatentes_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
             SqlDataReader readerPatentes_23DB = cmdPatentes_23DB.ExecuteReader();
-            while (readerPatentes_23DB.Read())
+            while(readerPatentes_23DB.Read())
             {
                 familia_23DB.Agregar_23DB(new Patente_23DB
                 {
@@ -111,13 +111,13 @@ namespace DAL_23DB
             cmdFamilias_23DB.Parameters.AddWithValue("@IdFamilia", idFamilia_23DB);
             SqlDataReader readerFamilias_23DB = cmdFamilias_23DB.ExecuteReader();
             List<int> idsFamilias_23DB = new List<int>();
-            while (readerFamilias_23DB.Read())
+            while(readerFamilias_23DB.Read())
             {
                 idsFamilias_23DB.Add((int)readerFamilias_23DB["IdFamiliaHija"]);
             }                
             readerFamilias_23DB.Close();
 
-            foreach (int idSubFamilia_23DB in idsFamilias_23DB)
+            foreach(int idSubFamilia_23DB in idsFamilias_23DB)
             {
                 familia_23DB.Agregar_23DB(ObtenerFamiliaRecursiva_23DB(idSubFamilia_23DB));
             }              
@@ -191,9 +191,9 @@ namespace DAL_23DB
                 cmdDelFam_23DB.ExecuteNonQuery();
 
                 
-                foreach (Rol_23DB componente_23DB in componentes_23DB)
+                foreach(Rol_23DB componente_23DB in componentes_23DB)
                 {
-                    if (componente_23DB is Patente_23DB)
+                    if(componente_23DB is Patente_23DB)
                     {
                         string queryRel_23DB = "INSERT INTO FamPat_23DB (IdFamilia, IdPatente) VALUES (@IdFamilia, @IdPatente)";
                         SqlCommand cmdRel_23DB = new SqlCommand(queryRel_23DB, conexion_23DB);

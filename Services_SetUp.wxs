@@ -160,9 +160,20 @@
 
     </ComponentGroup>
 
+    <!-- ==================== Registro de Windows ==================== -->
+    <ComponentGroup Id="RegistryComponents">
+
+      <!-- Guarda el servidor SQL ingresado por el usuario en HKLM\SOFTWARE\AeroManager\Server -->
+      <Component Id="CompRegistryServer" Directory="INSTALLFOLDER" Guid="*">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\AeroManager" Name="Server" Type="string" Value="[SQLSERVERNAME]" KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
     <Feature Id="MainFeature" Title="AeroManager Pro" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="ShortcutComponents" />
+      <ComponentGroupRef Id="RegistryComponents" />
     </Feature>
 
     <!-- ==================== Ejecución del script SQL con sqlcmd ==================== -->

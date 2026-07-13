@@ -22,7 +22,7 @@ namespace DAL_23DB
 
         private void Desconectar_23DB()
         {
-            if (conexion_23DB != null && conexion_23DB.State == ConnectionState.Open)
+            if(conexion_23DB != null && conexion_23DB.State == ConnectionState.Open)
             {
                 conexion_23DB.Close();
             }
@@ -148,7 +148,7 @@ namespace DAL_23DB
                 cmdDelFam_23DB.ExecuteNonQuery();
 
                 
-                foreach (Rol_23DB componente_23DB in componentes_23DB)
+                foreach(Rol_23DB componente_23DB in componentes_23DB)
                 {
                     if(componente_23DB is Patente_23DB)
                     {
@@ -247,7 +247,7 @@ namespace DAL_23DB
                 cmdFamilias_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerFamilias_23DB = cmdFamilias_23DB.ExecuteReader();
                 List<int> idsFamilias_23DB = new List<int>();
-                while (readerFamilias_23DB.Read())
+                while(readerFamilias_23DB.Read())
                 {
                     idsFamilias_23DB.Add((int)readerFamilias_23DB["IdFamilia"]);
                 }                  
@@ -256,7 +256,7 @@ namespace DAL_23DB
                 // carga cada familia completa 
                 mapperFamilia_23DB mapperFam_23DB = new mapperFamilia_23DB();
                 mapperFam_23DB.SetConexion_23DB(conexion_23DB); // comparte conexion con mapperFamilia
-                foreach (int idFam_23DB in idsFamilias_23DB)
+                foreach(int idFam_23DB in idsFamilias_23DB)
                 {
                     Familia_23DB familia_23DB = mapperFam_23DB.ObtenerFamiliaRecursiva_23DB(idFam_23DB);
                     if (familia_23DB != null)
@@ -299,7 +299,7 @@ namespace DAL_23DB
                 SqlCommand cmdPat_23DB = new SqlCommand(queryPat_23DB, conexion_23DB);
                 cmdPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerPat_23DB = cmdPat_23DB.ExecuteReader();
-                while (readerPat_23DB.Read())
+                while(readerPat_23DB.Read())
                 {
                     patentes_23DB.Add(readerPat_23DB["NombrePatente"].ToString());
                 }
@@ -308,21 +308,23 @@ namespace DAL_23DB
 
                 // trae las patentes de las familias que tenga el rol y las patentes de las familias de las familias
                 string queryFamPat_23DB = @"WITH FamiliasRecursivas AS (SELECT IdFamilia FROM RolFam_23DB WHERE IdRol = @IdRol UNION ALL
-                                            SELECT FF.IdFamiliaHija 
-                                            FROM FamFam_23DB FF
-                                            INNER JOIN FamiliasRecursivas FR ON FF.IdFamiliaPadre = FR.IdFamilia)
-                                        SELECT DISTINCT P.NombrePatente 
-                                        FROM Patente_23DB P
-                                        INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente
-                                        INNER JOIN FamiliasRecursivas FR ON FP.IdFamilia = FR.IdFamilia";
+                        SELECT FF.IdFamiliaHija 
+                        FROM FamFam_23DB FF
+                        INNER JOIN FamiliasRecursivas FR ON FF.IdFamiliaPadre = FR.IdFamilia)
+                        SELECT DISTINCT P.NombrePatente 
+                        FROM Patente_23DB P
+                        INNER JOIN FamPat_23DB FP ON P.IdPatente = FP.IdPatente
+                        INNER JOIN FamiliasRecursivas FR ON FP.IdFamilia = FR.IdFamilia";
                 SqlCommand cmdFamPat_23DB = new SqlCommand(queryFamPat_23DB, conexion_23DB);
                 cmdFamPat_23DB.Parameters.AddWithValue("@IdRol", idRol_23DB);
                 SqlDataReader readerFamPat_23DB = cmdFamPat_23DB.ExecuteReader();
-                while (readerFamPat_23DB.Read())
+                while(readerFamPat_23DB.Read())
                 {
                     string patente_23DB = readerFamPat_23DB["NombrePatente"].ToString();
-                    if (!patentes_23DB.Contains(patente_23DB))
-                        patentes_23DB.Add(patente_23DB);
+                                        if(!patentes_23DB.Contains(patente_23DB))
+                    { 
+                        patentes_23DB.Add(patente_23DB); 
+                    }
                 }
                 readerFamPat_23DB.Close();
             }

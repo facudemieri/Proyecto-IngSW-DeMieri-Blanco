@@ -17,7 +17,7 @@ namespace BLL_23DB
         public List<string> ObtenerIdiomas_23DB()
         {
             List<string> idiomas_23DB = new List<string>();
-            foreach (string archivo_23DB in Directory.GetFiles(rutaIdiomas_23DB, "*.json"))
+            foreach(string archivo_23DB in Directory.GetFiles(rutaIdiomas_23DB, "*.json"))
             {
                 idiomas_23DB.Add(Path.GetFileNameWithoutExtension(archivo_23DB));
             }
