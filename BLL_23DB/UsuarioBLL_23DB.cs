@@ -51,6 +51,14 @@ namespace BLL_23DB
 
         public void CrearUsuario_23DB(Usuario_23DB usuario_23DB)
         {
+            if (mapperUsuario_23DB.ObtenerUsuarioDNI_23DB(usuario_23DB.DNI_23DB) != null)
+            {
+                throw new Exception("Ya existe un usuario con ese DNI.");
+            }
+            if (mapperUsuario_23DB.ObtenerUsuarioPorLogin_23DB(usuario_23DB.Login_23DB) != null)
+            {
+                throw new Exception("Ya existe un usuario con ese nombre y apellido.");
+            }
             usuario_23DB.Login_23DB = GenerarLogin_23DB(usuario_23DB.Nombre_23DB, usuario_23DB.Apellido_23DB);
             usuario_23DB.Password_23DB = GenerarPasswordInicial_23DB(usuario_23DB.DNI_23DB, usuario_23DB.Apellido_23DB);
             usuario_23DB.Bloqueado_23DB = false;

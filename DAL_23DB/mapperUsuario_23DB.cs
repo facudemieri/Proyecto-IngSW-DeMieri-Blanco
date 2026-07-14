@@ -237,6 +237,27 @@ namespace DAL_23DB
             return usuario_23DB;
         }
 
+        public Usuario_23DB ObtenerUsuarioDNI_23DB(string dni_23DB) 
+        {
+            Usuario_23DB usuario_23DB = null;
+            try
+            {
+                Conectar_23DB();
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE DNI = @DNI";
+                SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
+                cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
+                SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
+                if (reader_23DB.Read())
+                {
+                    usuario_23DB = MapearUsuario_23DB(reader_23DB);
+                }
+            }
+            finally
+            {
+                Desconectar_23DB();
+            }
+            return usuario_23DB;
+        }
         public void BloquearUsuario_23DB(string dni)
         {
             try

@@ -213,11 +213,18 @@ namespace GUI_23DB
                 IdRol_23DB = (int)cmbRol.SelectedValue
             };
 
-            usuarioBLL_23DB.CrearUsuario_23DB(usuario_23DB);
-            eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Crear Usuario", 2);
-            Mensaje.Text = "Usuario creado correctamente.";
-            CargarGrilla_23DB(ObtenerFiltroActual_23DB());
-            ModoConsulta_23DB();
+            try
+            {
+                usuarioBLL_23DB.CrearUsuario_23DB(usuario_23DB);
+                eventoBLL_23DB.RegistrarEvento_23DB(SessionManager_23DB.ObtenerInstancia_23DB().DNI_23DB, "Administrador", "Crear Usuario", 2);
+                Mensaje.Text = "Usuario creado correctamente.";
+                CargarGrilla_23DB(ObtenerFiltroActual_23DB());
+                ModoConsulta_23DB();
+            }
+            catch (Exception ex_23DB)
+            {
+                Mensaje.Text = ex_23DB.Message;
+            }
         }
 
         private void btnAct_Des_Click(object sender, EventArgs e)
