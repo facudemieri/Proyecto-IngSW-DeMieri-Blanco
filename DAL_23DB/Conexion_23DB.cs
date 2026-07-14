@@ -16,11 +16,14 @@ namespace DAL_23DB
         {
             string servidor_23DB = ".";
 
-            using (RegistryKey baseKey_23DB = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
-            using (RegistryKey key_23DB = baseKey_23DB.OpenSubKey(@"SOFTWARE\AeroManager"))
+            using(RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+
+            using(RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\AeroManager"))
             {
-                if (key_23DB != null)
-                    servidor_23DB = key_23DB.GetValue("Server", ".").ToString();
+                if (key != null)
+                { 
+                    servidor_23DB = key.GetValue("Server", ".").ToString(); 
+                }
             }
 
             return $"Server={servidor_23DB};Database=INGSW_23DB;Integrated Security=True;";
