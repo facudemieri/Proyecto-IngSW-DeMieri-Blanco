@@ -14,19 +14,19 @@ namespace DAL_23DB
 
         //public static string ObtenerCadena_23DB()
         //{
-        //    return cadena_23DB();
+        //    return cadena_23DB;
         //}
         public static string ObtenerCadena_23DB()
         {
             string servidor_23DB = ".";
 
-            using(RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+            using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
 
-            using(RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\AeroManager"))
+            using (RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\AeroManager"))
             {
                 if (key != null)
-                { 
-                    servidor_23DB = key.GetValue("Server", ".").ToString(); 
+                {
+                    servidor_23DB = key.GetValue("Server", ".").ToString();
                 }
             }
 

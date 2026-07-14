@@ -52,6 +52,16 @@ namespace GUI_23DB
             cmbEvento.Items.Add("Activar / Desactivar Usuario");
             cmbEvento.Items.Add("Desbloquear Usuario");
             cmbEvento.Items.Add("Cambiar Clave");
+            cmbEvento.Items.Add("Cambiar Idioma");
+            cmbEvento.Items.Add("Crear Familia");
+            cmbEvento.Items.Add("Modificar Familia");
+            cmbEvento.Items.Add("Eliminar Familia");
+            cmbEvento.Items.Add("Crear Rol");
+            cmbEvento.Items.Add("Modificar Rol");
+            cmbEvento.Items.Add("Eliminar Rol");
+            cmbEvento.Items.Add("Backup BD");
+            cmbEvento.Items.Add("Restore BD");
+            cmbEvento.Items.Add("Recalcular DV");
             cmbEvento.SelectedIndex = -1;
         }
 
@@ -194,8 +204,10 @@ namespace GUI_23DB
             cmbModulo.SelectedIndex = -1;
             cmbEvento.SelectedIndex = -1;
             cmbCriticidad.SelectedIndex = -1;
-            dtpFechaInicio.Value = DateTime.Now.AddDays(-3);
-            dtpFechaFin.Value = DateTime.Now;
+            dtpFechaInicio.MaxDate = DateTime.Now.Date;
+            dtpFechaFin.MaxDate = DateTime.Now.Date;
+            dtpFechaInicio.Value = DateTime.Now.AddDays(-3).Date;
+            dtpFechaFin.Value = DateTime.Now.Date;
             txtNombre.Text = string.Empty;
             txtApellido.Text = string.Empty;
             CargarGrilla_23DB();

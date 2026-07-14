@@ -23,6 +23,7 @@ namespace BLL_23DB
         public void BloquearUsuario_23DB(string dni_23DB)
         {
             mapperUsuario_23DB.BloquearUsuario_23DB(dni_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public string ObtenerNombreRol_23DB(int idRol_23DB)
@@ -51,15 +52,18 @@ namespace BLL_23DB
 
         public void CrearUsuario_23DB(Usuario_23DB usuario_23DB)
         {
-            if (mapperUsuario_23DB.ObtenerUsuarioDNI_23DB(usuario_23DB.DNI_23DB) != null)
+            if(mapperUsuario_23DB.ObtenerUsuarioDNI_23DB(usuario_23DB.DNI_23DB) != null)
             {
                 throw new Exception("Ya existe un usuario con ese DNI.");
             }
-            if (mapperUsuario_23DB.ObtenerUsuarioPorLogin_23DB(usuario_23DB.Login_23DB) != null)
+
+            string loginGenerado_23DB = GenerarLogin_23DB(usuario_23DB.Nombre_23DB, usuario_23DB.Apellido_23DB);
+
+            if(mapperUsuario_23DB.ObtenerUsuarioPorLogin_23DB(loginGenerado_23DB) != null)
             {
                 throw new Exception("Ya existe un usuario con ese nombre y apellido.");
             }
-            usuario_23DB.Login_23DB = GenerarLogin_23DB(usuario_23DB.Nombre_23DB, usuario_23DB.Apellido_23DB);
+            usuario_23DB.Login_23DB = loginGenerado_23DB;
             usuario_23DB.Password_23DB = GenerarPasswordInicial_23DB(usuario_23DB.DNI_23DB, usuario_23DB.Apellido_23DB);
             usuario_23DB.Bloqueado_23DB = false;
             usuario_23DB.Activo_23DB = true;
@@ -106,11 +110,13 @@ namespace BLL_23DB
         public void IncrementarIntentos_23DB(string dni_23DB)
         {
             mapperUsuario_23DB.IncrementarIntentos_23DB(dni_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public void ResetearIntentos_23DB(string dni_23DB)
         {
             mapperUsuario_23DB.ResetearIntentos_23DB(dni_23DB);
+            dvBLL_23DB.RecalcularDVTabla_23DB("Usuario_23DB");
         }
 
         public void ActualizarUltimoIdioma_23DB(string dni_23DB, string idioma_23DB)

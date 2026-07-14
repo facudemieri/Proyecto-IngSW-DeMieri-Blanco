@@ -103,6 +103,9 @@ namespace GUI_23DB
             txtNombre.Enabled = habilitar_23DB;
             txtEmail.Enabled = habilitar_23DB;
             cmbRol.Enabled = habilitar_23DB;
+            txtActivo.Enabled = habilitar_23DB;
+            txtLogin.Enabled = habilitar_23DB;
+            txtBloqueado.Enabled = habilitar_23DB;
         }
 
         private void LimpiarCampos_23DB()
@@ -198,9 +201,22 @@ namespace GUI_23DB
 
         private void Crear_23DB()
         {
+            
             if(string.IsNullOrEmpty(txtDni.Text) || string.IsNullOrEmpty(txtApellido.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtEmail.Text))
             {
                 Mensaje.Text = "Debe completar todos los campos obligatorios.";
+                return;
+            }
+
+            if (txtDni.Text.Length != 8)
+            {
+                Mensaje.Text = "El DNI debe tener exactamente 8 dígitos.";
+                return;
+            }
+
+            if (!txtDni.Text.All(char.IsDigit))
+            {
+                Mensaje.Text = "El DNI solo puede contener números.";
                 return;
             }
 

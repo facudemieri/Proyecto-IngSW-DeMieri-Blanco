@@ -220,7 +220,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE DNI = @DNI AND [Password] = @Password";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB WHERE DNI = @DNI AND [Password] = @Password";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 cmd_23DB.Parameters.AddWithValue("@Password", password_23DB);
@@ -243,7 +243,7 @@ namespace DAL_23DB
             try
             {
                 Conectar_23DB();
-                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo FROM Usuario_23DB WHERE DNI = @DNI";
+                string query_23DB = "SELECT DNI, Apellido, Nombre, Email, [Login], IdRol, Bloqueado, Activo, IntentosFallidos, FechaUltimoIntento, UltimoIdioma FROM Usuario_23DB WHERE DNI = @DNI";
                 SqlCommand cmd_23DB = new SqlCommand(query_23DB, conexion_23DB);
                 cmd_23DB.Parameters.AddWithValue("@DNI", dni_23DB);
                 SqlDataReader reader_23DB = cmd_23DB.ExecuteReader();
