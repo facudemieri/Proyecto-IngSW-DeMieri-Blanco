@@ -24,8 +24,14 @@ namespace Services_23DB
             {
                 lock (lock_23DB)
                 {
-                    if(instancia_23DB == null)
-                        instancia_23DB = new SessionManager_23DB();
+                    if (instancia_23DB == null)
+                    { 
+                        instancia_23DB = new SessionManager_23DB();  
+                    }
+                    else
+                    {
+                        throw new Exception("No se puede crear una nueva instancia de SessionManager_23DB, ya que la instancia ya existe.");
+                    }
                 }
             }
             return instancia_23DB;
